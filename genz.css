@@ -1,0 +1,1216 @@
+/* ============================================================
+   AUREVIA — GEN Z MODE CSS
+   Aesthetic: Y2K Maximalist × Neo-Brutalist × Glitchcore
+   Vibe: Bold, chaotic-beautiful, unapologetically loud
+============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&display=swap');
+
+/* ============================================================
+   DESIGN TOKENS
+============================================================ */
+:root {
+ 
+  --z-bg: #08090d;
+  --z-text: #f0f0f5;
+  --z-muted: rgba(240,240,245,0.6);
+  --z-border: rgba(255,255,255,0.08);
+  --z-border-hot: rgba(255,255,255,0.18);
+  --z-lime: #c6ff00;
+  --z-electric: #00f5ff;
+
+
+  /* Core Gen Z Palette */
+  --z-bg:        #08090d;
+  --z-surface:   #0f1117;
+  --z-card:      #14161f;
+  --z-border:    rgba(255,255,255,0.06);
+  --z-border-hot:rgba(255,255,255,0.15);
+
+  /* Neon Accents */
+  --z-lime:      #c6ff00;
+  --z-electric:  #00f5ff;
+  --z-pink:      #ff2d78;
+  --z-purple:    #9b5de5;
+  --z-orange:    #ff6b35;
+  --z-gold:      #ffd60a;
+
+  /* Text */
+  --z-text:      #f0f0f5;
+  --z-muted:     rgba(240,240,245,0.45);
+  --z-dim:       rgba(240,240,245,0.25);
+  
+  --z-bg: #08090d;
+  --z-text: #f0f0f5;
+  --z-muted: rgba(240,240,245,0.6);
+  --z-border: rgba(255,255,255,0.08);
+  --z-border-hot: rgba(255,255,255,0.18);
+  --z-lime: #ff47ac;
+  --z-electric: #00f5ff;
+
+
+  /* Gradients */
+  --z-grad-main:  linear-gradient(135deg,#ff2d78,#9b5de5,#00f5ff);
+  --z-grad-lime:  linear-gradient(135deg,#c6ff00,#00f5ff);
+  --z-grad-fire:  linear-gradient(135deg,#ff6b35,#ff2d78,#9b5de5);
+  --z-grad-card:  linear-gradient(145deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));
+
+  /* Glow */
+  --z-glow-pink:   0 0 40px rgba(255,45,120,0.35), 0 0 80px rgba(255,45,120,0.15);
+  --z-glow-lime:   0 0 40px rgba(198,255,0,0.35),  0 0 80px rgba(198,255,0,0.15);
+  --z-glow-cyan:   0 0 40px rgba(0,245,255,0.35),  0 0 80px rgba(0,245,255,0.15);
+  --z-glow-purple: 0 0 40px rgba(155,93,229,0.4),  0 0 80px rgba(155,93,229,0.2);
+
+  /* Sizes */
+  --z-radius:    20px;
+  --z-radius-sm: 12px;
+  --z-radius-xl: 32px;
+
+  /* Fonts */
+  --z-display: 'Bebas Neue', sans-serif;
+  --z-head:    'Bricolage Grotesque', sans-serif;
+  --z-body:    'Space Grotesk', sans-serif;
+}
+
+/* ============================================================
+   BASE OVERRIDE
+============================================================ */
+body.genz-mode {
+  background: var(--z-bg);
+  color: var(--z-text);
+  font-family: var(--z-body);
+  overflow-x: hidden;
+  cursor: default;
+  margin: 0;
+}
+
+body.genz-mode * { box-sizing: border-box; }
+
+/* Subtle grid texture */
+body.genz-mode::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.genz-mode::after { display: none; }
+
+/* Floating orbs */
+.gz-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbFloat 8s ease-in-out infinite;
+}
+.gz-orb-1 {
+  width: 500px; height: 500px;
+  background: rgba(255,45,120,0.12);
+  top: -15%; left: -10%;
+  animation-delay: 0s;
+}
+.gz-orb-2 {
+  width: 400px; height: 400px;
+  background: rgba(0,245,255,0.1);
+  bottom: 10%; right: -10%;
+  animation-delay: -3s;
+}
+.gz-orb-3 {
+  width: 300px; height: 300px;
+  background: rgba(155,93,229,0.12);
+  top: 40%; left: 50%;
+  animation-delay: -5s;
+}
+@keyframes orbFloat {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33%      { transform: translate(30px,-20px) scale(1.05); }
+  66%      { transform: translate(-20px,15px) scale(0.97); }
+}
+/* ============================================================
+   NAVBAR BASE
+============================================================ */
+#navbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: rgba(8,9,13,0.85);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--z-border);
+}
+
+/* ============================================================
+   FLEX LAYOUT
+============================================================ */
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 64px;
+  gap: 1rem;
+}
+
+/* LEFT */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* LOGO */
+.nav-logo a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--z-text);
+}
+
+/* ============================================================
+   CITY DROPDOWN
+============================================================ */
+.nav-city-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-city-icon {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--z-lime);
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.nav-city-select {
+  padding: 6px 24px 6px 26px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--z-border-hot);
+  color: var(--z-text);
+  border-radius: 8px;
+  outline: none;
+}
+
+/* dropdown options fix */
+.nav-city-select option {
+  background: #0c0f1a;
+  color: #fff;
+}
+
+/* ============================================================
+   SEARCH BAR
+============================================================ */
+.nav-search-wrap {
+  flex: 1;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.nav-search-icon {
+  position: absolute;
+  left: 10px;
+  color: var(--z-muted);
+}
+
+#nav-search {
+  width: 100%;
+  padding: 8px 12px 8px 30px;
+  border-radius: 8px;
+  border: 1px solid var(--z-border-hot);
+  background: rgba(255,255,255,0.05);
+  color: var(--z-text);
+}
+
+#nav-search::placeholder {
+  color: var(--z-muted);
+}
+
+/* ============================================================
+   RIGHT SIDE
+============================================================ */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* LINKS */
+.nav-links {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.nav-links a {
+  color: var(--z-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--z-text);
+}
+
+/* THEME BUTTON */
+#theme-toggle {
+  cursor: pointer;
+  color: var(--z-muted);
+  transition: 0.2s;
+}
+
+#theme-toggle:hover {
+  color: var(--z-lime);
+}
+
+/* ============================================================
+   HAMBURGER
+============================================================ */
+.hamburger-label {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.hamburger-label span {
+  width: 20px;
+  height: 2px;
+  background: var(--z-text);
+}
+
+/* ============================================================
+   MOBILE MENU
+============================================================ */
+.mobile-nav {
+  display: none;
+  background: rgba(8,9,13,0.98);
+  border-top: 1px solid var(--z-border);
+}
+
+.mobile-nav a {
+  display: block;
+  padding: 1rem;
+  color: var(--z-muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--z-border);
+}
+
+.mobile-nav a:hover {
+  color: var(--z-lime);
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger-label {
+    display: flex;
+  }
+
+  #mob-chk:checked ~ #navbar .mobile-nav {
+    display: block;
+  }
+}
+.hero-gz {
+  position: relative;
+  min-height: 90vh;   /* size same rakha */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 2rem;
+  overflow: hidden;
+
+  /* IMAGE + DARK OVERLAY */
+  background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
+  background-size: cover;
+  background-position: center;
+}
+
+/* DARK OVERLAY (important 🔥) */
+.hero-gz::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(8,9,13,0.85),
+    rgba(8,9,13,0.9)
+  );
+  z-index: 0;
+}
+
+/* CONTENT ABOVE IMAGE */
+.hero-gz > div {
+  position: relative;
+  z-index: 2;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+/* TITLE (same vibe) */
+.hero-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+/* GRADIENT TEXT */
+.grad-word {
+  background: linear-gradient(90deg, #ff2d78, #9b5de5, #00f5ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* OUTLINE TEXT (light subtle) */
+.outline-word {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.25);
+}
+
+/* CITY NORMAL */
+.city-word {
+  color: #f0f0f5;
+}
+
+/* SUBTITLE */
+.gz-subtitle {
+  color: rgba(240,240,245,0.7);
+  margin: 1rem 0 2rem;
+}
+
+/* BUTTONS */
+.hero-ctas {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn-hero-main {
+  padding: 14px 30px;
+  border-radius: 50px;
+  background: #f14b99;
+  color: #000;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 0 40px rgba(201, 245, 3, 0.459);
+}
+
+.btn-hero-ghost {
+  padding: 14px 28px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-hero-ghost:hover {
+  border-color: white;
+  color: white;
+  box-shadow: var(--z-glow-lime);
+}
+/* ============================================================
+   MARQUEE FIX
+============================================================ */
+.hero-marquee {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  padding: 1rem 0;
+  border-top: 1px solid var(--z-border);
+  background: rgba(8,9,13,0.5);
+}
+
+.marquee-track {
+  display: flex;
+  animation: marqueeScroll 20s linear infinite;
+}
+
+.marquee-track span {
+  padding: 0 2rem;
+  color: rgba(255,255,255,0.3);
+  white-space: nowrap;
+}
+
+.marquee-track .accent {
+  color: var(--z-lime);
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   SECTIONS
+============================================================ */
+.gz-section {
+  padding: 6rem 2rem;
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.section-bg-alt {
+  background: none;
+  border-top: 1px solid var(--z-border);
+  border-bottom: 1px solid var(--z-border);
+  max-width: 100%;
+  padding: 6rem 0;
+}
+.section-bg-alt > .gz-section-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-bg-pink {
+  background: none;
+  border-top: 1px solid var(--z-border);
+  border-bottom: 1px solid var(--z-border);
+  max-width: 100%;
+  padding: 6rem 0;
+}
+.section-bg-pink > .gz-section-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ── Section Title ── */
+.gz-title {
+  font-family: var(--z-head) !important;
+  font-size: clamp(2rem, 4vw, 3.2rem) !important;
+  font-weight: 800 !important;
+  color: var(--z-text) !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.1 !important;
+  margin-bottom: 0.5rem !important;
+}
+.gz-title span {
+  background: var(--z-grad-main) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+.gz-subtitle {
+  font-family: var(--z-body) !important;
+  color: var(--z-muted) !important;
+  font-size: 1.05rem !important;
+  line-height: 1.6 !important;
+}
+
+/* Section label pill */
+.gz-section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--z-border-hot);
+  padding: 0.3em 0.9em;
+  border-radius: 50px;
+  font-family: var(--z-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--z-muted);
+  margin-bottom: 1rem;
+}
+
+/* ============================================================
+   VIBE CHECK BUTTONS
+============================================================ */
+.vibe-row {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.vibe-btn {
+  padding: 12px 28px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--z-border-hot);
+  color: var(--z-muted);
+  font-family: var(--z-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(8px);
+}
+.vibe-btn:hover {
+  background: rgba(255,255,255,0.08);
+  color: var(--z-text);
+  border-color: var(--z-electric);
+  transform: translateY(-3px);
+}
+.vibe-btn.active {
+  background: var(--z-lime);
+  color: #000;
+  border-color: var(--z-lime);
+  box-shadow: var(--z-glow-lime);
+  transform: translateY(-2px);
+  font-weight: 700;
+}
+
+/* Highlight Box */
+.highlight-box {
+  background: var(--z-grad-card) !important;
+  border: 1px solid var(--z-border-hot) !important;
+  border-radius: var(--z-radius) !important;
+  padding: 2.5rem !important;
+  margin-bottom: 2.5rem !important;
+  backdrop-filter: blur(12px) !important;
+  position: relative;
+  overflow: hidden;
+}
+.highlight-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--z-grad-main);
+  opacity: 0.8;
+}
+.highlight-box h3 {
+  font-family: var(--z-head) !important;
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+  color: var(--z-text) !important;
+  margin-bottom: 0.6rem !important;
+}
+.highlight-box p {
+  color: var(--z-muted) !important;
+  font-family: var(--z-body) !important;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+}
+
+.vibe-content { display: none; }
+.vibe-content.active {
+  display: block;
+  animation: fadeSlideUp 0.45s ease both;
+}
+
+/* ============================================================
+   GZ CARDS — SLEEK DARK GLASS
+============================================================ */
+.gz-grid { display: grid; gap: 1.5rem; }
+.gz-grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.gz-grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+.gz-card {
+  background: var(--z-card) !important;
+  border: 1px solid var(--z-border) !important;
+  border-radius: var(--z-radius) !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  transition: all 0.35s cubic-bezier(0.34,1.2,0.64,1) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  text-decoration: none !important;
+  color: var(--z-text) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+}
+.gz-card::after { display: none !important; }
+.gz-card:hover {
+  transform: translateY(-8px) !important;
+  border-color: var(--z-border-hot) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5) !important;
+}
+
+/* Accent line on hover */
+.gz-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--z-grad-main);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 3;
+}
+.gz-card:hover::before { opacity: 1; }
+
+.gz-card-img {
+  width: 100% !important;
+  height: 200px !important;
+  object-fit: cover !important;
+  border-radius: 0 !important;
+  margin-bottom: 0 !important;
+  transition: transform 0.6s ease !important;
+  display: block !important;
+}
+.gz-card:hover .gz-card-img { transform: scale(1.06) !important; }
+
+/* Card text content */
+.gz-card h3 {
+  font-family: var(--z-head) !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  color: var(--z-text) !important;
+  margin: 1.2rem 1.4rem 0.4rem !important;
+  letter-spacing: -0.02em !important;
+}
+.gz-card p {
+  font-family: var(--z-body) !important;
+  color: var(--z-muted) !important;
+  font-size: 0.88rem !important;
+  line-height: 1.55 !important;
+  flex-grow: 1 !important;
+  padding: 0 1.4rem 1.4rem !important;
+  margin: 0 !important;
+}
+
+/* Badge */
+.gz-badge {
+  position: absolute !important;
+  top: 14px !important;
+  right: 14px !important;
+  background: rgba(8,9,13,0.85) !important;
+  border: 1px solid var(--z-border-hot) !important;
+  padding: 5px 12px !important;
+  border-radius: 6px !important;
+  font-family: var(--z-body) !important;
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  color: var(--z-lime) !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  backdrop-filter: blur(10px) !important;
+  z-index: 10 !important;
+  box-shadow: none !important;
+}
+
+/* ============================================================
+   SURPRISE ME — DARK NEO BRUTALIST
+============================================================ */
+.surprise-banner {
+  background: var(--z-card) !important;
+  border: 1px solid var(--z-border-hot) !important;
+  border-radius: var(--z-radius-xl) !important;
+  padding: 4rem 3rem !important;
+  text-align: center !important;
+  box-shadow: none !important;
+  margin-bottom: 4rem !important;
+  position: relative !important;
+  overflow: hidden !important;
+  backdrop-filter: none !important;
+}
+
+.surprise-banner::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: var(--z-grad-fire) !important;
+  opacity: 1 !important;
+  z-index: 1 !important;
+}
+
+.surprise-banner > * { position: relative !important; z-index: 2 !important; }
+
+.surprise-title {
+  font-family: var(--z-head) !important;
+  font-size: clamp(1.6rem,3vw,2.2rem) !important;
+  font-weight: 800 !important;
+  color: var(--z-text) !important;
+  margin-bottom: 0.5rem !important;
+}
+.surprise-subtitle {
+  color: var(--z-muted) !important;
+  font-family: var(--z-body) !important;
+  font-size: 1rem !important;
+  margin-bottom: 2.5rem !important;
+}
+
+.neon-btn {
+  background: var(--z-lime) !important;
+  color: #000 !important;
+  border: none !important;
+  padding: 16px 40px !important;
+  border-radius: 10px !important;
+  font-family: var(--z-head) !important;
+  font-size: 1.1rem !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1) !important;
+  box-shadow: var(--z-glow-lime) !important;
+  letter-spacing: -0.01em !important;
+}
+.neon-btn:hover {
+  transform: translateY(-4px) scale(1.04) !important;
+  box-shadow: 0 0 60px rgba(198,255,0,0.55), 0 0 120px rgba(198,255,0,0.25) !important;
+}
+
+/* Surprise result box */
+#surprise-result {
+  background: rgba(255,255,255,0.03) !important;
+  border: 1px solid var(--z-border-hot) !important;
+  border-radius: var(--z-radius) !important;
+  animation: fadeSlideUp 0.4s ease both;
+}
+#surprise-result h4 {
+  font-family: var(--z-head) !important;
+  font-weight: 800 !important;
+  color: var(--z-text) !important;
+}
+#surprise-result p { color: var(--z-muted) !important; }
+
+/* ============================================================
+   THIS OR THAT
+============================================================ */
+.tot-container {
+  display: flex !important;
+  gap: 1.2rem !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  margin-top: 2rem !important;
+}
+
+.tot-option {
+  flex: 1 !important;
+  min-width: 170px !important;
+  padding: 1.4rem 1.5rem !important;
+  border-radius: var(--z-radius-sm) !important;
+  background: rgba(255,255,255,0.03) !important;
+  border: 1px solid var(--z-border-hot) !important;
+  cursor: pointer !important;
+  font-family: var(--z-head) !important;
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+  color: var(--z-text) !important;
+  transition: all 0.3s cubic-bezier(0.34,1.2,0.64,1) !important;
+  backdrop-filter: none !important;
+}
+.tot-option:hover {
+  transform: translateY(-5px) !important;
+  border-color: var(--z-electric) !important;
+  background: rgba(0,245,255,0.06) !important;
+  box-shadow: 0 0 30px rgba(0,245,255,0.15) !important;
+}
+.tot-option.selected {
+  background: var(--z-lime) !important;
+  color: #000 !important;
+  border-color: var(--z-lime) !important;
+  box-shadow: var(--z-glow-lime) !important;
+}
+
+.tot-result {
+  font-family: var(--z-head) !important;
+  font-size: 1.3rem !important;
+  font-weight: 800 !important;
+  color: var(--z-text) !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--z-text) !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  margin-top: 2rem !important;
+  animation: fadeSlideUp 0.4s ease both;
+  display: block;
+}
+.tot-result::before { content: '→ '; color: var(--z-lime); }
+
+.btn-outline {
+  padding: 10px 24px !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--z-border-hot) !important;
+  background: transparent !important;
+  color: var(--z-muted) !important;
+  font-family: var(--z-body) !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  cursor: pointer !important;
+  transition: all 0.25s !important;
+}
+.btn-outline:hover {
+  border-color: var(--z-lime) !important;
+  color: var(--z-lime) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ============================================================
+   FOOTER OVERRIDE
+============================================================ */
+#footer {
+  background: #000 !important;
+  border-top: 1px solid var(--z-border);
+  padding: 4rem 0 2rem !important;
+  color: var(--z-muted) !important;
+}
+
+.footer-inner { max-width: 1240px; margin: auto; padding: 0 2rem; }
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+@media (max-width: 860px) {
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+@media (max-width: 500px) {
+  .footer-top { grid-template-columns: 1fr; }
+}
+
+.brand-name {
+  font-family: var(--z-head) !important;
+  font-size: 1.35rem !important;
+  font-weight: 800 !important;
+  color: var(--z-text) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  margin-bottom: 0.9rem !important;
+}
+.brand-name i {
+  background: var(--z-grad-main) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+.footer-brand p { font-family: var(--z-body) !important; font-size: 0.88rem !important; line-height: 1.7 !important; }
+
+.footer-socials { display: flex; gap: 0.7rem; margin-top: 1.4rem; }
+.social-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid var(--z-border-hot);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--z-muted); font-size: 0.88rem;
+  transition: all 0.25s; text-decoration: none;
+}
+.social-btn:hover {
+  border-color: var(--z-lime);
+  color: var(--z-lime);
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(198,255,0,0.2);
+}
+
+.footer-col h4 {
+  font-family: var(--z-head) !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: var(--z-text) !important;
+  margin-bottom: 1.2rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+}
+.footer-col ul { display: flex; flex-direction: column; gap: 0.7rem; }
+.footer-col a { font-family: var(--z-body) !important; font-size: 0.88rem !important; color: var(--z-muted) !important; transition: color 0.2s !important; }
+.footer-col a:hover { color: var(--z-lime) !important; }
+
+.footer-bottom {
+  padding-top: 2rem;
+  border-top: 1px solid var(--z-border);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--z-body) !important; font-size: 0.82rem !important;
+  color: var(--z-dim) !important; flex-wrap: wrap; gap: 0.8rem;
+}
+
+/* NAVBAR LOGO TEXT */
+.nav-logo a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--z-head);
+  font-weight: 800;
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+
+/* ICON GRADIENT (same as footer) */
+.nav-logo i {
+  background: linear-gradient(90deg, #ff2d78, #9b5de5, #00f5ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* TEXT GRADIENT (Aurevia word 🔥) */
+.nav-logo a span {
+  background: linear-gradient(90deg, #ff2d78, #9b5de5, #00f5ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================================================
+   BACK TO TOP
+============================================================ */
+#back-top {
+  position: fixed !important;
+  bottom: 2rem !important; right: 2rem !important;
+  z-index: 700 !important;
+  width: 44px !important; height: 44px !important;
+  border-radius: 10px !important;
+  background: var(--z-lime) !important;
+  color: #000 !important; border: none !important;
+  font-size: 1rem !important; cursor: pointer !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  box-shadow: var(--z-glow-lime) !important;
+  transition: all 0.3s !important;
+  opacity: 0; pointer-events: none;
+}
+#back-top.visible { opacity: 1 !important; pointer-events: all !important; }
+#back-top:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 0 40px rgba(198,255,0,0.5) !important;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+  .gz-section { padding: 4rem 1.2rem; }
+  .gz-grid-3, .gz-grid-4 { grid-template-columns: 1fr; }
+  .hero-gz { padding: 7rem 1.5rem 5rem; }
+  .surprise-banner { padding: 3rem 1.5rem !important; }
+  .vibe-row { gap: 0.6rem; }
+  .vibe-btn { padding: 10px 20px; font-size: 0.9rem; }
+  .footer-top { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 480px) {
+  .gz-grid-3, .gz-grid-4 { grid-template-columns: 1fr; gap: 1rem; }
+  .footer-top { grid-template-columns: 1fr !important; }
+  .hero-gz h1 { font-size: clamp(4rem,18vw,6rem) !important; }
+}
+/* ===============================
+   NETFLIX STYLE HORIZONTAL SLIDER
+================================ */
+/* ============================================================
+   SLIDER FIX PATCH — Netflix-style horizontal scroll only
+   Zero design changes — layout behavior fix only
+============================================================ */
+
+/* ── Core slider wrapper ── */
+.gz-slider {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1rem 0 1.5rem;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gz-slider::-webkit-scrollbar { display: none; }
+.gz-slider { scrollbar-width: none; -ms-overflow-style: none; }
+
+/* ── Track: force single horizontal row ── */
+.gz-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 20px;
+  width: max-content;
+  padding: 4px 2px;
+}
+
+/* ── Slide wrappers (Trending, Hidden Gems) ── */
+.gz-slide {
+  flex: 0 0 300px;
+  max-width: 300px;
+}
+
+/* ── Cards inside .gz-track (Nearby: cards direct children) ── */
+.gz-slider .gz-card,
+.gz-track .gz-card {
+  flex: 0 0 300px !important;
+  max-width: 300px !important;
+  width: 300px !important;
+}
+
+/* ── Vibe Check: convert .gz-grid inside vibe-content to slider ── */
+.vibe-content .gz-grid {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 20px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  width: 100% !important;
+  padding: 1rem 0 1.5rem !important;
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  grid-template-columns: unset !important;
+}
+.vibe-content .gz-grid::-webkit-scrollbar { display: none !important; }
+
+.vibe-content .gz-grid .gz-card {
+  flex: 0 0 300px !important;
+  max-width: 300px !important;
+  width: 300px !important;
+  min-width: 0 !important;
+}
+
+/* ── Plan Trip: gz-plan-grid class (added to HTML) ── */
+.gz-plan-grid {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 20px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  width: 100% !important;
+  padding: 1rem 0 1.5rem !important;
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  grid-template-columns: unset !important;
+}
+.gz-plan-grid::-webkit-scrollbar { display: none !important; }
+
+.gz-plan-grid .gz-card {
+  flex: 0 0 280px !important;
+  max-width: 280px !important;
+  width: 280px !important;
+  min-width: 0 !important;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .gz-slide,
+  .gz-slider .gz-card,
+  .gz-track .gz-card,
+  .vibe-content .gz-grid .gz-card {
+    flex: 0 0 260px !important;
+    max-width: 260px !important;
+    width: 260px !important;
+  }
+  .gz-plan-grid .gz-card {
+    flex: 0 0 240px !important;
+    max-width: 240px !important;
+    width: 240px !important;
+  }
+}
+/* ============================================================
+   SLIDER FIX PATCH — Netflix-style horizontal scroll only
+   Zero design changes — layout behavior fix only
+============================================================ */
+
+/* ── Core slider wrapper ── */
+.gz-slider {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1rem 0 1.5rem;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gz-slider::-webkit-scrollbar { display: none; }
+.gz-slider { scrollbar-width: none; -ms-overflow-style: none; }
+
+/* ── Track: force single horizontal row ── */
+.gz-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 20px;
+  width: max-content;
+  padding: 4px 2px;
+}
+
+/* ── Slide wrappers (Trending, Hidden Gems) ── */
+.gz-slide {
+  flex: 0 0 300px;
+  max-width: 300px;
+}
+
+/* ── Cards inside .gz-track (Nearby: cards direct children) ── */
+.gz-slider .gz-card,
+.gz-track .gz-card {
+  flex: 0 0 300px !important;
+  max-width: 300px !important;
+  width: 300px !important;
+}
+
+/* ── Vibe Check: convert .gz-grid inside vibe-content to slider ── */
+.vibe-content .gz-grid {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 20px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  width: 100% !important;
+  padding: 1rem 0 1.5rem !important;
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  grid-template-columns: unset !important;
+}
+.vibe-content .gz-grid::-webkit-scrollbar { display: none !important; }
+
+.vibe-content .gz-grid .gz-card {
+  flex: 0 0 300px !important;
+  max-width: 300px !important;
+  width: 300px !important;
+  min-width: 0 !important;
+}
+
+/* ── Plan Trip: gz-plan-grid class (added to HTML) ── */
+.gz-plan-grid {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 20px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  width: 100% !important;
+  padding: 1rem 0 1.5rem !important;
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  grid-template-columns: unset !important;
+}
+.gz-plan-grid::-webkit-scrollbar { display: none !important; }
+
+.gz-plan-grid .gz-card {
+  flex: 0 0 280px !important;
+  max-width: 280px !important;
+  width: 280px !important;
+  min-width: 0 !important;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .gz-slide,
+  .gz-slider .gz-card,
+  .gz-track .gz-card,
+  .vibe-content .gz-grid .gz-card {
+    flex: 0 0 260px !important;
+    max-width: 260px !important;
+    width: 260px !important;
+  }
+  .gz-plan-grid .gz-card {
+    flex: 0 0 240px !important;
+    max-width: 240px !important;
+    width: 240px !important;
+  }
+}

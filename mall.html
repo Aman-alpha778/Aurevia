@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aurevia | Shopping & Malls in Chandigarh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --navy:      #1F256B;
+      --cyan:      #29B6C8;
+      --cyan-lt:   #5fd6e6;
+      --cyan-dk:   #1d8fa0;
+      --sky:       #87CEEB;
+      --sky-light: #E0F4FF;
+      --sky-mid:   #C8E9F8;
+      --card-bg:   #ffffff;
+      --surface:   #ffffff;
+      --body-bg:   #f0f8ff;
+      --input-bg:  #ffffff;
+      --off:       #e8f4fb;
+      --text:      #1a2040;
+      --text-2:    #4a5568;
+      --text-muted:#4a5568;
+      --border:    rgba(31,37,107,.12);
+      --nav-bg:    rgba(255,255,255,.92);
+      --shadow:    0 8px 40px rgba(31,37,107,.15);
+      --shadow-sm: 0 2px 12px rgba(31,37,107,0.08);
+      --shadow-md: 0 8px 32px rgba(31,37,107,0.14);
+      --shadow-lg: 0 24px 64px rgba(31,37,107,0.22);
+      --tr:        0.32s cubic-bezier(.4,0,.2,1);
+      --ease:      cubic-bezier(0.16,1,0.3,1);
+      --glass-bg:  rgba(255,255,255,0.72);
+      --glass-border: rgba(255,255,255,0.75);
+      --radius:    20px;
+      --radius-sm: 12px;
+      --radius-pill: 50px;
+      --nav-h:     68px;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+    }
+    [data-theme="dark"] {
+      --body-bg:  #0b1220;
+      --card-bg:  #121826;
+      --surface:  #121826;
+      --text:     #e6f1ff;
+      --text-2:   #7f8ea3;
+      --text-muted:#7f8ea3;
+      --nav-bg:   rgba(10,14,25,0.92);
+      --input-bg: #0f1724;
+      --border:   #1f2a3a;
+      --off:      #0f1724;
+      --shadow:   0 8px 40px rgba(0,0,0,.35);
+      --shadow-sm:0 2px 12px rgba(0,0,0,0.2);
+      --shadow-md:0 8px 32px rgba(0,0,0,0.3);
+      --glass-bg: rgba(18,24,38,0.75);
+      --glass-border: rgba(41,182,200,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--body-bg); color: var(--text); overflow-x: hidden; transition: background .3s, color .3s; line-height: 1.65; }
+    h1,h2,h3,h4 { font-family: var(--font-display); }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; object-fit: cover; }
+    ul { list-style: none; }
+    button { cursor: pointer; font-family: inherit; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem,5vw,2.5rem); }
+    .section-pad { padding: clamp(3.5rem,7vw,6rem) 0; }
+
+    .section-label {
+      display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--cyan-dk);
+      background: rgba(41,182,200,.1); border: 1px solid rgba(41,182,200,.25);
+      padding: .35em .9em; border-radius: 100px; margin-bottom: 1rem;
+    }
+    [data-theme="dark"] .section-label { color: var(--cyan-lt); background: rgba(41,182,200,.12); border-color: rgba(41,182,200,.3); }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 800; line-height: 1.15; color: var(--text); }
+    .section-title span { color: var(--cyan); }
+    [data-theme="dark"] .section-title { color: #e6f1ff; }
+    .section-header { margin-bottom: 3rem; text-align: center; }
+    .section-header .section-label { margin: 0 auto 1rem; display: table; }
+
+    /* Toast */
+    #toast-container { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 7000; display: flex; flex-direction: column; gap: .6rem; align-items: center; pointer-events: none; }
+    .toast { padding: .7rem 1.4rem; border-radius: 50px; font-family: var(--font-display); font-size: .85rem; color: #fff; display: flex; align-items: center; gap: .6rem; box-shadow: 0 4px 20px rgba(0,0,0,.25); white-space: nowrap; opacity: 0; transform: translateY(16px); pointer-events: all; transition: opacity .35s, transform .35s; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.info { background: linear-gradient(135deg,var(--navy),#3546b0); }
+
+    /* ── NAVBAR ── */
+    #navbar { position: sticky; top: 0; z-index: 900; background: var(--nav-bg); backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: background .35s, box-shadow .35s; }
+    #navbar.scrolled { box-shadow: var(--shadow); }
+    .nav-inner { max-width: 1300px; margin: auto; display: flex; align-items: center; justify-content: space-between; padding: .85rem 2rem; gap: 1.2rem; height: var(--nav-h); }
+    .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; color: var(--navy); white-space: nowrap; flex-shrink: 0; }
+    .nav-logo a { display: flex; align-items: center; gap: .55rem; color: inherit; }
+    .nav-logo i { color: var(--cyan); font-size: 1.4rem; }
+    [data-theme="dark"] .nav-logo { color: var(--cyan-lt); }
+    .nav-city-wrap { position: relative; display: flex; align-items: center; flex-shrink: 0; }
+    .nav-city-icon { position: absolute; left: .75rem; color: var(--cyan); font-size: .9rem; pointer-events: none; z-index: 1; }
+    .nav-city-select { appearance: none; background: var(--input-bg); border: 1.5px solid var(--border); border-radius: 10px; padding: .5rem 2.2rem .5rem 2.1rem; font-family: var(--font-display); font-weight: 700; font-size: .85rem; color: var(--navy); cursor: pointer; min-width: 140px; transition: border-color var(--tr); }
+    .nav-city-select:focus { outline: none; border-color: var(--cyan); }
+    .nav-city-caret { position: absolute; right: .6rem; color: var(--text-2); font-size: .75rem; pointer-events: none; }
+    [data-theme="dark"] .nav-city-select { background: #121826; border-color: #2a3446; color: var(--cyan-lt); }
+    .nav-search-wrap { position: relative; flex: 1; max-width: 280px; }
+    .nav-search-icon { position: absolute; left: .85rem; top: 50%; transform: translateY(-50%); color: var(--text-2); font-size: .9rem; pointer-events: none; }
+    #nav-search { width: 100%; background: var(--input-bg); border: 1.5px solid var(--border); border-radius: 10px; padding: .5rem .9rem .5rem 2.2rem; font-family: var(--font-body); font-size: .88rem; color: var(--text); transition: border-color var(--tr), box-shadow var(--tr); outline: none; }
+    #nav-search::placeholder { color: var(--text-2); opacity: .7; }
+    #nav-search:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(41,182,200,.15); }
+    [data-theme="dark"] #nav-search { background: #121826; border-color: #2a3446; color: #e6f1ff; }
+    .nav-links { display: flex; align-items: center; gap: 1.6rem; flex-shrink: 0; }
+    .nav-links a { font-weight: 500; font-size: .9rem; color: var(--text-2); position: relative; padding-bottom: 2px; transition: color var(--tr); white-space: nowrap; }
+    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; border-radius: 2px; background: var(--cyan); transition: width var(--tr); }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-links a.active { color: var(--cyan); }
+    [data-theme="dark"] .nav-links a { color: #9fb3c8; }
+    #theme-toggle { font-size: 1.15rem; cursor: pointer; color: var(--text-2); transition: color var(--tr), transform var(--tr); flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--border); }
+    #theme-toggle:hover { color: var(--cyan); transform: scale(1.1); border-color: var(--cyan); }
+    [data-theme="dark"] #theme-toggle { color: var(--cyan-lt); border-color: rgba(41,182,200,.3); }
+    .hamburger-label { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; flex-shrink: 0; }
+    .hamburger-label span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all var(--tr); display: block; }
+    [data-theme="dark"] .hamburger-label span { background: #e6f1ff; }
+    .mob-toggle { display: none; }
+    .mob-toggle:checked ~ .nav-inner .hamburger-label span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .mob-toggle:checked ~ .nav-inner .hamburger-label span:nth-child(2) { opacity: 0; }
+    .mob-toggle:checked ~ .nav-inner .hamburger-label span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav { display: none; flex-direction: column; background: var(--nav-bg); border-top: 1px solid var(--border); max-height: 0; overflow: hidden; transition: max-height .4s ease; }
+    .mob-toggle:checked ~ .mobile-nav { max-height: 500px; }
+    .mobile-nav a { padding: .85rem 2rem; font-weight: 500; font-size: .95rem; color: var(--text-2); border-bottom: 1px solid var(--border); transition: color var(--tr), background var(--tr); }
+    .mobile-nav a:hover { color: var(--cyan); background: rgba(41,182,200,.06); }
+    @media (max-width: 992px) { .nav-links, .nav-search-wrap { display: none; } .hamburger-label { display: flex; } .mobile-nav { display: flex; } }
+
+    /* ── HERO ── */
+    @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.12); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .cat-hero { position: relative; min-height: 70vh; display: flex; align-items: flex-end; overflow: hidden; }
+    .cat-hero-bg { position: absolute; inset: 0; }
+    .cat-hero-img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); animation: heroZoom 14s ease-in-out infinite alternate; }
+    .cat-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,14,40,.92) 0%, rgba(20,30,80,.5) 50%, rgba(10,18,50,.25) 100%); }
+    .cat-hero-content { position: relative; z-index: 2; width: 100%; max-width: 1200px; margin: 0 auto; padding: calc(var(--nav-h) + 2rem) clamp(1rem,5vw,2.5rem) 4rem; }
+    .cat-hero-badge { display: inline-flex; align-items: center; gap: .5rem; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--cyan-lt); border: 1px solid rgba(95,214,230,.4); padding: .4em 1.1em; border-radius: 100px; margin-bottom: 1.2rem; backdrop-filter: blur(8px); background: rgba(41,182,200,.12); animation: fadeUp .8s var(--ease) both; }
+    .cat-hero-title { font-family: var(--font-display); font-size: clamp(2.8rem,7vw,6rem); font-weight: 800; color: #fff; line-height: .95; letter-spacing: -.02em; margin-bottom: 1.2rem; animation: fadeUp .8s var(--ease) .15s both; }
+    .cat-hero-title em { font-style: italic; background: linear-gradient(135deg,var(--cyan-lt),var(--sky)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .cat-hero-sub { max-width: 480px; font-size: clamp(.95rem,1.8vw,1.1rem); color: rgba(255,255,255,.78); margin-bottom: 2rem; line-height: 1.7; animation: fadeUp .8s var(--ease) .3s both; }
+    .cat-hero-meta { display: flex; gap: 2rem; animation: fadeUp .8s var(--ease) .45s both; flex-wrap: wrap; }
+    .cat-hero-stat strong { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: var(--cyan-lt); line-height: 1; display: block; }
+    .cat-hero-stat span { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: .85rem 0; }
+    [data-theme="dark"] .breadcrumb-bar { background: #121826; }
+    .breadcrumb { display: flex; align-items: center; gap: .5rem; font-size: .82rem; color: var(--text-muted); flex-wrap: wrap; }
+    .breadcrumb a { color: var(--cyan-dk); font-weight: 600; transition: color var(--tr); }
+    .breadcrumb a:hover { color: var(--cyan); }
+    [data-theme="dark"] .breadcrumb a { color: var(--cyan-lt); }
+    .breadcrumb i { font-size: .6rem; opacity: .5; }
+    .breadcrumb span { color: var(--text); font-weight: 600; }
+
+    /* ── FILTER BAR ── */
+    .filter-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 1rem 0; position: sticky; top: var(--nav-h); z-index: 500; backdrop-filter: blur(12px); }
+    [data-theme="dark"] .filter-bar { background: rgba(18,24,38,.95); }
+    .filter-bar-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .filter-chips { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .chip { padding: .4em 1.1em; border-radius: 50px; border: 1.5px solid var(--border); background: var(--input-bg); font-family: var(--font-display); font-size: .8rem; font-weight: 700; color: var(--text-2); cursor: pointer; transition: all var(--tr); white-space: nowrap; }
+    .chip:hover, .chip.active { background: var(--cyan); color: #fff; border-color: var(--cyan); }
+    [data-theme="dark"] .chip { background: #121826; }
+    .filter-count { font-size: .82rem; color: var(--text-muted); white-space: nowrap; }
+    .filter-count strong { color: var(--cyan-dk); font-family: var(--font-display); }
+    [data-theme="dark"] .filter-count strong { color: var(--cyan-lt); }
+
+    /* ── FEATURED CARD ── */
+    .featured-strip { padding: clamp(2rem,4vw,3.5rem) 0; background: var(--body-bg); }
+    .featured-card { display: grid; grid-template-columns: 1.1fr 1fr; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--border); transition: transform .45s var(--ease); }
+    .featured-card:hover { transform: translateY(-6px); }
+    [data-theme="dark"] .featured-card { background: var(--card-bg); }
+    .featured-img-wrap { position: relative; height: 440px; overflow: hidden; }
+    .featured-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+    .featured-card:hover .featured-img-wrap img { transform: scale(1.05); }
+    .featured-badge { position: absolute; top: 1.2rem; left: 1.2rem; background: linear-gradient(135deg,var(--navy),var(--cyan-dk)); color: #fff; font-family: var(--font-display); font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: .4em 1em; border-radius: 50px; display: flex; align-items: center; gap: .4rem; }
+    .featured-rating { position: absolute; bottom: 1.2rem; left: 1.2rem; background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); padding: .45em 1em; border-radius: 50px; display: flex; align-items: center; gap: .5rem; font-family: var(--font-display); font-size: .82rem; font-weight: 700; color: var(--navy); }
+    [data-theme="dark"] .featured-rating { background: rgba(18,24,38,.85); border-color: rgba(41,182,200,.3); color: var(--cyan-lt); }
+    .featured-rating i { color: #f1c40f; }
+    .featured-body { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; gap: 1.2rem; background: var(--surface); }
+    [data-theme="dark"] .featured-body { background: var(--card-bg); }
+    .featured-category { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: var(--cyan-dk); font-weight: 700; }
+    [data-theme="dark"] .featured-category { color: var(--cyan-lt); }
+    .featured-title { font-family: var(--font-display); font-size: clamp(1.5rem,2.5vw,2rem); font-weight: 800; color: var(--text); line-height: 1.2; }
+    [data-theme="dark"] .featured-title { color: #e6f1ff; }
+    .featured-desc { font-size: .95rem; color: var(--text-muted); line-height: 1.7; }
+    .featured-amenities { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .amenity-tag { display: flex; align-items: center; gap: .4rem; background: rgba(41,182,200,.1); border: 1px solid rgba(41,182,200,.2); padding: .3em .8em; border-radius: 50px; font-size: .75rem; font-weight: 600; color: var(--cyan-dk); }
+    [data-theme="dark"] .amenity-tag { background: rgba(41,182,200,.12); color: var(--cyan-lt); }
+    .featured-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-book { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1.8rem; border-radius: var(--radius-pill); background: linear-gradient(135deg,var(--navy),var(--cyan)); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: .9rem; border: none; transition: transform .28s var(--ease), box-shadow .28s; box-shadow: 0 8px 24px rgba(31,37,107,.3); }
+    .btn-book:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(31,37,107,.35); }
+    .btn-outline-nav { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1.8rem; border-radius: var(--radius-pill); border: 1.5px solid var(--border); background: transparent; color: var(--text-2); font-family: var(--font-display); font-weight: 700; font-size: .9rem; transition: all var(--tr); }
+    .btn-outline-nav:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* ── PLACES GRID ── */
+    .places-section { padding: clamp(2rem,4vw,4rem) 0 clamp(3.5rem,7vw,6rem); background: var(--body-bg); }
+    .places-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.8rem; }
+    .place-card { background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border); transition: transform .4s var(--ease), box-shadow .4s; display: flex; flex-direction: column; }
+    .place-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+    [data-theme="dark"] .place-card { background: var(--card-bg); }
+    .place-img-wrap { position: relative; height: 210px; overflow: hidden; flex-shrink: 0; }
+    .place-img-wrap img { height: 100%; width: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+    .place-card:hover .place-img-wrap img { transform: scale(1.06); }
+    .place-tag { position: absolute; top: 1rem; right: 1rem; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); padding: .3em .8em; border-radius: 100px; font-size: .7rem; font-weight: 700; color: var(--navy); font-family: var(--font-display); }
+    [data-theme="dark"] .place-tag { color: var(--cyan-lt); background: rgba(18,24,38,.8); border-color: rgba(41,182,200,.3); }
+    .place-stars { position: absolute; bottom: 1rem; left: 1rem; background: rgba(0,0,0,.55); backdrop-filter: blur(8px); padding: .25em .7em; border-radius: 50px; font-size: .72rem; color: #f1c40f; display: flex; align-items: center; gap: .3rem; }
+    .place-stars span { color: #fff; font-weight: 700; }
+    .place-body { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
+    .place-body h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; margin-bottom: .5rem; color: var(--text); }
+    .place-body p { font-size: .88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; flex: 1; }
+    .place-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .place-badge { font-size: .75rem; font-weight: 700; font-family: var(--font-display); display: flex; align-items: center; gap: .35rem; }
+    .badge-mall { color: var(--navy); }
+    .badge-market { color: #7c3aed; }
+    [data-theme="dark"] .badge-mall { color: var(--cyan-lt); }
+    [data-theme="dark"] .badge-market { color: #a78bfa; }
+    .place-link { font-size: .82rem; font-weight: 700; color: var(--cyan-dk); display: inline-flex; align-items: center; gap: .35rem; font-family: var(--font-display); transition: gap .2s, color .2s; }
+    .place-link:hover { color: var(--navy); gap: .6rem; }
+    [data-theme="dark"] .place-link { color: var(--cyan-lt); }
+    [data-theme="dark"] .place-link:hover { color: #fff; }
+
+    /* ── VIBES STRIP (Marquee ticker) ── */
+    .vibes-strip { overflow: hidden; background: linear-gradient(135deg,var(--navy),#29386e); padding: 1rem 0; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .vibes-track { display: flex; gap: 2.5rem; white-space: nowrap; width: max-content; animation: marquee 22s linear infinite; }
+    .vibes-item { font-family: var(--font-display); font-size: .85rem; font-weight: 700; color: rgba(255,255,255,.65); display: flex; align-items: center; gap: .5rem; }
+    .vibes-item i { color: var(--cyan-lt); }
+
+    /* ── SHOPPING TIPS ── */
+    .tips-strip { background: linear-gradient(135deg,var(--navy),#29386e); padding: clamp(2.5rem,5vw,4rem) 0; }
+    .tips-inner { display: grid; grid-template-columns: auto 1fr; gap: 2.5rem; align-items: start; }
+    .tips-label h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: #fff; }
+    .tips-label p { font-size: .85rem; color: rgba(255,255,255,.6); margin-top: .3rem; }
+    .tips-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+    .tip-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius-sm); padding: 1.2rem; backdrop-filter: blur(8px); transition: background .3s; }
+    .tip-card:hover { background: rgba(255,255,255,.1); }
+    .tip-icon { font-size: 1.5rem; margin-bottom: .6rem; }
+    .tip-card h4 { font-family: var(--font-display); font-size: .9rem; font-weight: 700; color: #fff; margin-bottom: .3rem; }
+    .tip-card p { font-size: .8rem; color: rgba(255,255,255,.6); line-height: 1.5; }
+
+    /* ── FADE IN ── */
+    .fade-in { opacity: 0; transform: translateY(28px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* ── FOOTER ── */
+    footer { background-color: #1F256B; color: rgba(255,255,255,.65); padding: 3rem 2rem 1.5rem; }
+    .footer-inner { max-width: 1300px; margin: auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+    .footer-brand .brand-name { font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; color: #fff; display: flex; align-items: center; gap: .5rem; margin-bottom: .8rem; }
+    .footer-brand .brand-name i { color: var(--cyan); }
+    .footer-brand p { font-size: .88rem; line-height: 1.7; max-width: 280px; }
+    .footer-socials { display: flex; gap: .6rem; margin-top: 1.2rem; }
+    .social-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.18); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.5); font-size: .88rem; transition: all var(--tr); }
+    .social-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+    .footer-col h4 { font-family: var(--font-display); font-weight: 700; font-size: .92rem; color: #fff; margin-bottom: 1rem; }
+    .footer-col ul li { margin-bottom: .55rem; }
+    .footer-col ul li a { font-size: .86rem; transition: color var(--tr); }
+    .footer-col ul li a:hover { color: var(--cyan); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 1.2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .8rem; }
+    .footer-bottom p { font-size: .82rem; }
+
+    /* ── BACK TO TOP ── */
+    #back-top { position: fixed; bottom: 2rem; left: 2rem; z-index: 700; width: 44px; height: 44px; border-radius: 50%; background: var(--navy); color: #fff; border: none; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,.2); opacity: 0; pointer-events: none; transition: all var(--tr); }
+    #back-top.visible { opacity: 1; pointer-events: all; }
+    #back-top:hover { background: var(--cyan); transform: translateY(-3px); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 992px) { .featured-card { grid-template-columns: 1fr; } .featured-img-wrap { height: 300px; } .tips-inner { grid-template-columns: 1fr; } .tips-grid { grid-template-columns: repeat(2,1fr); } .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) { .places-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 580px) { .places-grid { grid-template-columns: 1fr; } .tips-grid { grid-template-columns: 1fr; } .footer-top { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div id="toast-container"></div>
+
+<!-- ══════════════════════════════════════════════════════
+     NAVBAR — exact match to City Page
+══════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <input type="checkbox" class="mob-toggle" id="mob-chk"/>
+  <div class="nav-inner">
+
+    <div class="nav-logo">
+      <a href="homepage.html" style="display:flex;align-items:center;gap:.55rem;color:inherit;">
+        <i class="fa fa-city"></i> Aurevia
+      </a>
+    </div>
+
+    <div class="nav-city-wrap">
+      <i class="fa fa-location-dot nav-city-icon"></i>
+      <select class="nav-city-select" aria-label="Select City">
+        <option value="chandigarh" selected>Chandigarh</option>
+        <option value="delhi">Delhi</option>
+        <option value="udaipur">Udaipur</option>
+        <option value="rishikesh">Rishikesh</option>
+      </select>
+      <i class="fa fa-chevron-down nav-city-caret"></i>
+    </div>
+
+    <div class="nav-search-wrap">
+      <i class="fa fa-magnifying-glass nav-search-icon"></i>
+      <input type="text" id="nav-search" placeholder="Search malls & markets…"/>
+    </div>
+
+    <nav class="nav-links">
+      <a href="homepage.html">Home</a>
+      <a href="homepage.html#about">About</a>
+      <a href="homepage.html#categories">Explore</a>
+      <a href="homepage.html#places">Places</a>
+      <a href="homepage.html#map">Map</a>
+      <a href="homepage.html#complaint">Review</a>
+    </nav>
+
+    <div id="theme-toggle" title="Toggle dark mode"><i class="fas fa-moon"></i></div>
+
+    <label class="hamburger-label" for="mob-chk" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </label>
+  </div>
+
+  <div class="mobile-nav">
+    <a href="homepage.html">Home</a>
+    <a href="homepage.html#about">About</a>
+    <a href="homepage.html#categories">Explore</a>
+    <a href="homepage.html#places">Places</a>
+    <a href="homepage.html#map">Map</a>
+    <a href="homepage.html#complaint">Review</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════ -->
+<section class="cat-hero">
+  <div class="cat-hero-bg">
+    <img src="https://images.unsplash.com/photo-1567446841818-80961816d299?w=1800&q=80"
+         alt="Shopping in Chandigarh" class="cat-hero-img"
+         onerror="this.src='https://images.unsplash.com/photo-1581417478175-a9ef18f210c2?w=1800&q=80'"/>
+    <div class="cat-hero-overlay"></div>
+  </div>
+  <div class="cat-hero-content">
+    <div class="cat-hero-badge"><i class="fa fa-bag-shopping"></i> Retail Therapy</div>
+    <h1 class="cat-hero-title">Shop the <em>City</em></h1>
+    <p class="cat-hero-sub">From luxury mega-malls to bustling traditional markets — Chandigarh is a true shopper's paradise.</p>
+    <div class="cat-hero-meta">
+      <div class="cat-hero-stat"><strong>6+</strong><span>Shopping Hubs</span></div>
+      <div class="cat-hero-stat"><strong>200+</strong><span>Brands</span></div>
+      <div class="cat-hero-stat"><strong>24/7</strong><span>Open Markets</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-bar">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="homepage.html"><i class="fa fa-house"></i> Home</a>
+      <i class="fa fa-chevron-right"></i>
+      <a href="homepage.html#categories">Explore</a>
+      <i class="fa fa-chevron-right"></i>
+      <span>Shopping & Malls</span>
+    </nav>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="container">
+    <div class="filter-bar-inner">
+      <div class="filter-chips">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="mall">Malls</button>
+        <button class="chip" data-filter="market">Markets</button>
+        <button class="chip" data-filter="luxury">Luxury</button>
+        <button class="chip" data-filter="budget">Budget</button>
+      </div>
+      <div class="filter-count">Showing <strong id="shop-count">6</strong> spots</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     FEATURED — Elante Mall
+══════════════════════════════════════════════════════ -->
+<section class="featured-strip">
+  <div class="container">
+    <div class="section-header fade-in" style="text-align:left; margin-bottom:1.5rem;">
+      <span class="section-label">Editor's Pick</span>
+      <h2 class="section-title">Featured <span>Destination</span></h2>
+    </div>
+    <div class="featured-card fade-in">
+      <div class="featured-img-wrap">
+        <img src="https://static.india.com/wp-content/uploads/2019/08/Elante-Mall.jpg?impolicy=Medium_Widthonly&w=900"
+             alt="Elante Mall"
+             onerror="this.src='https://images.unsplash.com/photo-1581417478175-a9ef18f210c2?w=900&q=80'"/>
+        <div class="featured-badge"><i class="fa fa-crown"></i> North India's Largest</div>
+        <div class="featured-rating"><i class="fa fa-star"></i> 4.7 · 8.2k reviews</div>
+      </div>
+      <div class="featured-body">
+        <div class="featured-category">Luxury Mall · Industrial Area Ph-I</div>
+        <h2 class="featured-title">Elante Mall</h2>
+        <p class="featured-desc">North India's largest shopping mall sprawling over 1.2 million sq ft. Home to 250+ international and domestic brands, a massive food court, PVR Cinemas, and a dedicated entertainment zone.</p>
+        <div class="featured-amenities">
+          <span class="amenity-tag"><i class="fa fa-film"></i> PVR Cinemas</span>
+          <span class="amenity-tag"><i class="fa fa-utensils"></i> Food Court</span>
+          <span class="amenity-tag"><i class="fa fa-car"></i> Free Parking</span>
+          <span class="amenity-tag"><i class="fa fa-wifi"></i> Free WiFi</span>
+          <span class="amenity-tag"><i class="fa fa-gamepad"></i> Gaming Zone</span>
+        </div>
+        <div class="featured-cta">
+          <button class="btn-book"><i class="fa fa-map-pin"></i> Get Directions</button>
+          <button class="btn-outline-nav" onclick="window.open('https://maps.google.com/?q=Elante+Mall+Chandigarh','_blank')"><i class="fa fa-arrow-up-right-from-square"></i> View on Map</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     VIBES MARQUEE
+══════════════════════════════════════════════════════ -->
+<div class="vibes-strip">
+  <div class="vibes-track">
+    <span class="vibes-item"><i class="fa fa-shirt"></i> Fashion &amp; Apparel</span>
+    <span class="vibes-item"><i class="fa fa-gem"></i> Jewellery &amp; Accessories</span>
+    <span class="vibes-item"><i class="fa fa-mobile-screen"></i> Electronics</span>
+    <span class="vibes-item"><i class="fa fa-bowl-food"></i> Food &amp; Dining</span>
+    <span class="vibes-item"><i class="fa fa-shoe-prints"></i> Footwear</span>
+    <span class="vibes-item"><i class="fa fa-film"></i> Multiplexes</span>
+    <span class="vibes-item"><i class="fa fa-paintbrush"></i> Home Décor</span>
+    <span class="vibes-item"><i class="fa fa-spa"></i> Beauty &amp; Wellness</span>
+    <!-- duplicate for loop -->
+    <span class="vibes-item"><i class="fa fa-shirt"></i> Fashion &amp; Apparel</span>
+    <span class="vibes-item"><i class="fa fa-gem"></i> Jewellery &amp; Accessories</span>
+    <span class="vibes-item"><i class="fa fa-mobile-screen"></i> Electronics</span>
+    <span class="vibes-item"><i class="fa fa-bowl-food"></i> Food &amp; Dining</span>
+    <span class="vibes-item"><i class="fa fa-shoe-prints"></i> Footwear</span>
+    <span class="vibes-item"><i class="fa fa-film"></i> Multiplexes</span>
+    <span class="vibes-item"><i class="fa fa-paintbrush"></i> Home Décor</span>
+    <span class="vibes-item"><i class="fa fa-spa"></i> Beauty &amp; Wellness</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SHOPPING GRID
+══════════════════════════════════════════════════════ -->
+<section class="places-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">All Shopping Spots</span>
+      <h2 class="section-title">Latest <span>Trends</span></h2>
+    </div>
+
+    <div class="places-grid" id="shop-grid">
+
+      <!-- Sector 17 -->
+      <div class="place-card fade-in" data-filter="market">
+        <div class="place-img-wrap">
+          <img src="https://images.unsplash.com/photo-1544644181-148f98017134?w=600&q=80" alt="Sector 17 Plaza"
+               onerror="this.src='https://images.unsplash.com/photo-1581417478175-a9ef18f210c2?w=600&q=80'"/>
+          <span class="place-tag">Market</span>
+          <div class="place-stars"><i class="fa fa-star"></i><span>4.6</span></div>
+        </div>
+        <div class="place-body">
+          <h3>Sector 17 Plaza</h3>
+          <p>The iconic pedestrian heart of Chandigarh. Perfect for local crafts, branded clothes, books, and the best street snacks in town.</p>
+          <div class="place-footer">
+            <span class="place-badge badge-market"><i class="fa fa-store"></i> Open Market</span>
+            <a href="#" class="place-link">Explore →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- VR Punjab -->
+      <div class="place-card fade-in" data-filter="mall luxury">
+        <div class="place-img-wrap">
+          <img src="https://images.unsplash.com/photo-1567446841818-80961816d299?w=600&q=80" alt="VR Punjab"
+               onerror="this.src='https://images.unsplash.com/photo-1581417478175-a9ef18f210c2?w=600&q=80'"/>
+          <span class="place-tag">Luxury Mall</span>
+          <div class="place-stars"><i class="fa fa-star"></i><span>4.5</span></div>
+        </div>
+        <div class="place-body">
+          <h3>VR Punjab</h3>
+          <p>Located on the outskirts near Mohali, this premium open-air mall offers a curated retail experience with beautiful architecture.</p>
+          <div class="place-footer">
+            <span class="place-badge badge-mall"><i class="fa fa-building"></i> Premium Mall</span>
+            <a href="#" class="place-link">Explore →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- City Centre DLF -->
+      <div class="place-card fade-in" data-filter="mall luxury">
+        <div class="place-img-wrap">
+          <img src="https://images.unsplash.com/photo-1523381210434-271e8be1952b?w=600&q=80" alt="City Centre DLF"
+               onerror="this.src='https://images.unsplash.com/photo-1581417478175-a9ef18f210c2?w=600&q=80'"/>
+          <span class="place-tag">Upscale</span>
+          <div class="place-stars"><i class="fa fa-star"></i><span>4.4</span></div>
+        </div>
+        <div class="place-body">
+          <h3>City Centre DLF</h3>
+          <p>An upscale shopping destination in IT Park, featuring high-end boutiques, global brand outlets, and exclusive dining.</p>
+          <div class="place-footer">
+            <span class="place-badge badge-mall"><i class="fa fa-building"></i> DLF Mall</span>
+            <a href="#" class="place-link">Explore →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sector 22 Market -->
+      <div class="place-card fade-in" data-filter="market budget">
+        <div class="place-img-wrap">
+          <img src="https://images.unsplash.com/photo-1577732881180-87a32c694664?w=600&q=80" alt="Sector 22 Market"
+               onerror="this.src='https://images.unsplash.com/photo-1581417478175-a9ef18f210c2?w=600&q=80'"/>
+          <span class="place-tag">Market</span>
+          <div class="place-stars"><i class="fa fa-star"></i><span>4.3</span></div>
+        </div>
+        <div class="place-body">
+          <h3>Sector 22 Shastri Market</h3>
+          <p>The ultimate destination for budget-friendly fashion, gold jewellery, and authentic Punjabi juttis. Haggling welcome!</p>
+          <div class="place-footer">
+            <span class="place-badge badge-market"><i class="fa fa-store"></i> Street Market</span>
+            <a href="#" class="place-link">Explore →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Centra Mall -->
+      <div class="place-card fade-in" data-filter="mall">
+        <div class="place-img-wrap">
+          <img src="https://images.unsplash.com/photo-1533038590840-1cde6e668a3d?w=600&q=80" alt="Centra Mall"
+               onerror="this.src='https://images.unsplash.com/photo-1581417478175-a9ef18f210c2?w=600&q=80'"/>
+          <span class="place-tag">Mall</span>
+          <div class="place-stars"><i class="fa fa-star"></i><span>4.2</span></div>
+        </div>
+        <div class="place-body">
+          <h3>Centra Mall</h3>
+          <p>A convenient and compact mall in the Industrial Area, popular for its premium cinema and quick-stop shopping experience.</p>
+          <div class="place-footer">
+            <span class="place-badge badge-mall"><i class="fa fa-building"></i> Compact Mall</span>
+            <a href="#" class="place-link">Explore →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grain Market Sector 26 -->
+      <div class="place-card fade-in" data-filter="market budget">
+        <div class="place-img-wrap">
+          <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=600&q=80" alt="Sector 26 Market"
+               onerror="this.src='https://images.unsplash.com/photo-1581417478175-a9ef18f210c2?w=600&q=80'"/>
+          <span class="place-tag">Bazaar</span>
+          <div class="place-stars"><i class="fa fa-star"></i><span>4.1</span></div>
+        </div>
+        <div class="place-body">
+          <h3>Sector 26 Grain Market</h3>
+          <p>An experience unto itself — a vibrant wholesale and retail bazaar for spices, dry fruits, local produce, and daily essentials.</p>
+          <div class="place-footer">
+            <span class="place-badge badge-market"><i class="fa fa-store"></i> Wholesale Bazaar</span>
+            <a href="#" class="place-link">Explore →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SHOPPER TIPS
+══════════════════════════════════════════════════════ -->
+<section class="tips-strip fade-in">
+  <div class="container">
+    <div class="tips-inner">
+      <div class="tips-label">
+        <h3>Shopper's<br/>Guide</h3>
+        <p>Pro tips for your<br/>retail adventure</p>
+      </div>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-icon">🕐</div>
+          <h4>Best Time to Shop</h4>
+          <p>Weekday mornings at markets = no crowds, best prices. Malls are most lively on weekend evenings.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-icon">💬</div>
+          <h4>Bargain at Markets</h4>
+          <p>Sector 22 and Grain Market welcome bargaining. Start at 50% of the quoted price and negotiate from there.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-icon">🚗</div>
+          <h4>Getting There</h4>
+          <p>Elante and VR Punjab have free parking. For Sector 17, take the CTU bus or auto — parking is tricky.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════ -->
+<footer id="footer">
+  <div class="footer-inner container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand-name"><i class="fa fa-city"></i> Aurevia</div>
+        <p>Your one-stop digital gateway to explore cafes, hotels, tourist spots, restaurants, transport, and emergency services across India's top cities.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="cafes.html">Cafés</a></li>
+          <li><a href="restaurant.html">Restaurants</a></li>
+          <li><a href="hotel.html">Hotels</a></li>
+          <li><a href="mall.html">Shopping</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Cities</h4>
+        <ul>
+          <li><a href="#">Chandigarh</a></li>
+          <li><a href="#">Delhi</a></li>
+          <li><a href="#">Udaipur</a></li>
+          <li><a href="#">Rishikesh</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="homepage.html#complaint">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 <span style="color:var(--cyan)">Aurevia - City Explorer and Travel Web Portal</span>. All rights reserved.</p>
+      <p>Made with <span style="color:#e74c3c">♥</span> for India</p>
+    </div>
+  </div>
+</footer>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top">
+  <i class="fa fa-arrow-up"></i>
+</button>
+
+<script>
+  // Dark mode
+  const themeToggle = document.getElementById('theme-toggle');
+  const icon = themeToggle.querySelector('i');
+  if (localStorage.getItem('aurevia-theme') === 'dark') {
+    document.documentElement.setAttribute('data-theme','dark');
+    icon.classList.replace('fa-moon','fa-sun');
+  }
+  themeToggle.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('aurevia-theme','light');
+      icon.classList.replace('fa-sun','fa-moon');
+    } else {
+      document.documentElement.setAttribute('data-theme','dark');
+      localStorage.setItem('aurevia-theme','dark');
+      icon.classList.replace('fa-moon','fa-sun');
+    }
+  });
+
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+    document.getElementById('back-top').classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  // Mobile nav close
+  document.querySelectorAll('.mobile-nav a').forEach(a => {
+    a.addEventListener('click', () => { document.getElementById('mob-chk').checked = false; });
+  });
+
+  // Fade-in observer
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 3) * 80}ms`;
+    fadeObserver.observe(el);
+  });
+
+  // Filter chips
+  const chips = document.querySelectorAll('.chip');
+  const cards = document.querySelectorAll('.place-card');
+  const countEl = document.getElementById('shop-count');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const filter = chip.dataset.filter;
+      let count = 0;
+      cards.forEach(card => {
+        const cardFilters = card.dataset.filter || '';
+        const match = filter === 'all' || cardFilters.includes(filter);
+        card.style.display = match ? 'flex' : 'none';
+        if (match) count++;
+      });
+      countEl.textContent = count;
+    });
+  });
+
+  // Get Directions button
+  document.querySelector('.btn-book').addEventListener('click', () => {
+    window.open('https://maps.google.com/?q=Elante+Mall+Chandigarh', '_blank');
+  });
+</script>
+</body>
+</html>

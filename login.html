@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Aurevia | Login & Signup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://us.images.westend61.de/0001985775pw/aerial-view-of-modern-city-skyline-at-sunset-bhandup-west-mumbai-india-AAEF30819.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .section {
+            position: relative;
+            max-width: 800px; /* Compact Size */
+            width: 100%;
+            height: 480px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            perspective: 2700px;
+            overflow: hidden;
+        }
+
+        .section .cover {
+            position: absolute; top: 0; left: 50%; height: 100%; width: 50%;
+            z-index: 98; transition: all 1s ease; transform-origin: left;
+            transform-style: preserve-3d; border-radius: 0 30px 30px 0;
+        }
+        /* Image par halka sa Dark Overlay (Dimming effect) */
+.section .cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.8); /* Image thodi dark ho jayegi */
+    transition: 0.5s;
+}
+
+        .section #flip:checked ~ .cover { transform: rotateY(-180deg); }
+        .section .cover .front, .section .cover .back {
+            position: absolute; top: 0; left: 0; height: 100%; width: 100%; backface-visibility: hidden;
+        }
+        .cover .back { transform: rotateY(180deg); }
+        .section .cover img { width: 100%; height: 100%; object-fit: cover; }
+
+        .cover .text {
+            position: absolute; z-index: 10; height: 100%; width: 100%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.3); color: white; text-align: center; padding: 20px;
+        }
+
+        .forms { height: 100%; width: 100%; padding: 40px; }
+        .form-content { display: flex; align-items: center; justify-content: space-between; }
+        .login-form, .signup-form { width: 45%; }
+        
+        .title { font-size: 26px; font-weight: 600; color: white; margin-bottom: 25px; }
+        
+        .input-box { height: 45px; width: 100%; margin: 15px 0; position: relative; }
+        .input-box input {
+            height: 100%; width: 100%; background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3); border-radius: 12px;
+            padding: 0 45px; color: white; font-size: 14px;
+        }
+        
+        ::placeholder { color: rgba(255, 255, 255, 0.7) !important; }
+        .input-box i { position: absolute; left: 15px; top: 15px; color: white; }
+
+        .button input {
+            background: #007bff !important; color: white; border: none;
+            width: 100%; height: 45px; border-radius: 12px; cursor: pointer;
+            font-weight: 600; transition: 0.3s;
+        }
+        .button input:hover { background: #0056b3 !important; }
+
+        .text { color: white !important; font-size: 13px; margin-top: 10px; }
+        label { color: #87ceeb !important; cursor: pointer; font-weight: 600; }
+        
+        #flip { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="section">
+        <input type="checkbox" id="flip">
+        
+        <div class="cover">
+            <div class="front">
+                <img src="https://hblimg.mmtcdn.com/content/hubble/img/desttvimg/mmt/destination/m_Rishikesh_tv_destination_img_2_l_664_996.jpg" alt="">
+                <div class="text"><span class="text-1">Aurevia <br> City Explorer and Travel Web Portal</span></div>
+            </div>
+            <div class="back">
+                <img src="https://storage.googleapis.com/stateless-www-justwravel-com/2021/05/1550217293_shutterstock_1129297934.jpg.jpg" alt="">
+                <div class="text"><span class="text-1">Explore Hidden <br> Indian Gems</span></div>
+            </div>
+        </div>
+
+        <div class="forms">
+            <div class="form-content">
+                <div class="login-form">
+                    <div class="title">Login</div>
+                    <form action="#">
+                        <div class="input-box"><i class="fas fa-envelope"></i><input type="text" placeholder="Type your email" required></div>
+                        <div class="input-box"><i class="fas fa-lock"></i><input type="password" placeholder="Type your password" required></div>
+                        <div class="button input-box"><input type="submit" value="Submit"></div>
+                        <div class="text">Don't have an account? <label for="flip"><a href="homepage.html"></a>Register now</label></div>
+                    </form>
+                </div>
+                <div class="signup-form">
+                    <div class="title">Signup</div>
+                    <form action="#">
+                        <div class="input-box"><i class="fas fa-user"></i><input type="text" placeholder="Type your name" required></div>
+                        <div class="input-box"><i class="fas fa-envelope"></i><input type="text" placeholder="Type your email" required></div>
+                        <div class="input-box"><i class="fas fa-lock"></i><input type="password" placeholder="Type your password" required></div>
+                        <div class="button input-box"><input type="submit" value="Submit"></div>
+                        <div class="text">Already have an account? <label for="flip"><a href="homepage.html"></a>Login now</label></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

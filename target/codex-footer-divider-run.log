@@ -1,0 +1,103 @@
+[INFO] Scanning for projects...
+Downloading from central: https://repo.maven.apache.org/maven2/io/github/git-commit-id/maven-metadata.xml
+Downloading from central: https://repo.maven.apache.org/maven2/org/cyclonedx/maven-metadata.xml
+Downloading from central: https://repo.maven.apache.org/maven2/org/flywaydb/maven-metadata.xml
+Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/maven-metadata.xml
+Progress (1): 249 BProgress (2): 249 B | 255 BProgress (3): 249 B | 255 B | 243 BProgress (4): 249 B | 255 B | 243 B | 234 B                                           Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/maven-metadata.xml (249 B at 91 B/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/jooq/maven-metadata.xml
+Downloaded from central: https://repo.maven.apache.org/maven2/io/github/git-commit-id/maven-metadata.xml (255 B at 92 B/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/maven-metadata.xml
+Downloaded from central: https://repo.maven.apache.org/maven2/org/cyclonedx/maven-metadata.xml (243 B at 86 B/s)
+Progress (2): 234 B | 375 BProgress (3): 234 B | 375 B | 398 B                                   Downloaded from central: https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/maven-metadata.xml (375 B at 4.5 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/jooq/maven-metadata.xml (398 B at 3.3 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/graalvm/buildtools/maven-metadata.xml
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-metadata.xml
+Downloading from central: https://repo.maven.apache.org/maven2/org/liquibase/maven-metadata.xml
+Progress (2): 234 B | 242 BProgress (3): 234 B | 242 B | 4.6 kBProgress (4): 234 B | 242 B | 4.6 kB | 394 BProgress (4): 234 B | 242 B | 9.7 kB | 394 B                                            Downloaded from central: https://repo.maven.apache.org/maven2/org/graalvm/buildtools/maven-metadata.xml (242 B at 3.3 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/maven-metadata.xml
+Progress (3): 234 B | 14 kB | 394 B                                   Downloaded from central: https://repo.maven.apache.org/maven2/org/flywaydb/maven-metadata.xml (234 B at 79 B/s)
+Progress (3): 14 kB | 394 B | 3.1 kBProgress (3): 14 kB | 394 B | 7.7 kBProgress (3): 14 kB | 394 B | 12 kB Progress (3): 14 kB | 394 B | 17 kBProgress (3): 14 kB | 394 B | 20 kBProgress (3): 14 kB | 394 B | 21 kB                                   Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/maven-metadata.xml (21 kB at 139 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/liquibase/maven-metadata.xml (394 B at 1.8 kB/s)
+Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-metadata.xml (14 kB at 53 kB/s)
+[INFO] 
+[INFO] ---------------------< com.aurevia:city-explorer >----------------------
+[INFO] Building city-explorer 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.4.5:run (default-cli) > test-compile @ city-explorer >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ city-explorer ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 18 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ city-explorer ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ city-explorer ---
+[INFO] skip non existing resourceDirectory C:\Users\Hp\Desktop\majorprojectai\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ city-explorer ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:3.4.5:run (default-cli) < test-compile @ city-explorer <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.4.5:run (default-cli) @ city-explorer ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.5)
+
+2026-05-12T00:08:18.784+05:30  INFO 4656 --- [city-explorer] [           main] c.a.c.CityExplorerApplication            : Starting CityExplorerApplication using Java 25.0.3 with PID 4656 (C:\Users\Hp\Desktop\majorprojectai\target\classes started by Hp in C:\Users\Hp\Desktop\majorprojectai)
+2026-05-12T00:08:18.799+05:30  INFO 4656 --- [city-explorer] [           main] c.a.c.CityExplorerApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-05-12T00:08:23.282+05:30  INFO 4656 --- [city-explorer] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-12T00:08:23.757+05:30  INFO 4656 --- [city-explorer] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 432 ms. Found 4 JPA repository interfaces.
+2026-05-12T00:08:27.162+05:30  INFO 4656 --- [city-explorer] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2026-05-12T00:08:27.262+05:30  INFO 4656 --- [city-explorer] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-12T00:08:27.263+05:30  INFO 4656 --- [city-explorer] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+2026-05-12T00:08:27.542+05:30  INFO 4656 --- [city-explorer] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-12T00:08:27.544+05:30  INFO 4656 --- [city-explorer] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 8379 ms
+2026-05-12T00:08:28.331+05:30  INFO 4656 --- [city-explorer] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-12T00:08:28.665+05:30  INFO 4656 --- [city-explorer] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2026-05-12T00:08:28.896+05:30  INFO 4656 --- [city-explorer] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-12T00:08:30.913+05:30  INFO 4656 --- [city-explorer] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-12T00:08:31.124+05:30  INFO 4656 --- [city-explorer] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-12T00:08:32.212+05:30  INFO 4656 --- [city-explorer] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./target/aurevia-db-v2 user=SA
+2026-05-12T00:08:32.221+05:30  INFO 4656 --- [city-explorer] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-12T00:08:32.592+05:30  INFO 4656 --- [city-explorer] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-05-12T00:08:39.327+05:30  INFO 4656 --- [city-explorer] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-05-12T00:08:39.994+05:30  INFO 4656 --- [city-explorer] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-12T00:08:42.295+05:30  INFO 4656 --- [city-explorer] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userService
+2026-05-12T00:08:45.011+05:30  INFO 4656 --- [city-explorer] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./target/aurevia-db-v2'
+2026-05-12T00:08:45.528+05:30  INFO 4656 --- [city-explorer] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2026-05-12T00:08:45.562+05:30  INFO 4656 --- [city-explorer] [           main] c.a.c.CityExplorerApplication            : Started CityExplorerApplication in 29.145 seconds (process running for 31.513)
+2026-05-12T00:08:46.310+05:30  INFO 4656 --- [city-explorer] [nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-12T00:08:46.311+05:30  INFO 4656 --- [city-explorer] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-12T00:08:46.323+05:30  INFO 4656 --- [city-explorer] [nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14:15 min
+[INFO] Finished at: 2026-05-12T00:22:07+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.4.5:run (default-cli) on project city-explorer: Process terminated with exit code: -1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

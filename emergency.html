@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aurevia | Emergency Services in Chandigarh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root{--navy:#1F256B;--cyan:#29B6C8;--cyan-lt:#5fd6e6;--cyan-dk:#1d8fa0;--card-bg:#ffffff;--surface:#ffffff;--body-bg:#fff5f5;--input-bg:#ffffff;--off:#fff0f0;--text:#1a0505;--text-2:#5a3535;--text-muted:#5a3535;--border:rgba(180,30,30,.1);--nav-bg:rgba(255,255,255,.92);--shadow:0 8px 40px rgba(180,30,30,.12);--shadow-sm:0 2px 12px rgba(180,30,30,0.07);--shadow-md:0 8px 32px rgba(180,30,30,0.12);--shadow-lg:0 24px 64px rgba(180,30,30,0.18);--tr:0.32s cubic-bezier(.4,0,.2,1);--ease:cubic-bezier(0.16,1,0.3,1);--glass:rgba(255,255,255,0.55);--glass-bg:rgba(255,255,255,0.72);--glass-border:rgba(255,255,255,0.75);--radius:20px;--radius-sm:12px;--radius-pill:50px;--nav-h:68px;--font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--accent:#c0392b;--accent-lt:#e74c3c;--accent-dk:#922b21;}
+    [data-theme="dark"]{--body-bg:#150505;--card-bg:#1e0808;--surface:#1e0808;--text:#ffe8e8;--text-2:#a07070;--text-muted:#a07070;--nav-bg:rgba(21,5,5,0.92);--input-bg:#1a0606;--border:#3a1010;--off:#1a0606;--shadow:0 8px 40px rgba(0,0,0,.4);--shadow-sm:0 2px 12px rgba(0,0,0,.25);--shadow-md:0 8px 32px rgba(0,0,0,.35);--glass:rgba(30,8,8,0.65);--glass-bg:rgba(30,8,8,.78);--glass-border:rgba(192,57,43,.25);}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{font-size:16px;scroll-behavior:smooth;}body{font-family:var(--font-body);background:var(--body-bg);color:var(--text);overflow-x:hidden;transition:background .3s,color .3s;line-height:1.65;}h1,h2,h3,h4{font-family:var(--font-display);}a{text-decoration:none;color:inherit;}img{max-width:100%;display:block;object-fit:cover;}ul{list-style:none;}button{cursor:pointer;font-family:inherit;}
+    .container{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem);}.section-pad{padding:clamp(3.5rem,7vw,6rem) 0;}
+    .section-label{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-dk);background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.25);padding:.35em .9em;border-radius:100px;margin-bottom:1rem;}
+    [data-theme="dark"] .section-label{color:var(--accent-lt);background:rgba(192,57,43,.12);border-color:rgba(192,57,43,.3);}
+    .section-title{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;line-height:1.15;color:var(--text);}.section-title span,.section-title em{color:var(--accent);font-style:normal;}[data-theme="dark"] .section-title{color:#ffe8e8;}
+    .section-header{margin-bottom:3rem;text-align:center;}.section-header .section-label{margin:0 auto 1rem;display:table;}
+    #toast-container{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);z-index:7000;display:flex;flex-direction:column;gap:.6rem;align-items:center;pointer-events:none;}
+    .toast{padding:.7rem 1.4rem;border-radius:50px;font-family:var(--font-display);font-size:.85rem;color:#fff;display:flex;align-items:center;gap:.6rem;box-shadow:0 4px 20px rgba(0,0,0,.25);opacity:0;transform:translateY(16px);transition:opacity .35s,transform .35s;}.toast.show{opacity:1;transform:translateY(0);}.toast.success{background:linear-gradient(135deg,var(--accent-dk),var(--accent));}
+    /* NAVBAR */
+    #navbar{position:sticky;top:0;z-index:900;background:var(--nav-bg);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);box-shadow:var(--shadow-sm);transition:background .35s,box-shadow .35s;}#navbar.scrolled{box-shadow:var(--shadow);}.mob-toggle{display:none;}
+    .nav-inner{max-width:1300px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:.85rem 2rem;gap:1.2rem;height:var(--nav-h);}
+    .nav-logo{font-family:var(--font-display);font-weight:800;font-size:1.25rem;color:var(--navy);white-space:nowrap;flex-shrink:0;}.nav-logo a{display:flex;align-items:center;gap:.55rem;color:inherit;}.nav-logo i{color:var(--cyan);font-size:1.4rem;}[data-theme="dark"] .nav-logo{color:var(--cyan-lt);}
+    .nav-city-wrap{position:relative;display:flex;align-items:center;flex-shrink:0;}.nav-city-icon{position:absolute;left:.75rem;color:var(--cyan);font-size:.9rem;pointer-events:none;z-index:1;}
+    .nav-city-select{appearance:none;background:var(--input-bg);border:1.5px solid var(--border);border-radius:10px;padding:.5rem 2.2rem .5rem 2.1rem;font-family:var(--font-display);font-weight:700;font-size:.85rem;color:var(--navy);cursor:pointer;min-width:140px;transition:border-color var(--tr);}.nav-city-select:focus{outline:none;border-color:var(--accent);}
+    .nav-city-caret{position:absolute;right:.6rem;color:var(--text-2);font-size:.75rem;pointer-events:none;}[data-theme="dark"] .nav-city-select{background:#1e0808;border-color:#3a1010;color:var(--accent-lt);}
+    .nav-search-wrap{position:relative;flex:1;max-width:280px;}.nav-search-icon{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:var(--text-2);font-size:.9rem;pointer-events:none;}
+    #nav-search{width:100%;background:var(--input-bg);border:1.5px solid var(--border);border-radius:10px;padding:.5rem .9rem .5rem 2.2rem;font-family:var(--font-body);font-size:.88rem;color:var(--text);transition:border-color var(--tr),box-shadow var(--tr);outline:none;}#nav-search::placeholder{color:var(--text-2);opacity:.7;}#nav-search:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(192,57,43,.15);}[data-theme="dark"] #nav-search{background:#1e0808;border-color:#3a1010;color:#ffe8e8;}
+    .nav-links{display:flex;align-items:center;gap:1.6rem;flex-shrink:0;}.nav-links a{font-weight:500;font-size:.9rem;color:var(--text-2);position:relative;padding-bottom:2px;transition:color var(--tr);white-space:nowrap;}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;border-radius:2px;background:var(--accent);transition:width var(--tr);}.nav-links a:hover,.nav-links a.active{color:var(--accent);}.nav-links a:hover::after,.nav-links a.active::after{width:100%;}[data-theme="dark"] .nav-links a{color:#c08080;}
+    #theme-toggle{font-size:1.15rem;cursor:pointer;color:var(--text-2);transition:color var(--tr),transform var(--tr);flex-shrink:0;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--border);background:transparent;}#theme-toggle:hover{color:var(--accent);transform:scale(1.1);border-color:var(--accent);}[data-theme="dark"] #theme-toggle{color:var(--accent-lt);border-color:rgba(192,57,43,.3);}
+    .hamburger-label{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;flex-shrink:0;}.hamburger-label span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all var(--tr);display:block;}[data-theme="dark"] .hamburger-label span{background:#ffe8e8;}
+    .mob-toggle:checked~.nav-inner .hamburger-label span:nth-child(1){transform:translateY(7px) rotate(45deg);}.mob-toggle:checked~.nav-inner .hamburger-label span:nth-child(2){opacity:0;}.mob-toggle:checked~.nav-inner .hamburger-label span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .mobile-nav{display:none;flex-direction:column;background:var(--nav-bg);border-top:1px solid var(--border);max-height:0;overflow:hidden;transition:max-height .4s ease;}.mob-toggle:checked~.mobile-nav{max-height:500px;}
+    .mobile-nav a{padding:.85rem 2rem;font-weight:500;font-size:.95rem;color:var(--text-2);border-bottom:1px solid var(--border);transition:color var(--tr),background var(--tr);}.mobile-nav a:hover{color:var(--accent);background:rgba(192,57,43,.06);}[data-theme="dark"] .mobile-nav{background:#1a0606;}[data-theme="dark"] .mobile-nav a{color:#c08080;border-color:#3a1010;}
+    @media(max-width:992px){.nav-links,.nav-search-wrap{display:none;}.hamburger-label{display:flex;}.mobile-nav{display:flex;}}
+    /* HERO */
+    .cat-hero{position:relative;min-height:65vh;display:flex;align-items:flex-end;overflow:hidden;}
+    .cat-hero-bg{position:absolute;inset:0;}.cat-hero-img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);animation:heroZoom 14s ease-in-out infinite alternate;}
+    @keyframes heroZoom{from{transform:scale(1.05);}to{transform:scale(1.12);}}
+    .cat-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,3,3,0.98) 0%,rgba(30,3,3,.6) 50%,rgba(30,3,3,.15) 100%);}
+    .cat-hero-content{position:relative;z-index:2;width:100%;padding:4rem clamp(1rem,5vw,2.5rem);max-width:1200px;margin:0 auto;}
+    .cat-hero-breadcrumb{display:flex;align-items:center;gap:.5rem;margin-bottom:1.2rem;font-size:.78rem;color:rgba(255,255,255,.5);font-weight:500;}.cat-hero-breadcrumb a{color:#ff9999;transition:color var(--tr);}.cat-hero-breadcrumb a:hover{color:#fff;}.cat-hero-breadcrumb i{font-size:.55rem;}
+    .cat-hero-badge{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#ff9999;border:1px solid rgba(255,100,100,.4);padding:.4em 1.1em;border-radius:100px;margin-bottom:1.2rem;backdrop-filter:blur(8px);background:rgba(192,57,43,.2);}
+    .cat-hero-title{font-family:var(--font-display);font-size:clamp(2.8rem,7vw,6rem);font-weight:800;color:#fff;line-height:.95;letter-spacing:-.02em;margin-bottom:1rem;}
+    .cat-hero-title em{font-style:italic;background:linear-gradient(135deg,#ff9999,#ffd0d0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .cat-hero-sub{max-width:520px;font-size:clamp(1rem,2vw,1.1rem);color:rgba(255,255,255,.75);margin-bottom:2.2rem;line-height:1.7;}
+    /* CRITICAL ALERT BANNER */
+    .alert-banner{background:linear-gradient(135deg,var(--accent-dk),var(--accent-lt));padding:1.2rem clamp(1rem,5vw,2.5rem);display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;}
+    .alert-banner-text{color:#fff;font-family:var(--font-display);font-size:.95rem;font-weight:700;display:flex;align-items:center;gap:.6rem;}
+    .alert-banner-num{color:#fff;font-family:var(--font-display);font-size:1.1rem;font-weight:800;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);padding:.3em .9em;border-radius:50px;}
+    /* QUICK CALL CARDS */
+    .quick-call-section{background:var(--body-bg);padding:clamp(3rem,5vw,5rem) 0;}
+    .quick-call-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-bottom:3rem;}
+    .call-card{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);border:2px solid var(--border);transition:transform .35s var(--ease),box-shadow .35s;text-align:center;padding:2rem 1.2rem;background:var(--surface);position:relative;}
+    .call-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);}[data-theme="dark"] .call-card{background:var(--card-bg);}
+    .call-card.medical{border-color:rgba(231,76,60,.35);background:linear-gradient(160deg,rgba(231,76,60,.06) 0%,var(--surface) 60%);}
+    .call-card.police{border-color:rgba(41,128,185,.35);background:linear-gradient(160deg,rgba(41,128,185,.06) 0%,var(--surface) 60%);}
+    .call-card.fire{border-color:rgba(243,156,18,.35);background:linear-gradient(160deg,rgba(243,156,18,.06) 0%,var(--surface) 60%);}
+    .call-card.rescue{border-color:rgba(39,174,96,.35);background:linear-gradient(160deg,rgba(39,174,96,.06) 0%,var(--surface) 60%);}
+    .call-icon-wrap{width:68px;height:68px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 1rem;}
+    .call-card.medical .call-icon-wrap{background:rgba(231,76,60,.12);color:#e74c3c;}
+    .call-card.police .call-icon-wrap{background:rgba(41,128,185,.12);color:#2980b9;}
+    .call-card.fire .call-icon-wrap{background:rgba(243,156,18,.12);color:#f39c12;}
+    .call-card.rescue .call-icon-wrap{background:rgba(39,174,96,.12);color:#27ae60;}
+    .call-type{font-family:var(--font-display);font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.4rem;}
+    .call-name{font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:.6rem;}
+    .call-number{font-family:var(--font-display);font-size:2rem;font-weight:800;line-height:1;margin-bottom:1rem;}
+    .call-card.medical .call-number{color:#e74c3c;}.call-card.police .call-number{color:#2980b9;}.call-card.fire .call-number{color:#f39c12;}.call-card.rescue .call-number{color:#27ae60;}
+    .call-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6em 1.4em;border-radius:50px;font-family:var(--font-display);font-size:.82rem;font-weight:700;color:#fff;border:none;cursor:pointer;transition:all var(--tr);}
+    .call-card.medical .call-btn{background:#e74c3c;}.call-card.police .call-btn{background:#2980b9;}.call-card.fire .call-btn{background:#f39c12;}.call-card.rescue .call-btn{background:#27ae60;}
+    .call-btn:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 4px 16px rgba(0,0,0,.2);}
+    @media(max-width:992px){.quick-call-grid{grid-template-columns:repeat(2,1fr);}}@media(max-width:480px){.quick-call-grid{grid-template-columns:1fr;}}
+    /* HOSPITAL LIST */
+    .em-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;}
+    .em-card{background:var(--surface);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--border);transition:transform .4s var(--ease),box-shadow .4s;display:flex;flex-direction:column;}.em-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg);}[data-theme="dark"] .em-card{background:var(--card-bg);}
+    .em-img-wrap{position:relative;height:210px;overflow:hidden;flex-shrink:0;}.em-img-wrap img{height:100%;width:100%;object-fit:cover;transition:transform .55s var(--ease);}.em-card:hover .em-img-wrap img{transform:scale(1.07);}
+    .em-tag{position:absolute;top:1rem;right:1rem;background:var(--glass-bg);backdrop-filter:blur(10px);border:1px solid var(--glass-border);padding:.3em .8em;border-radius:100px;font-size:.7rem;font-weight:700;color:#5a0000;font-family:var(--font-display);}[data-theme="dark"] .em-tag{color:#ff9999;background:rgba(30,8,8,.85);border-color:rgba(192,57,43,.3);}
+    .em-avail{position:absolute;bottom:1rem;left:1rem;padding:.3em .75em;border-radius:100px;display:flex;align-items:center;gap:.35rem;font-size:.78rem;font-weight:700;font-family:var(--font-display);}.em-avail.open{background:rgba(39,174,96,.9);color:#fff;}.em-avail.hrs24{background:rgba(231,76,60,.9);color:#fff;}.em-avail i{font-size:.7rem;}
+    .em-body{padding:1.5rem;display:flex;flex-direction:column;flex:1;}.em-name{font-family:var(--font-display);font-size:1.15rem;font-weight:800;margin-bottom:.3rem;color:var(--text);}
+    .em-location{display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--text-muted);margin-bottom:.8rem;}.em-location i{color:var(--accent);font-size:.7rem;}
+    .em-desc{font-size:.9rem;color:var(--text-muted);line-height:1.65;margin-bottom:1.2rem;flex:1;}
+    .em-chips{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:1.3rem;}.em-chip{font-size:.7rem;font-weight:600;padding:.25em .7em;border-radius:50px;background:rgba(192,57,43,.1);color:var(--accent-dk);border:1px solid rgba(192,57,43,.2);font-family:var(--font-display);}[data-theme="dark"] .em-chip{color:#ff9999;background:rgba(192,57,43,.12);border-color:rgba(192,57,43,.25);}
+    .em-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--border);}
+    .em-phone{font-family:var(--font-display);font-size:.85rem;font-weight:700;color:var(--text-muted);}.em-phone span{color:var(--accent-dk);}[data-theme="dark"] .em-phone span{color:#ff9999;}
+    .em-link{font-size:.82rem;font-weight:700;color:var(--accent-dk);display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-display);transition:gap .2s,color .2s;}.em-link:hover{color:var(--navy);gap:.7rem;}[data-theme="dark"] .em-link{color:#ff9999;}
+    .em-card.featured{grid-column:1/-1;flex-direction:row;}.em-card.featured .em-img-wrap{height:auto;min-height:260px;width:40%;flex-shrink:0;}.em-card.featured .em-body{padding:2.5rem;justify-content:center;}.em-card.featured .em-name{font-size:1.6rem;margin-bottom:.4rem;}.em-card.featured .em-desc{font-size:1rem;}
+    .featured-label{display:inline-flex;align-items:center;gap:.4rem;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:#fff;background:linear-gradient(135deg,var(--accent-dk),var(--accent-lt));padding:.3em .85em;border-radius:50px;margin-bottom:.9rem;}
+    @media(max-width:992px){.em-grid{grid-template-columns:repeat(2,1fr);}.em-card.featured{flex-direction:column;grid-column:auto;}.em-card.featured .em-img-wrap{width:100%;height:210px;}}@media(max-width:640px){.em-grid{grid-template-columns:1fr;}}
+    .fade-in{opacity:0;transform:translateY(32px);transition:opacity .75s var(--ease),transform .75s var(--ease);}.fade-in.visible{opacity:1;transform:translateY(0);}
+    /* TIPS STRIP */
+    .tips-strip{background:linear-gradient(135deg,#1a0505,#2a0808);padding:2.5rem 0;}
+    .tips-inner{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem);}
+    .tips-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
+    .tip-item{text-align:center;color:rgba(255,255,255,.8);}.tip-icon{width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto .8rem;color:#ff9999;transition:all .35s var(--ease);}.tip-item:hover .tip-icon{background:rgba(192,57,43,.25);transform:translateY(-4px);}
+    .tip-label{font-family:var(--font-display);font-weight:700;font-size:.92rem;color:#fff;margin-bottom:.2rem;}.tip-sub{font-size:.78rem;color:rgba(255,255,255,.45);}
+    @media(max-width:768px){.tips-grid{grid-template-columns:repeat(2,1fr);}}
+    /* REVIEW */
+    #complaint{background:linear-gradient(135deg,#fff0f0,#ffe5e5);padding:5rem 0;}[data-theme="dark"] #complaint{background:#150505;}
+    .complaint-inner{max-width:1300px;margin:auto;padding:0 clamp(1rem,5vw,2.5rem);}.complaint-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+    .complaint-info h2{font-size:clamp(2rem,3vw,3rem);font-weight:800;color:var(--text);margin-bottom:.8rem;}.complaint-info h2 span{color:var(--accent);}
+    .complaint-info p{color:var(--text-2);line-height:1.7;margin-bottom:1.2rem;}.complaint-steps{display:flex;flex-direction:column;gap:1rem;}
+    .cstep{display:flex;align-items:flex-start;gap:.8rem;}.cstep-num{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:var(--accent);color:#fff;font-family:var(--font-display);font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center;}.cstep-text{font-size:1rem;color:var(--text-2);line-height:1.5;padding-top:2px;}
+    .hero-badge-inline{display:inline-flex;align-items:center;gap:.5rem;background:rgba(192,57,43,.12);border:1px solid rgba(192,57,43,.3);padding:.35rem .9rem;border-radius:50px;font-size:.8rem;font-family:var(--font-display);font-weight:700;color:var(--accent-dk);margin-bottom:.8rem;}[data-theme="dark"] .hero-badge-inline{color:#ff9999;}
+    .complaint-form{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow);}[data-theme="dark"] .complaint-form{background:linear-gradient(180deg,#1e0808 0%,#1a0606 100%);border-color:rgba(255,255,255,.08);}
+    .form-group{margin-bottom:1.1rem;}.form-group label{display:block;font-size:.78rem;font-weight:700;color:var(--text);margin-bottom:.35rem;font-family:var(--font-display);}
+    .form-control{width:100%;padding:.65rem .9rem;background:var(--input-bg);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font-body);font-size:.85rem;outline:none;transition:border-color var(--tr),box-shadow var(--tr);}.form-control:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(192,57,43,.15);}.form-control::placeholder{color:var(--text-2);opacity:.6;}textarea.form-control{resize:vertical;min-height:90px;}
+    .upload-zone{border:2px dashed var(--border);border-radius:10px;padding:1.1rem;text-align:center;cursor:pointer;transition:all var(--tr);position:relative;}.upload-zone:hover{border-color:var(--accent);background:rgba(192,57,43,.04);}.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;}.upload-zone i{font-size:1.5rem;color:var(--accent);margin-bottom:.3rem;display:block;}.upload-zone p{font-size:.75rem;color:var(--text-2);}
+    .btn-submit{width:100%;padding:.8rem;border-radius:50px;background:linear-gradient(135deg,var(--accent-dk) 13%,var(--accent-lt) 78%);color:#fff;border:none;font-family:var(--font-display);font-weight:700;font-size:.92rem;cursor:pointer;transition:all var(--tr);display:flex;align-items:center;justify-content:center;gap:.5rem;}.btn-submit:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(192,57,43,.4);}
+    @media(max-width:768px){.complaint-wrap{grid-template-columns:1fr;}}
+    footer{background-color:#1F256B;color:rgba(255,255,255,.65);padding:3rem 2rem 1.5rem;}.footer-inner{max-width:1300px;margin:auto;}.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;}
+    .footer-brand .brand-name{font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:#fff;display:flex;align-items:center;gap:.5rem;margin-bottom:.8rem;}.footer-brand .brand-name i{color:var(--cyan);}
+    .footer-brand p{font-size:.88rem;line-height:1.7;max-width:280px;}.footer-socials{display:flex;gap:.6rem;margin-top:1.2rem;}
+    .social-btn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.88rem;transition:all var(--tr);}.social-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+    .footer-col h4{font-family:var(--font-display);font-weight:700;font-size:.92rem;color:#fff;margin-bottom:1rem;}.footer-col ul li{margin-bottom:.55rem;}.footer-col ul li a{font-size:.86rem;transition:color var(--tr);}.footer-col ul li a:hover{color:var(--cyan);}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:1.2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;}.footer-bottom p{font-size:.82rem;}
+    @media(max-width:992px){.footer-top{grid-template-columns:1fr 1fr;}}@media(max-width:540px){.footer-top{grid-template-columns:1fr;}}
+    #back-top{position:fixed;bottom:2rem;left:2rem;z-index:700;width:44px;height:44px;border-radius:50%;background:var(--accent-dk);color:#fff;border:none;font-size:.95rem;cursor:pointer;opacity:0;pointer-events:none;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:all var(--tr);}#back-top.visible{opacity:1;pointer-events:all;}#back-top:hover{background:var(--accent);transform:translateY(-3px);}
+  </style>
+</head>
+<body>
+<div id="toast-container"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <input type="checkbox" class="mob-toggle" id="mob-chk"/>
+  <div class="nav-inner">
+    <div class="nav-logo"><a href="home.html"><i class="fa fa-city"></i> Aurevia</a></div>
+    <div class="nav-city-wrap">
+      <i class="fa fa-location-dot nav-city-icon"></i>
+      <select class="nav-city-select"><option selected>Chandigarh</option><option>Delhi</option><option>Udaipur</option><option>Rishikesh</option></select>
+      <i class="fa fa-chevron-down nav-city-caret"></i>
+    </div>
+    <div class="nav-search-wrap">
+      <i class="fa fa-magnifying-glass nav-search-icon"></i>
+      <input type="text" id="nav-search" placeholder="Search hospitals…"/>
+    </div>
+    <nav class="nav-links">
+      <a href="homepage.html">Home</a><a href="cafes.html">Cafés</a><a href="transport.html">Transport</a><a href="emergency.html" class="active">Emergency</a>
+    </nav>
+    <button id="theme-toggle" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
+    <label class="hamburger-label" for="mob-chk"><span></span><span></span><span></span></label>
+  </div>
+  <div class="mobile-nav">
+    <a href="homepage.html">Home</a><a href="emergency.html">Emergency</a><a href="transport.html">Transport</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="cat-hero" id="hero">
+  <div class="cat-hero-bg">
+    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=1800&q=80" alt="Emergency Services" class="cat-hero-img" onerror="this.src='https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=1800&q=80'"/>
+    <div class="cat-hero-overlay"></div>
+  </div>
+  <div class="cat-hero-content">
+    <div class="cat-hero-breadcrumb">
+      <a href="homepage.html">Home</a><i class="fa fa-chevron-right"></i><a href="homepage.html#categories">Explore</a><i class="fa fa-chevron-right"></i><span>Emergency</span>
+    </div>
+    <div class="cat-hero-badge"><i class="fa fa-truck-medical"></i> Always Ready</div>
+    <h1 class="cat-hero-title">Emergency<br/><em>Support</em></h1>
+    <p class="cat-hero-sub">We are here to help — 24/7. Find critical contacts, nearest hospitals, and safety resources for medical and emergency assistance in Chandigarh.</p>
+  </div>
+</section>
+
+<!-- CRITICAL ALERT BANNER -->
+<div class="alert-banner">
+  <div class="alert-banner-text"><i class="fa fa-triangle-exclamation"></i> In an emergency, call immediately:</div>
+  <div class="alert-banner-num">📞 112 — National Emergency</div>
+  <div class="alert-banner-num">🚑 108 — Ambulance</div>
+  <div class="alert-banner-num">🚒 101 — Fire</div>
+  <div class="alert-banner-num">👮 100 — Police</div>
+</div>
+
+<!-- QUICK CALL SECTION -->
+<section class="quick-call-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">Act Fast</span>
+      <h2 class="section-title">One-Tap <span>Emergency Calls</span></h2>
+    </div>
+
+    <div class="quick-call-grid fade-in">
+      <div class="call-card medical">
+        <div class="call-icon-wrap"><i class="fa fa-ambulance"></i></div>
+        <div class="call-type">Medical</div>
+        <div class="call-name">Ambulance Service</div>
+        <div class="call-number">108</div>
+        <a href="tel:108" class="call-btn"><i class="fa fa-phone"></i> Call Now</a>
+      </div>
+      <div class="call-card police">
+        <div class="call-icon-wrap"><i class="fa fa-shield-halved"></i></div>
+        <div class="call-type">Law & Order</div>
+        <div class="call-name">Police Helpline</div>
+        <div class="call-number">100</div>
+        <a href="tel:100" class="call-btn"><i class="fa fa-phone"></i> Call Now</a>
+      </div>
+      <div class="call-card fire">
+        <div class="call-icon-wrap"><i class="fa fa-fire-extinguisher"></i></div>
+        <div class="call-type">Fire</div>
+        <div class="call-name">Fire Department</div>
+        <div class="call-number">101</div>
+        <a href="tel:101" class="call-btn"><i class="fa fa-phone"></i> Call Now</a>
+      </div>
+      <div class="call-card rescue">
+        <div class="call-icon-wrap"><i class="fa fa-person-falling-burst"></i></div>
+        <div class="call-type">Universal</div>
+        <div class="call-name">National Emergency</div>
+        <div class="call-number">112</div>
+        <a href="tel:112" class="call-btn"><i class="fa fa-phone"></i> Call Now</a>
+      </div>
+    </div>
+
+    <!-- HOSPITALS SECTION -->
+    <div class="section-header fade-in" style="margin-top:2rem;">
+      <span class="section-label">Nearest Help</span>
+      <h2 class="section-title">Key <span>Hospitals & Centres</span></h2>
+    </div>
+
+    <div class="em-grid fade-in" id="card-grid">
+
+      <!-- FEATURED -->
+      <div class="em-card featured">
+        <div class="em-img-wrap">
+          <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=900&q=80" alt="PGIMER" onerror="this.src='https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=900&q=80'"/>
+          <span class="em-avail hrs24"><i class="fa fa-clock"></i> 24/7 Emergency</span>
+          <span class="em-tag">Govt. Hospital</span>
+        </div>
+        <div class="em-body">
+          <div class="featured-label"><i class="fa fa-award"></i> India's #1 Medical Institute</div>
+          <h3 class="em-name">PGIMER — Post Graduate Institute of Medical Education & Research</h3>
+          <div class="em-location"><i class="fa fa-location-dot"></i> Sector 12, Chandigarh</div>
+          <p class="em-desc">India's premier government hospital and research institute. PGIMER has a dedicated Emergency & Trauma Centre operating round-the-clock with top specialists across all departments. The hospital handles thousands of emergency cases daily and is equipped with a helipad for critical airlifts.</p>
+          <div class="em-chips"><span class="em-chip">Trauma Centre</span><span class="em-chip">24/7 Casualty</span><span class="em-chip">All Specialities</span><span class="em-chip">Helipad</span></div>
+          <div class="em-footer"><div class="em-phone">Helpline <span>0172-2746018</span></div><a href="tel:01722746018" class="em-link"><i class="fa fa-phone"></i> Call →</a></div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="em-card">
+        <div class="em-img-wrap">
+          <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=600&q=80" alt="Govt Multi Specialty Hospital" onerror="this.src='https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=600&q=80'"/>
+          <span class="em-avail hrs24"><i class="fa fa-clock"></i> 24/7</span>
+          <span class="em-tag">Govt. Hospital</span>
+        </div>
+        <div class="em-body">
+          <h3 class="em-name">Govt. Multi-Specialty Hospital</h3>
+          <div class="em-location"><i class="fa fa-location-dot"></i> Sector 16, Chandigarh</div>
+          <p class="em-desc">A major government hospital serving central Chandigarh. Comprehensive emergency services, OPD, ICU, and specialist departments. Free treatment for eligible patients under government schemes.</p>
+          <div class="em-chips"><span class="em-chip">Free Treatment</span><span class="em-chip">ICU / NICU</span><span class="em-chip">Maternity</span></div>
+          <div class="em-footer"><div class="em-phone">Emergency <span>0172-2660007</span></div><a href="tel:01722660007" class="em-link"><i class="fa fa-phone"></i> Call →</a></div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="em-card">
+        <div class="em-img-wrap">
+          <img src="https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&q=80" alt="Fortis Hospital" onerror="this.src='https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=600&q=80'"/>
+          <span class="em-avail hrs24"><i class="fa fa-clock"></i> 24/7</span>
+          <span class="em-tag">Private Hospital</span>
+        </div>
+        <div class="em-body">
+          <h3 class="em-name">Fortis Hospital</h3>
+          <div class="em-location"><i class="fa fa-location-dot"></i> Sector 62, Mohali</div>
+          <p class="em-desc">A leading private multi-specialty hospital in the Tricity area with a state-of-the-art emergency department, cardiac care, neurosciences, and advanced surgical facilities.</p>
+          <div class="em-chips"><span class="em-chip">Cardiac Care</span><span class="em-chip">Neurosciences</span><span class="em-chip">ICU</span></div>
+          <div class="em-footer"><div class="em-phone">Emergency <span>0172-5096001</span></div><a href="tel:01725096001" class="em-link"><i class="fa fa-phone"></i> Call →</a></div>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="em-card">
+        <div class="em-img-wrap">
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="Max Hospital" onerror="this.src='https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=600&q=80'"/>
+          <span class="em-avail hrs24"><i class="fa fa-clock"></i> 24/7</span>
+          <span class="em-tag">Private Hospital</span>
+        </div>
+        <div class="em-body">
+          <h3 class="em-name">Max Super Specialty Hospital</h3>
+          <div class="em-location"><i class="fa fa-location-dot"></i> Phase 6, Mohali</div>
+          <p class="em-desc">Max brings world-class healthcare to the Tricity. Their emergency wing handles critical care, trauma, cancer emergencies, and organ transplants with 24/7 specialist availability.</p>
+          <div class="em-chips"><span class="em-chip">Oncology</span><span class="em-chip">Transplants</span><span class="em-chip">Critical Care</span></div>
+          <div class="em-footer"><div class="em-phone">Emergency <span>0172-3981000</span></div><a href="tel:01723981000" class="em-link"><i class="fa fa-phone"></i> Call →</a></div>
+        </div>
+      </div>
+
+      <!-- CARD 5 -->
+      <div class="em-card">
+        <div class="em-img-wrap">
+          <img src="https://images.unsplash.com/photo-1590005354167-6da97a5aaeac?w=600&q=80" alt="Civil Hospital" onerror="this.src='https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=600&q=80'"/>
+          <span class="em-avail open"><i class="fa fa-check-circle"></i> Open Now</span>
+          <span class="em-tag">Civil Hospital</span>
+        </div>
+        <div class="em-body">
+          <h3 class="em-name">Civil Hospital, Manimajra</h3>
+          <div class="em-location"><i class="fa fa-location-dot"></i> Manimajra, Chandigarh</div>
+          <p class="em-desc">Serving the eastern part of Chandigarh, this civil hospital provides basic to intermediate emergency services, outpatient care, and minor surgical procedures at no cost.</p>
+          <div class="em-chips"><span class="em-chip">Free OPD</span><span class="em-chip">Minor Surgery</span><span class="em-chip">East CHD</span></div>
+          <div class="em-footer"><div class="em-phone">Reception <span>0172-2733700</span></div><a href="tel:01722733700" class="em-link"><i class="fa fa-phone"></i> Call →</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TIPS STRIP -->
+<div class="tips-strip">
+  <div class="tips-inner">
+    <div class="tips-grid">
+      <div class="tip-item fade-in"><div class="tip-icon"><i class="fa fa-kit-medical"></i></div><div class="tip-label">Carry a First Aid Kit</div><div class="tip-sub">Always be prepared</div></div>
+      <div class="tip-item fade-in"><div class="tip-icon"><i class="fa fa-location-arrow"></i></div><div class="tip-label">Share Your Location</div><div class="tip-sub">In any emergency call</div></div>
+      <div class="tip-item fade-in"><div class="tip-icon"><i class="fa fa-id-card"></i></div><div class="tip-label">Keep ID Handy</div><div class="tip-sub">For faster hospital admission</div></div>
+      <div class="tip-item fade-in"><div class="tip-icon"><i class="fa fa-blood-drop"></i></div><div class="tip-label">Know Your Blood Group</div><div class="tip-sub">Critical in emergencies</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEW -->
+<section id="complaint">
+  <div class="complaint-inner">
+    <div class="complaint-wrap">
+      <div class="complaint-info">
+        <div class="hero-badge-inline"><i class="fa fa-bullhorn"></i> Share Feedback</div>
+        <h2>Help Us <span>Improve</span></h2>
+        <p>Did you receive timely help? Was a hospital understaffed? Your experience helps us highlight the best services and flag gaps — so others get better care. 🏥</p>
+        <div class="complaint-steps">
+          <div class="cstep"><div class="cstep-num">1</div><div class="cstep-text">Say hi 👋 who's giving this feedback?</div></div>
+          <div class="cstep"><div class="cstep-num">2</div><div class="cstep-text">📍 Pick your city.</div></div>
+          <div class="cstep"><div class="cstep-num">3</div><div class="cstep-text">💭 Drop your thoughts (no filter)</div></div>
+          <div class="cstep"><div class="cstep-num">4</div><div class="cstep-text">🚀 Hit submit = done.</div></div>
+        </div>
+      </div>
+      <div class="complaint-form">
+        <form id="review-form">
+          <div class="form-group"><label>Full Name *</label><input type="text" class="form-control" id="c-name" placeholder="Your full name" required/></div>
+          <div class="form-group"><label>City *</label><select class="form-control" id="c-city" required><option value="">— Select City —</option><option>Chandigarh</option><option>Delhi</option><option>Udaipur</option><option>Rishikesh</option></select></div>
+          <div class="form-group"><label>Review *</label><textarea class="form-control" id="c-desc" placeholder="Share your experience with emergency services…" required></textarea></div>
+          <div class="form-group"><label>Upload Photo (optional)</label><div class="upload-zone"><input type="file" accept="image/*"/><i class="fa fa-cloud-arrow-up"></i><p>Click or drag &amp; drop an image here</p></div></div>
+          <button type="submit" class="btn-submit"><i class="fa fa-paper-plane"></i> Submit Feedback</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer><div class="footer-inner container">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="brand-name"><i class="fa fa-city"></i> Aurevia</div><p>Your one-stop digital gateway to explore cafes, hotels, tourist spots, restaurants, transport, and emergency services across India's top cities.</p><div class="footer-socials"><a href="#" class="social-btn"><i class="fab fa-instagram"></i></a><a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a><a href="#" class="social-btn"><i class="fab fa-facebook"></i></a><a href="#" class="social-btn"><i class="fab fa-github"></i></a></div></div>
+    <div class="footer-col"><h4>Explore</h4><ul><li><a href="cafes.html">Cafés</a></li><li><a href="restaurant.html">Restaurants</a></li><li><a href="transport.html">Transport</a></li><li><a href="emergency.html">Emergency</a></li></ul></div>
+    <div class="footer-col"><h4>Cities</h4><ul><li><a href="#">Chandigarh</a></li><li><a href="#">Delhi</a></li><li><a href="#">Udaipur</a></li><li><a href="#">Rishikesh</a></li></ul></div>
+    <div class="footer-col"><h4>Help</h4><ul><li><a href="#">About Us</a></li><li><a href="#complaint">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 <span style="color:var(--cyan)">Aurevia - City Explorer and Travel Web Portal</span>. All rights reserved.</p><p>Made with <span style="color:#e74c3c">♥</span> for India</p></div>
+</div></footer>
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa fa-arrow-up"></i></button>
+
+<script>
+function showToast(msg,type='success'){const c=document.getElementById('toast-container');const t=document.createElement('div');t.className=`toast ${type}`;t.innerHTML=`<i class="fa fa-circle-check"></i> ${msg}`;c.appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),400);},3200);}
+document.addEventListener('DOMContentLoaded',()=>{
+  const nb=document.getElementById('navbar');window.addEventListener('scroll',()=>nb.classList.toggle('scrolled',window.scrollY>50),{passive:true});
+  document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>{const c=document.getElementById('mob-chk');if(c)c.checked=false;}));
+  const bt=document.getElementById('back-top');window.addEventListener('scroll',()=>bt.classList.toggle('visible',window.scrollY>400),{passive:true});
+  const tt=document.getElementById('theme-toggle');const ic=tt.querySelector('i');if(localStorage.getItem('aurevia-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');ic?.classList.replace('fa-moon','fa-sun');}
+  tt.addEventListener('click',()=>{const d=document.documentElement.getAttribute('data-theme')==='dark';if(d){document.documentElement.removeAttribute('data-theme');localStorage.setItem('aurevia-theme','light');ic?.classList.replace('fa-sun','fa-moon');}else{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem('aurevia-theme','dark');ic?.classList.replace('fa-moon','fa-sun');}});
+  const fi=new IntersectionObserver((e)=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');fi.unobserve(x.target);}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.fade-in').forEach((el,i)=>{el.style.transitionDelay=`${(i%3)*100}ms`;fi.observe(el);});
+  const rf=document.getElementById('review-form');if(rf){rf.addEventListener('submit',function(e){e.preventDefault();const n=document.getElementById('c-name')?.value.trim();const ci=document.getElementById('c-city')?.value;const b=this.querySelector('.btn-submit');b.disabled=true;b.innerHTML='<i class="fa fa-spinner fa-spin"></i> Submitting…';setTimeout(()=>{this.reset();showToast(`✅ Thanks ${n}! Your feedback for ${ci} has been received 🏥`,'success');b.disabled=false;b.innerHTML='<i class="fa fa-paper-plane"></i> Submit Feedback';},1200);});}
+});
+</script>
+</body>
+</html>

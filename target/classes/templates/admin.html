@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurevia | Admin Panel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+    <script defer th:src="@{/js/main.js}"></script>
+    <style>
+        .admin-main {
+            padding: 20px 24px 24px;
+            display: grid;
+            gap: 22px;
+        }
+
+        .admin-hero-shell {
+            position: relative;
+            overflow: hidden;
+            border-radius: 26px;
+            padding: 24px 26px;
+            color: #f8fbff;
+            background:
+                radial-gradient(circle at top right, rgba(61, 214, 228, 0.34), transparent 30%),
+                radial-gradient(circle at bottom left, rgba(113, 86, 255, 0.2), transparent 28%),
+                linear-gradient(135deg, #0d1f48 0%, #16346d 52%, #1e7684 100%);
+            box-shadow: 0 22px 48px rgba(10, 23, 59, 0.24);
+        }
+
+        .admin-hero-shell::after {
+            content: "";
+            position: absolute;
+            inset: auto -60px -60px auto;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.12), rgba(255,255,255,0));
+        }
+
+        .admin-hero-copy {
+            position: relative;
+            z-index: 1;
+            max-width: 820px;
+        }
+
+        .admin-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.16);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .admin-hero-shell h1 {
+            margin: 12px 0 10px;
+            font-family: "Syne", sans-serif;
+            font-size: clamp(1.65rem, 3vw, 2.65rem);
+            line-height: 1.08;
+            max-width: 900px;
+        }
+
+        .admin-hero-shell p {
+            margin: 0;
+            max-width: 760px;
+            color: rgba(248, 251, 255, 0.86);
+            font-size: 0.96rem;
+            line-height: 1.62;
+        }
+
+        .admin-seed {
+            margin-top: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 100%;
+            padding: 10px 14px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.14);
+            font-size: 0.88rem;
+        }
+
+        .admin-seed span {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .admin-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .admin-metric {
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(14px);
+        }
+
+        .admin-metric strong {
+            display: block;
+            font-family: "Syne", sans-serif;
+            font-size: 1.55rem;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .admin-metric span {
+            font-size: 0.88rem;
+        }
+
+        .admin-shell {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .admin-sidebar-card,
+        .admin-panel {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 28px;
+            box-shadow: 0 26px 60px rgba(15, 23, 42, 0.1);
+            backdrop-filter: blur(12px);
+        }
+
+        .admin-sidebar-card {
+            position: sticky;
+            top: 92px;
+            padding: 24px;
+            display: grid;
+            gap: 20px;
+        }
+
+        .admin-panel {
+            padding: 26px;
+        }
+
+        .admin-panel + .admin-panel {
+            margin-top: 24px;
+        }
+
+        .admin-panel-head {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .admin-panel-head h2,
+        .admin-sidebar-card h2,
+        .admin-subsection h3 {
+            margin: 0 0 8px;
+            font-family: "Syne", sans-serif;
+            line-height: 1.05;
+        }
+
+        .admin-panel-head p,
+        .admin-sidebar-card p,
+        .admin-subsection p,
+        .admin-table td {
+            color: #5f6d81;
+        }
+
+        .admin-nav {
+            display: grid;
+            gap: 10px;
+        }
+
+        .admin-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: #f7fbff;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            font-weight: 700;
+            transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .admin-nav a:hover {
+            transform: translateY(-1px);
+            border-color: rgba(15, 98, 254, 0.28);
+            background: #eef6ff;
+        }
+
+        .admin-sidebar-note {
+            padding: 16px 18px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(15, 98, 254, 0.08), rgba(25, 194, 176, 0.12));
+            border: 1px solid rgba(15, 98, 254, 0.12);
+        }
+
+        .admin-stack {
+            display: grid;
+        }
+
+        .admin-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .admin-form-grid .full-span {
+            grid-column: 1 / -1;
+        }
+
+        .admin-field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .admin-field label {
+            font-weight: 800;
+            color: #162033;
+        }
+
+        .admin-field-hint {
+            color: #6f7d90;
+            font-size: 0.84rem;
+            line-height: 1.6;
+        }
+
+        .admin-form-grid input,
+        .admin-form-grid textarea,
+        .admin-form-grid select,
+        .admin-inline-form input,
+        .admin-inline-form textarea,
+        .admin-inline-form select {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            background: rgba(255,255,255,0.92);
+            color: #162033;
+        }
+
+        .admin-form-grid textarea,
+        .admin-inline-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .admin-form-grid input:focus,
+        .admin-form-grid textarea:focus,
+        .admin-form-grid select:focus,
+        .admin-inline-form input:focus,
+        .admin-inline-form textarea:focus,
+        .admin-inline-form select:focus {
+            outline: none;
+            border-color: rgba(15, 98, 254, 0.38);
+            box-shadow: 0 0 0 4px rgba(15, 98, 254, 0.08);
+        }
+
+        .admin-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #0f62fe, #19c2b0);
+            color: #fff;
+            font-weight: 800;
+            box-shadow: 0 18px 34px rgba(15, 98, 254, 0.22);
+        }
+
+        .admin-ghost {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            background: #fff;
+            color: #162033;
+            font-weight: 700;
+        }
+
+        .admin-table-wrap {
+            overflow: auto;
+            border-radius: 20px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+        }
+
+        .admin-table th {
+            background: #f7fbff;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #476079;
+        }
+
+        .admin-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(15, 98, 254, 0.08);
+            color: #0f62fe;
+            font-weight: 800;
+            font-size: 0.83rem;
+        }
+
+        .admin-badge.alt {
+            background: rgba(25, 194, 176, 0.12);
+            color: #0d8e7f;
+        }
+
+        .admin-type-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .insight-type-card {
+            text-align: left;
+            border: 1px solid rgba(15, 23, 42, 0.1);
+            border-radius: 22px;
+            background: linear-gradient(180deg, #ffffff, #f6fbff);
+            padding: 18px;
+            display: grid;
+            gap: 10px;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .insight-type-card:hover,
+        .insight-type-card.active {
+            transform: translateY(-2px);
+            border-color: rgba(15, 98, 254, 0.24);
+            box-shadow: 0 18px 30px rgba(15, 98, 254, 0.12);
+        }
+
+        .insight-type-card i {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 98, 254, 0.1);
+            color: #0f62fe;
+        }
+
+        .admin-composer-head {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+            padding: 18px 20px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(15, 98, 254, 0.06), rgba(25, 194, 176, 0.08));
+            border: 1px solid rgba(15, 98, 254, 0.1);
+        }
+
+        .admin-composer-head h3 {
+            margin: 0 0 6px;
+            font-family: "Syne", sans-serif;
+        }
+
+        .admin-subsection {
+            padding: 18px;
+            border-radius: 22px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            background: #fbfdff;
+        }
+
+        .admin-subsection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .admin-manage-grid,
+        .admin-library-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .admin-city-card,
+        .admin-library-card {
+            overflow: hidden;
+            border-radius: 24px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            background: #fff;
+            box-shadow: 0 22px 48px rgba(15, 23, 42, 0.08);
+        }
+
+        .admin-city-card img,
+        .admin-library-visual img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .admin-city-card-body,
+        .admin-library-card-body {
+            padding: 20px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .admin-library-top {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .admin-library-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .admin-disclosure {
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 18px;
+            background: #fcfdff;
+            overflow: hidden;
+        }
+
+        .admin-disclosure summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 14px 16px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .admin-disclosure summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .admin-disclosure-content {
+            padding: 0 16px 16px;
+        }
+
+        .admin-inline-form {
+            display: grid;
+            gap: 14px;
+        }
+
+        .admin-inline-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .admin-danger {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 14px;
+            background: #b42318;
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .admin-empty {
+            padding: 22px;
+            border-radius: 22px;
+            border: 1px dashed rgba(15, 98, 254, 0.26);
+            background: rgba(15, 98, 254, 0.04);
+            color: #476079;
+        }
+
+        @media (max-width: 1180px) {
+            .admin-shell,
+            .admin-manage-grid,
+            .admin-library-grid,
+            .admin-type-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-sidebar-card {
+                position: static;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .admin-main {
+                padding: 14px;
+            }
+
+            .admin-form-grid,
+            .admin-inline-grid,
+            .admin-subsection-grid,
+            .admin-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-panel,
+            .admin-sidebar-card,
+            .admin-hero-shell {
+                padding: 20px;
+            }
+
+            .admin-hero-shell h1 {
+                font-size: clamp(1.45rem, 7vw, 2rem);
+            }
+
+            .admin-metrics {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="page-body admin-body">
+<header class="topbar">
+    <a class="brand" th:href="@{/portal}"><i class="fa-solid fa-shield-halved"></i> Aurevia Admin</a>
+    <nav>
+        <a th:href="@{/portal}">Portal</a>
+        <a th:href="@{/planner/hotels}">Hotel Planner</a>
+    </nav>
+    <div class="topbar-right">
+        <div id="theme-toggle" title="Toggle dark mode">
+            <i class="fas fa-moon"></i>
+        </div>
+        <span th:text="'Admin: ' + ${currentUser.fullName}"></span>
+        <form th:action="@{/logout}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <button class="ghost-btn" type="submit">Logout</button>
+        </form>
+    </div>
+</header>
+
+<main class="admin-main">
+    <section class="admin-hero-shell">
+        <div class="admin-hero-copy">
+            <span class="admin-kicker"><i class="fa-solid fa-sparkles"></i> Destination Control Center</span>
+            <h1>Build a professional city management panel for admins, cities, users, and deep destination content.</h1>
+            <p>Everything here is connected to the main app. When you add a city, it becomes searchable on the portal and appears in the city card area. When you add hotels, popular places, cafes, tourist spots, or educational places, those entries flow into the city, category, and place pages.</p>
+            <div class="admin-seed">
+                <i class="fa-solid fa-key"></i>
+                <span>Seed admin username: <strong th:text="${seedAdminEmail}"></strong></span>
+            </div>
+        </div>
+        <div class="admin-metrics">
+            <article class="admin-metric">
+                <strong th:text="${#lists.size(admins)}">0</strong>
+                <span>Admins</span>
+            </article>
+            <article class="admin-metric">
+                <strong th:text="${#lists.size(users)}">0</strong>
+                <span>Total Users</span>
+            </article>
+            <article class="admin-metric">
+                <strong th:text="${#lists.size(allCities)}">0</strong>
+                <span>Searchable Cities</span>
+            </article>
+            <article class="admin-metric">
+                <strong th:text="${#lists.size(managedPlaces)}">0</strong>
+                <span>Managed Insights</span>
+            </article>
+        </div>
+    </section>
+
+    <section th:if="${adminSuccess}">
+        <div class="message success" th:text="${adminSuccess}"></div>
+    </section>
+
+    <section class="admin-shell">
+        <aside class="admin-sidebar-card">
+            <div>
+                <h2>Panel Map</h2>
+                <p>Jump straight to the area you want to manage.</p>
+            </div>
+            <nav class="admin-nav">
+                <a href="#add-admin"><i class="fa-solid fa-user-shield"></i> Add Admin</a>
+                <a href="#view-admins"><i class="fa-solid fa-address-card"></i> View Admins</a>
+                <a href="#view-users"><i class="fa-solid fa-users"></i> View Users</a>
+                <a href="#add-city"><i class="fa-solid fa-city"></i> Add City</a>
+                <a href="#add-content"><i class="fa-solid fa-layer-group"></i> Add City Insights</a>
+                <a href="#manage-cities"><i class="fa-solid fa-pen-to-square"></i> Manage Cities</a>
+                <a href="#content-library"><i class="fa-solid fa-folder-tree"></i> Content Library</a>
+            </nav>
+            <div class="admin-sidebar-note">
+                <strong>Workflow tip</strong>
+                <p>Start with a city, then choose a content type card below and compose a full destination profile with gallery images, insight cards, and visitor notes.</p>
+            </div>
+        </aside>
+
+        <div class="admin-stack">
+            <section class="admin-panel" id="add-admin">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-badge"><i class="fa-solid fa-user-plus"></i> Add Admin</span>
+                        <h2>Create another admin</h2>
+                        <p>Add a new administrator who can manage cities, users, and live destination content.</p>
+                    </div>
+                </div>
+                <form class="admin-form-grid" th:action="@{/admin/admins}" th:object="${adminUserForm}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <div class="admin-field">
+                        <label>Full name</label>
+                        <input type="text" th:field="*{fullName}" placeholder="Example: City Content Manager">
+                        <small class="field-error" th:errors="*{fullName}"></small>
+                    </div>
+                    <div class="admin-field">
+                        <label>Email / username</label>
+                        <input type="email" th:field="*{email}" placeholder="admin@example.com">
+                        <small class="field-error" th:errors="*{email}"></small>
+                    </div>
+                    <div class="admin-field full-span">
+                        <label>Password</label>
+                        <input type="password" th:field="*{password}" placeholder="At least 6 characters">
+                        <small class="field-error" th:errors="*{password}"></small>
+                    </div>
+                    <div class="full-span">
+                        <button class="admin-submit" type="submit"><i class="fa-solid fa-user-check"></i> Add admin</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="admin-panel" id="view-admins">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-badge alt"><i class="fa-solid fa-shield"></i> View Admins</span>
+                        <h2>Admin directory</h2>
+                        <p>See every current admin account in one place.</p>
+                    </div>
+                </div>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="admin : ${admins}">
+                            <td th:text="${admin.fullName}"></td>
+                            <td th:text="${admin.email}"></td>
+                            <td><span class="admin-badge">ADMIN</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="admin-panel" id="view-users">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-badge"><i class="fa-solid fa-users"></i> View Users</span>
+                        <h2>User directory</h2>
+                        <p>Track both normal users and admins from one dashboard table.</p>
+                    </div>
+                </div>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.fullName}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td>
+                                <span class="admin-badge" th:classappend="${user.admin} ? '' : ' alt'" th:text="${user.role}"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="admin-panel" id="add-city">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-badge"><i class="fa-solid fa-map-location-dot"></i> Add City</span>
+                        <h2>Create a searchable city</h2>
+                        <p>The city will appear on the homepage city cards and become available in portal search once saved.</p>
+                    </div>
+                </div>
+                <form class="admin-form-grid" th:action="@{/admin/cities}" th:object="${cityForm}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <div class="admin-field">
+                        <label>City name</label>
+                        <input type="text" th:field="*{name}" placeholder="Example: Pune">
+                        <small class="field-error" th:errors="*{name}"></small>
+                    </div>
+                    <div class="admin-field">
+                        <label>Region / state</label>
+                        <input type="text" th:field="*{region}" placeholder="Example: Maharashtra">
+                        <small class="field-error" th:errors="*{region}"></small>
+                    </div>
+                    <div class="admin-field full-span">
+                        <label>Portal overview</label>
+                        <textarea th:field="*{tagline}" placeholder="Write the main city summary that appears on the city landing page."></textarea>
+                        <small class="field-error" th:errors="*{tagline}"></small>
+                    </div>
+                    <div class="admin-field full-span">
+                        <label>Hero image URL</label>
+                        <input type="text" th:field="*{heroImage}" placeholder="https://...">
+                        <small class="field-error" th:errors="*{heroImage}"></small>
+                    </div>
+                    <div class="admin-field">
+                        <label>Search keywords</label>
+                        <textarea th:field="*{searchKeywords}" placeholder="One alias per line, for example&#10;Bangalore&#10;Bengaluru"></textarea>
+                    </div>
+                    <div class="admin-subsection-grid">
+                        <div class="admin-field">
+                            <label>Best season</label>
+                            <input type="text" th:field="*{bestSeason}" placeholder="Oct to Feb">
+                        </div>
+                        <div class="admin-field">
+                            <label>Ideal duration</label>
+                            <input type="text" th:field="*{idealDuration}" placeholder="3 to 4 days">
+                        </div>
+                    </div>
+                    <div class="admin-field full-span">
+                        <label>City highlights</label>
+                        <textarea th:field="*{cityHighlights}" placeholder="One highlight per line"></textarea>
+                    </div>
+                    <div class="full-span">
+                        <button class="admin-submit" type="submit"><i class="fa-solid fa-circle-plus"></i> Add city to portal</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="admin-panel" id="add-content">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-badge alt"><i class="fa-solid fa-layer-group"></i> Add City Insights</span>
+                        <h2>Compose detailed destination content</h2>
+                        <p>Pick a content type card, then fill in a full venue profile with cover image, gallery, story copy, structured detail cards, and visitor notes.</p>
+                    </div>
+                </div>
+
+                <div class="message success" th:if="${selectedCityName}" th:text="${selectedCityName + ' is now selected below. Add its hotels, popular places, cafes, tourist spots, or educational places next.'}"></div>
+
+                <div class="admin-type-grid">
+                    <button class="insight-type-card active" type="button" data-category="hotels">
+                        <i class="fa-solid fa-hotel"></i>
+                        <strong>Hotels</strong>
+                        <span>Rooms, venue, dining, amenities, stay notes</span>
+                    </button>
+                    <button class="insight-type-card" type="button" data-category="popular-places">
+                        <i class="fa-solid fa-landmark"></i>
+                        <strong>Popular Places</strong>
+                        <span>Landmarks, must-see spots, identity of the city</span>
+                    </button>
+                    <button class="insight-type-card" type="button" data-category="tourist-places">
+                        <i class="fa-solid fa-camera-retro"></i>
+                        <strong>Tourist Places</strong>
+                        <span>Visitor flow, best time, entry tips, photo moments</span>
+                    </button>
+                    <button class="insight-type-card" type="button" data-category="cafes">
+                        <i class="fa-solid fa-mug-hot"></i>
+                        <strong>Cafes</strong>
+                        <span>Menu focus, vibe, signature dishes, hangout cues</span>
+                    </button>
+                    <button class="insight-type-card" type="button" data-category="educational-places">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <strong>Educational Places</strong>
+                        <span>Campus, learning focus, what visitors should explore</span>
+                    </button>
+                </div>
+
+                <form class="admin-inline-form" th:action="@{/admin/places}" th:object="${placeForm}" method="post" id="insight-composer-form">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <div class="admin-composer-head">
+                        <div>
+                            <span class="admin-badge" id="composer-category-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Hotels Composer</span>
+                            <h3 id="composer-title">Build a hotel profile</h3>
+                            <p id="composer-copy">Use this form to add a hotel that instantly shows up under the city, category, and place routes.</p>
+                        </div>
+                        <div class="admin-badge alt" id="composer-route-preview">Reflects on homepage, category page, and place page</div>
+                    </div>
+
+                    <div class="admin-subsection">
+                        <div class="admin-panel-head">
+                            <div>
+                                <h3>Basic identity</h3>
+                                <p>Choose the city, lock the content type, and set the main headline copy.</p>
+                            </div>
+                        </div>
+                        <div class="admin-form-grid">
+                            <div class="admin-field">
+                                <label>Select city</label>
+                                <select th:field="*{citySlug}">
+                                    <option value="">Choose city</option>
+                                    <option th:each="city : ${allCities}" th:value="${city.slug}" th:text="${city.name}"></option>
+                                </select>
+                                <small class="field-error" th:errors="*{citySlug}"></small>
+                            </div>
+                            <div class="admin-field">
+                                <label>Content type</label>
+                                <select th:field="*{categorySlug}" id="categorySlug">
+                                    <option value="hotels">Hotels</option>
+                                    <option value="popular-places">Popular Places</option>
+                                    <option value="tourist-places">Tourist Places</option>
+                                    <option value="cafes">Cafes</option>
+                                    <option value="educational-places">Educational Places</option>
+                                </select>
+                                <small class="field-error" th:errors="*{categorySlug}"></small>
+                            </div>
+                            <div class="admin-field">
+                                <label>Name</label>
+                                <input type="text" th:field="*{name}" placeholder="Example: The Oberoi Grand">
+                                <small class="field-error" th:errors="*{name}"></small>
+                            </div>
+                            <div class="admin-field">
+                                <label>Cover image URL</label>
+                                <input type="text" th:field="*{imageUrl}" placeholder="https://...">
+                                <small class="field-error" th:errors="*{imageUrl}"></small>
+                            </div>
+                            <div class="admin-field full-span">
+                                <label>Short overview</label>
+                                <textarea th:field="*{description}" placeholder="This becomes the card description on the city and category pages."></textarea>
+                                <small class="field-error" th:errors="*{description}"></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-subsection">
+                        <div class="admin-panel-head">
+                            <div>
+                                <h3>Gallery and story</h3>
+                                <p>Hotels can include at least five images here, while other categories can use the gallery for multiple angles and nearby context.</p>
+                            </div>
+                        </div>
+                        <div class="admin-form-grid">
+                            <div class="admin-field full-span">
+                                <label>Gallery image URLs</label>
+                                <textarea th:field="*{galleryImages}" placeholder="One image URL per line. For hotels, add at least 5."></textarea>
+                            </div>
+                            <div class="admin-field full-span">
+                                <label>Insight section copy</label>
+                                <textarea th:field="*{insight}" placeholder="What makes this place stand out?"></textarea>
+                            </div>
+                            <div class="admin-field full-span">
+                                <label>History or context</label>
+                                <textarea th:field="*{history}" placeholder="Add story, background, reputation, or why it matters in this city."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-subsection">
+                        <div class="admin-panel-head">
+                            <div>
+                                <h3>Practical information</h3>
+                                <p>These values are folded into the detail cards on the place page.</p>
+                            </div>
+                        </div>
+                        <div class="admin-subsection-grid">
+                            <div class="admin-field">
+                                <label>Address / venue</label>
+                                <input type="text" th:field="*{address}" placeholder="Venue, locality, landmark">
+                            </div>
+                            <div class="admin-field">
+                                <label>Timings / availability</label>
+                                <input type="text" th:field="*{timings}" placeholder="24x7, 9 AM to 8 PM, seasonal timings">
+                            </div>
+                            <div class="admin-field full-span">
+                                <label>Price range / entry / room range</label>
+                                <input type="text" th:field="*{priceRange}" placeholder="INR 5,000 to 8,000 per night or entry info">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-subsection">
+                        <div class="admin-panel-head">
+                            <div>
+                                <h3>Detail cards</h3>
+                                <p id="detail-helper-copy">Suggested hotel cards: Venue, Rooms, Dining, Amenities.</p>
+                            </div>
+                        </div>
+                        <div class="admin-form-grid">
+                            <div class="admin-field">
+                                <label id="detail-one-label">Detail card 1 title</label>
+                                <input type="text" th:field="*{detailTitleOne}" id="detailTitleOne" placeholder="Venue">
+                            </div>
+                            <div class="admin-field">
+                                <label>Detail card 1 body</label>
+                                <textarea th:field="*{detailBodyOne}" placeholder="Describe the venue experience."></textarea>
+                            </div>
+                            <div class="admin-field">
+                                <label id="detail-two-label">Detail card 2 title</label>
+                                <input type="text" th:field="*{detailTitleTwo}" id="detailTitleTwo" placeholder="Rooms">
+                            </div>
+                            <div class="admin-field">
+                                <label>Detail card 2 body</label>
+                                <textarea th:field="*{detailBodyTwo}" placeholder="Describe rooms, suites, layouts, or collections."></textarea>
+                            </div>
+                            <div class="admin-field">
+                                <label id="detail-three-label">Detail card 3 title</label>
+                                <input type="text" th:field="*{detailTitleThree}" id="detailTitleThree" placeholder="Dining">
+                            </div>
+                            <div class="admin-field">
+                                <label>Detail card 3 body</label>
+                                <textarea th:field="*{detailBodyThree}" placeholder="Describe dining, menu style, cafes, or food format."></textarea>
+                            </div>
+                            <div class="admin-field">
+                                <label id="detail-four-label">Detail card 4 title</label>
+                                <input type="text" th:field="*{detailTitleFour}" id="detailTitleFour" placeholder="Amenities">
+                            </div>
+                            <div class="admin-field">
+                                <label>Detail card 4 body</label>
+                                <textarea th:field="*{detailBodyFour}" placeholder="Describe amenities, what to expect, or visitor fit."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-subsection">
+                        <div class="admin-panel-head">
+                            <div>
+                                <h3>Visitor notes</h3>
+                                <p>These appear as short action-oriented bullets on the place page.</p>
+                            </div>
+                        </div>
+                        <div class="admin-field">
+                            <label>Visitor notes</label>
+                            <textarea th:field="*{visitorNotes}" placeholder="One note per line"></textarea>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button class="admin-submit" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save city insight</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="admin-panel" id="manage-cities">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-badge"><i class="fa-solid fa-earth-asia"></i> Manage Cities</span>
+                        <h2>Edit city cards and search metadata</h2>
+                        <p>These are the cities created through the admin panel. Updates flow back to the homepage card area and city routes.</p>
+                    </div>
+                </div>
+
+                <div class="admin-manage-grid" th:if="${!#lists.isEmpty(managedCities)}">
+                    <article class="admin-city-card" th:each="city : ${managedCities}">
+                        <img th:src="${city.heroImage}" th:alt="${city.name}">
+                        <div class="admin-city-card-body">
+                            <div class="admin-library-top">
+                                <div>
+                                    <span class="admin-badge alt" th:text="${city.region}"></span>
+                                    <h3 th:text="${city.name}"></h3>
+                                    <p th:text="'Slug: ' + ${city.slug}"></p>
+                                </div>
+                            </div>
+                            <p th:text="${city.tagline}"></p>
+                            <details class="admin-disclosure">
+                                <summary>
+                                    <span>Edit city profile</span>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </summary>
+                                <div class="admin-disclosure-content">
+                                    <form class="admin-inline-form" th:action="@{'/admin/cities/' + ${city.id} + '/update'}" method="post">
+                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                        <div class="admin-inline-grid">
+                                            <div class="admin-field">
+                                                <label>Name</label>
+                                                <input type="text" name="name" th:value="${city.name}">
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Region</label>
+                                                <input type="text" name="region" th:value="${city.region}">
+                                            </div>
+                                            <div class="admin-field" style="grid-column: 1 / -1;">
+                                                <label>Overview</label>
+                                                <textarea name="tagline" th:text="${city.tagline}"></textarea>
+                                            </div>
+                                            <div class="admin-field" style="grid-column: 1 / -1;">
+                                                <label>Hero image URL</label>
+                                                <input type="text" name="heroImage" th:value="${city.heroImage}">
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Best season</label>
+                                                <input type="text" name="bestSeason" th:value="${city.bestSeason}">
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Ideal duration</label>
+                                                <input type="text" name="idealDuration" th:value="${city.idealDuration}">
+                                            </div>
+                                            <div class="admin-field" style="grid-column: 1 / -1;">
+                                                <label>Search keywords</label>
+                                                <textarea name="searchKeywords" th:text="${city.searchKeywords}"></textarea>
+                                            </div>
+                                            <div class="admin-field" style="grid-column: 1 / -1;">
+                                                <label>City highlights</label>
+                                                <textarea name="cityHighlights" th:text="${city.cityHighlights}"></textarea>
+                                            </div>
+                                        </div>
+                                        <button class="admin-submit" type="submit"><i class="fa-solid fa-pen"></i> Update city</button>
+                                    </form>
+                                </div>
+                            </details>
+                            <form th:action="@{'/admin/cities/' + ${city.id} + '/delete'}" method="post">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                <button class="admin-danger" type="submit"><i class="fa-solid fa-trash"></i> Delete city</button>
+                            </form>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="admin-empty" th:if="${#lists.isEmpty(managedCities)}">
+                    No admin-added cities yet. Built-in cities are still available, and every new city you add here becomes searchable from the portal homepage.
+                </div>
+            </section>
+
+            <section class="admin-panel" id="content-library">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-badge alt"><i class="fa-solid fa-folder-open"></i> Content Library</span>
+                        <h2>Manage hotel, place, cafe, and city insight entries</h2>
+                        <p>Edit the live content cards that feed city pages, category pages, and detailed place routes.</p>
+                    </div>
+                </div>
+
+                <div class="admin-library-grid" th:if="${!#lists.isEmpty(managedPlaces)}">
+                    <article class="admin-library-card" th:each="place : ${managedPlaces}">
+                        <div class="admin-library-visual">
+                            <img th:src="${place.imageUrl}" th:alt="${place.name}">
+                        </div>
+                        <div class="admin-library-card-body">
+                            <div class="admin-library-top">
+                                <div>
+                                    <h3 th:text="${place.name}"></h3>
+                                    <p th:text="${place.cityName + ' • ' + place.categoryName}"></p>
+                                </div>
+                                <div class="admin-library-meta">
+                                    <span class="admin-badge" th:text="${place.categoryName}"></span>
+                                    <span class="admin-badge alt" th:text="${place.galleryCount + ' gallery'}"></span>
+                                </div>
+                            </div>
+                            <p th:text="${place.description}"></p>
+                            <details class="admin-disclosure">
+                                <summary>
+                                    <span>Edit insight entry</span>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </summary>
+                                <div class="admin-disclosure-content">
+                                    <form class="admin-inline-form" th:action="@{'/admin/places/' + ${place.id} + '/update'}" method="post">
+                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                        <div class="admin-inline-grid">
+                                            <div class="admin-field">
+                                                <label>City</label>
+                                                <select name="citySlug">
+                                                    <option th:each="city : ${allCities}"
+                                                            th:value="${city.slug}"
+                                                            th:text="${city.name}"
+                                                            th:selected="${city.slug == place.citySlug}"></option>
+                                                </select>
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Category</label>
+                                                <select name="categorySlug">
+                                                    <option value="hotels" th:selected="${place.categorySlug == 'hotels'}">Hotels</option>
+                                                    <option value="popular-places" th:selected="${place.categorySlug == 'popular-places'}">Popular Places</option>
+                                                    <option value="tourist-places" th:selected="${place.categorySlug == 'tourist-places'}">Tourist Places</option>
+                                                    <option value="cafes" th:selected="${place.categorySlug == 'cafes'}">Cafes</option>
+                                                    <option value="emergency-services" th:selected="${place.categorySlug == 'emergency-services'}">Emergency Services</option>
+                                                    <option value="educational-places" th:selected="${place.categorySlug == 'educational-places'}">Educational Places</option>
+                                                </select>
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Name</label>
+                                                <input type="text" name="name" th:value="${place.name}">
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Cover image URL</label>
+                                                <input type="text" name="imageUrl" th:value="${place.imageUrl}">
+                                            </div>
+                                            <div class="admin-field" style="grid-column: 1 / -1;">
+                                                <label>Overview</label>
+                                                <textarea name="description" th:text="${place.description}"></textarea>
+                                            </div>
+                                            <div class="admin-field" style="grid-column: 1 / -1;">
+                                                <label>Gallery images</label>
+                                                <textarea name="galleryImages" th:text="${place.galleryImages}"></textarea>
+                                            </div>
+                                            <div class="admin-field" style="grid-column: 1 / -1;">
+                                                <label>Insight</label>
+                                                <textarea name="insight" th:text="${place.insight}"></textarea>
+                                            </div>
+                                            <div class="admin-field" style="grid-column: 1 / -1;">
+                                                <label>History</label>
+                                                <textarea name="history" th:text="${place.history}"></textarea>
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Address</label>
+                                                <input type="text" name="address" th:value="${place.address}">
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Timings</label>
+                                                <input type="text" name="timings" th:value="${place.timings}">
+                                            </div>
+                                            <div class="admin-field" style="grid-column: 1 / -1;">
+                                                <label>Price range</label>
+                                                <input type="text" name="priceRange" th:value="${place.priceRange}">
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Detail card 1 title</label>
+                                                <input type="text" name="detailTitleOne" th:value="${place.detailTitleOne}">
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Detail card 1 body</label>
+                                                <textarea name="detailBodyOne" th:text="${place.detailBodyOne}"></textarea>
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Detail card 2 title</label>
+                                                <input type="text" name="detailTitleTwo" th:value="${place.detailTitleTwo}">
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Detail card 2 body</label>
+                                                <textarea name="detailBodyTwo" th:text="${place.detailBodyTwo}"></textarea>
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Detail card 3 title</label>
+                                                <input type="text" name="detailTitleThree" th:value="${place.detailTitleThree}">
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Detail card 3 body</label>
+                                                <textarea name="detailBodyThree" th:text="${place.detailBodyThree}"></textarea>
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Detail card 4 title</label>
+                                                <input type="text" name="detailTitleFour" th:value="${place.detailTitleFour}">
+                                            </div>
+                                            <div class="admin-field">
+                                                <label>Detail card 4 body</label>
+                                                <textarea name="detailBodyFour" th:text="${place.detailBodyFour}"></textarea>
+                                            </div>
+                                            <div class="admin-field" style="grid-column: 1 / -1;">
+                                                <label>Visitor notes</label>
+                                                <textarea name="visitorNotes" th:text="${place.visitorNotes}"></textarea>
+                                            </div>
+                                        </div>
+                                        <button class="admin-submit" type="submit"><i class="fa-solid fa-pen"></i> Update insight</button>
+                                    </form>
+                                </div>
+                            </details>
+                            <form th:action="@{'/admin/places/' + ${place.id} + '/delete'}" method="post">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                <button class="admin-danger" type="submit"><i class="fa-solid fa-trash"></i> Delete insight</button>
+                            </form>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="admin-empty" th:if="${#lists.isEmpty(managedPlaces)}">
+                    No admin-managed hotels, popular places, cafes, tourist places, or educational places yet.
+                </div>
+            </section>
+        </div>
+    </section>
+</main>
+
+<script>
+    (function () {
+        const presets = {
+            hotels: {
+                badge: "Hotels Composer",
+                title: "Build a hotel profile",
+                copy: "Add a hotel with venue details, room mix, dining coverage, amenities, and a strong gallery so it feels like a proper hospitality listing.",
+                helper: "Suggested hotel cards: Venue, Rooms, Dining, Amenities.",
+                placeholders: ["Venue", "Rooms", "Dining", "Amenities"]
+            },
+            "popular-places": {
+                badge: "Popular Places Composer",
+                title: "Build a landmark profile",
+                copy: "Use this for iconic city spots that should show up as signature landmarks on the main city journey.",
+                helper: "Suggested popular place cards: Identity, Experience, Best Time, Nearby Scene.",
+                placeholders: ["Identity", "Experience", "Best Time", "Nearby Scene"]
+            },
+            "tourist-places": {
+                badge: "Tourist Places Composer",
+                title: "Build a tourist place profile",
+                copy: "Ideal for viewpoints, gardens, forts, and sightseeing entries that need visitor tips and timing guidance.",
+                helper: "Suggested tourist place cards: What To See, Best Time, Entry Tips, Trip Fit.",
+                placeholders: ["What To See", "Best Time", "Entry Tips", "Trip Fit"]
+            },
+            cafes: {
+                badge: "Cafes Composer",
+                title: "Build a cafe profile",
+                copy: "Set the vibe, menu focus, signature orders, and what kind of audience the cafe naturally suits.",
+                helper: "Suggested cafe cards: Vibe, Menu, Signature Picks, Best For.",
+                placeholders: ["Vibe", "Menu", "Signature Picks", "Best For"]
+            },
+            "educational-places": {
+                badge: "Educational Places Composer",
+                title: "Build an educational place profile",
+                copy: "Use this for museums, universities, campuses, galleries, and knowledge-focused spaces.",
+                helper: "Suggested educational cards: Focus, Venue Type, What To Explore, Best For.",
+                placeholders: ["Focus", "Venue Type", "What To Explore", "Best For"]
+            },
+            "emergency-services": {
+                badge: "Emergency Services Composer",
+                title: "Build an emergency service profile",
+                copy: "Add hospitals, police, fire, pharmacies, helplines, and urgent service notes.",
+                helper: "Suggested emergency cards: Service Type, Availability, Location, Contact Cue.",
+                placeholders: ["Service Type", "Availability", "Location", "Contact Cue"]
+            }
+        };
+
+        const cards = Array.from(document.querySelectorAll(".insight-type-card"));
+        const select = document.getElementById("categorySlug");
+        const badge = document.getElementById("composer-category-badge");
+        const title = document.getElementById("composer-title");
+        const copy = document.getElementById("composer-copy");
+        const helper = document.getElementById("detail-helper-copy");
+        const titleInputs = [
+            document.getElementById("detailTitleOne"),
+            document.getElementById("detailTitleTwo"),
+            document.getElementById("detailTitleThree"),
+            document.getElementById("detailTitleFour")
+        ];
+
+        function applyPreset(category, shouldFillEmpty) {
+            const preset = presets[category] || presets.hotels;
+            if (select) {
+                select.value = category;
+            }
+            if (badge) {
+                badge.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> ' + preset.badge;
+            }
+            if (title) {
+                title.textContent = preset.title;
+            }
+            if (copy) {
+                copy.textContent = preset.copy;
+            }
+            if (helper) {
+                helper.textContent = preset.helper;
+            }
+            cards.forEach(card => card.classList.toggle("active", card.dataset.category === category));
+            titleInputs.forEach((input, index) => {
+                if (!input) return;
+                input.placeholder = preset.placeholders[index];
+                if (shouldFillEmpty && !input.value.trim()) {
+                    input.value = preset.placeholders[index];
+                }
+            });
+        }
+
+        cards.forEach(card => {
+            card.addEventListener("click", () => applyPreset(card.dataset.category, true));
+        });
+
+        select?.addEventListener("change", event => applyPreset(event.target.value, false));
+        applyPreset(select?.value || "hotels", false);
+    })();
+</script>
+</body>
+</html>

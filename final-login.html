@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurevia | Login & Signup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body class="login-body">
+<div class="login-shell">
+    <div class="login-section">
+        <input id="flip" class="auth-toggle" type="checkbox">
+
+        <div class="cover">
+            <div class="front">
+                <img src="https://hblimg.mmtcdn.com/content/hubble/img/desttvimg/mmt/destination/m_Rishikesh_tv_destination_img_2_l_664_996.jpg" alt="Rishikesh">
+                <div class="text">
+                    <span class="text-1">Aurevia <br> City Explorer and Travel Web Portal</span>
+                    <span class="text-2">Login to continue your city journey.</span>
+                </div>
+            </div>
+            <div class="back">
+                <img src="https://storage.googleapis.com/stateless-www-justwravel-com/2021/05/1550217293_shutterstock_1129297934.jpg.jpg" alt="India travel">
+                <div class="text">
+                    <span class="text-1">Explore Hidden <br> Indian Gems</span>
+                    <span class="text-2">Create an account and unlock every city page.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="forms">
+            <div class="form-content">
+                <section class="login-form">
+                    <div class="title">Login</div>
+                    <form action="/login" method="post"><input type="hidden" name="_csrf" value="G6nZiVHFEIdLDDDqobjdF6VgOsZtWvBmCwSVMQGp22ViinRLepvovDKmIuJmPAnYxJXpc5BZF6dYapNLOmGtCDnPuQcG6BZy"/>
+                        <input type="hidden" name="_csrf" value="G6nZiVHFEIdLDDDqobjdF6VgOsZtWvBmCwSVMQGp22ViinRLepvovDKmIuJmPAnYxJXpc5BZF6dYapNLOmGtCDnPuQcG6BZy">
+                        
+                        
+
+                        <div class="input-box">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" name="username" placeholder="Type your email" required>
+                        </div>
+
+                        <div class="input-box">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" name="password" placeholder="Type your password" required>
+                        </div>
+
+                        <div class="button input-box">
+                            <input type="submit" value="Submit">
+                        </div>
+
+                        <div class="text switch-copy">Don't have an account? <label for="flip">Register now</label></div>
+                    </form>
+                </section>
+
+                <section class="signup-form">
+                    <div class="title">Signup</div>
+                    <form action="/signup" method="post"><input type="hidden" name="_csrf" value="G6nZiVHFEIdLDDDqobjdF6VgOsZtWvBmCwSVMQGp22ViinRLepvovDKmIuJmPAnYxJXpc5BZF6dYapNLOmGtCDnPuQcG6BZy"/>
+                        <input type="hidden" name="_csrf" value="G6nZiVHFEIdLDDDqobjdF6VgOsZtWvBmCwSVMQGp22ViinRLepvovDKmIuJmPAnYxJXpc5BZF6dYapNLOmGtCDnPuQcG6BZy">
+                        
+
+                        <div class="input-box">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="Type your name" required id="fullName" name="fullName" value="">
+                        </div>
+                        
+
+                        <div class="input-box">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" placeholder="Type your email" required id="email" name="email" value="">
+                        </div>
+                        
+
+                        <div class="input-box">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="Type your password" required id="password" name="password" value="">
+                        </div>
+                        
+
+                        <div class="button input-box">
+                            <input type="submit" value="Submit">
+                        </div>
+
+                        <div class="text switch-copy">Already have an account? <label for="flip">Login now</label></div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

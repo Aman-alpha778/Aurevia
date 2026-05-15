@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gen Z Mode | Aurevia — Chandigarh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --navy:#1F256B; --cyan:#29B6C8; --cyan-lt:#5fd6e6; --cyan-dk:#1d8fa0;
+      --text:#f0f0f5; --text-2:rgba(240,240,245,0.55); --border:rgba(255,255,255,0.06);
+      --nav-bg:rgba(8,9,13,0.85); --input-bg:rgba(255,255,255,0.05);
+      --shadow-sm:none; --shadow:none;
+      --font-display:'Bricolage Grotesque',sans-serif; --font-body:'Space Grotesk',sans-serif;
+      --nav-h:64px; --tr:0.25s ease;
+    }
+  </style>
+  <link rel="stylesheet" href="genz.css"/>
+  <link rel="stylesheet" href="genz_slider_patch.css"/>
+</head>
+<body class="genz-mode">
+
+<div class="gz-orb gz-orb-1"></div>
+<div class="gz-orb gz-orb-2"></div>
+<div class="gz-orb gz-orb-3"></div>
+
+<input type="checkbox" class="mob-toggle" id="mob-chk" style="display:none"/>
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <a href="index.html" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;color:inherit;">
+        <i class="fa fa-city"></i> Aurevia
+      </a>
+    </div>
+    <div class="nav-city-wrap">
+      <i class="fa fa-location-dot nav-city-icon" style="position:absolute;left:.75rem;font-size:.85rem;pointer-events:none;z-index:1;color:#c6ff00;"></i>
+      <select class="nav-city-select" onchange="showToastGZ('📍 City changed!')">
+        <option value="chandigarh" selected>Chandigarh</option>
+        <option value="mohali">Delhi</option>
+        <option value="punchkula">Udaipur</option>
+        <option value="zirakpur">Rishikesh</option>
+      </select>
+    </div>
+    <div class="nav-search-wrap">
+      <i class="fa fa-magnifying-glass nav-search-icon"></i>
+      <input type="text" id="nav-search" placeholder="Search vibes, places…"/>
+    </div>
+    <nav class="nav-links">
+      <a href="homepage.html">Home</a>
+      <a href="#vibe">Vibe Check</a>
+      <a href="#trending">Trending</a>
+      <a href="#hidden">Hidden Gems</a>
+      <a href="#nearby">Nearby</a>
+    </nav>
+    <div id="theme-toggle" onclick="toggleTheme()"><i class="fas fa-sun"></i></div>
+    <label class="hamburger-label" for="mob-chk" style="display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;flex-shrink:0;">
+      <span style="width:22px;height:2px;background:#f0f0f5;border-radius:2px;display:block;"></span>
+      <span style="width:22px;height:2px;background:#f0f0f5;border-radius:2px;display:block;"></span>
+      <span style="width:22px;height:2px;background:#f0f0f5;border-radius:2px;display:block;"></span>
+    </label>
+  </div>
+  <div class="mobile-nav" style="display:none;">
+    <a href="homepage.html">Home</a>
+    <a href="#vibe">Vibe Check</a>
+    <a href="#trending">Trending</a>
+    <a href="#hidden">Hidden Gems</a>
+    <a href="#nearby">Nearby</a>
+  </div>
+</nav>
+
+<div id="gz-toast" style="position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);z-index:9999;background:#c6ff00;color:#000;padding:.65rem 1.4rem;border-radius:8px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.85rem;opacity:0;transition:all .35s;white-space:nowrap;pointer-events:none;"></div>
+
+<!-- HERO -->
+<header class="hero-gz" id="home">
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:2;">
+    <div class="hero-tag">✦ Gen Z Mode is ON — Welcome to the real Chandigarh</div>
+    <h1>
+      <span class="outline-word">YOUR</span>
+      <span class="grad-word">VIBE</span>
+      <span class="outline-word">YOUR</span> <span style="-webkit-text-fill-color:var(--z-text);">CITY</span>
+    </h1>
+    <p class="gz-subtitle">No boring tours, no aunty-uncle guides 💀<br/>Just real spots, real energy, real Chandigarh.</p>
+    <div class="hero-ctas">
+      <a href="#vibe" class="btn-hero-main"><i class="fa fa-bolt"></i> Check Your Vibe</a>
+      <a href="#hidden" class="btn-hero-ghost"><i class="fa fa-gem"></i> Hidden Gems</a>
+    </div>
+  </div>
+  <div class="hero-marquee">
+    <div class="marquee-track">
+      <span>CHANDIGARH</span><span class="accent">★</span>
+      <span>SUKHNA LAKE</span><span class="accent">★</span>
+      <span>ROCK GARDEN</span><span class="accent">★</span>
+      <span>ROSE GARDEN</span><span class="accent">★</span>
+      <span>SECTOR 17</span><span class="accent">★</span>
+      <span>PAL DHABA</span><span class="accent">★</span>
+      <span>ELANTE MALL</span><span class="accent">★</span>
+      <span>MORNI HILLS</span><span class="accent">★</span>
+      <span>CAPITOL COMPLEX</span><span class="accent">★</span>
+      <span>CHANDIGARH</span><span class="accent">★</span>
+      <span>SUKHNA LAKE</span><span class="accent">★</span>
+      <span>ROCK GARDEN</span><span class="accent">★</span>
+      <span>ROSE GARDEN</span><span class="accent">★</span>
+      <span>SECTOR 17</span><span class="accent">★</span>
+      <span>PAL DHABA</span><span class="accent">★</span>
+      <span>ELANTE MALL</span><span class="accent">★</span>
+      <span>MORNI HILLS</span><span class="accent">★</span>
+      <span>CAPITOL COMPLEX</span><span class="accent">★</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     VIBE CHECK — grids handled by .vibe-content .gz-grid CSS rule
+============================================================ -->
+<section class="gz-section" id="vibe">
+  <div style="margin-bottom:2.5rem;">
+    <span class="gz-section-label">✦ Pick Your Mood</span>
+    <h2 class="gz-title">Vibe Check <span>🎯</span></h2>
+    <p class="gz-subtitle">Select your energy and we'll match the perfect Chandigarh spots.</p>
+  </div>
+  <div class="vibe-row">
+    <button class="vibe-btn active" onclick="setVibe('chill',this)">🧊 Chill</button>
+    <button class="vibe-btn" onclick="setVibe('party',this)">🎉 Party</button>
+    <button class="vibe-btn" onclick="setVibe('food',this)">🍕 Food</button>
+    <button class="vibe-btn" onclick="setVibe('nature',this)">🌿 Nature</button>
+  </div>
+
+  <!-- CHILL -->
+  <div class="vibe-content active" id="vibe-chill">
+    <div class="highlight-box">
+      <h3>🧊 Chill Mode Activated</h3>
+      <p>Slow mornings, aesthetic spots, golden-hour walks. You need peace — we got you.</p>
+    </div>
+    <div class="gz-grid gz-grid-3">
+      <a href="https://maps.google.com/?q=Sukhna+Lake+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Sukhna Lake" class="gz-card-img"/>
+        <div class="gz-badge">Chill ❄️</div>
+        <h3>Sukhna Lake</h3>
+        <p>Sunrise walks, boats, golden hour — the ultimate chill spot. Come early, thank us later.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Brew+Banter+Cafe+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80" alt="Café" class="gz-card-img"/>
+        <div class="gz-badge">Café ☕</div>
+        <h3>Brew & Banter</h3>
+        <p>Aesthetic café on Sector 8-C. Great coffee, cozy vibes — perfect for a lazy afternoon or study sesh.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Zakir+Hussain+Rose+Garden+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Park 🌹</div>
+        <h3>Rose Garden</h3>
+        <p>Flowers + calm walks + aesthetic corners.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Garden+of+Silence+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Meditate 🧘</div>
+        <h3>Garden of Silence</h3>
+        <p>Quiet + spiritual + zero noise zone.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Japanese+Garden+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1522383225653-ed111181a951?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Zen 🌿</div>
+        <h3>Japanese Garden</h3>
+        <p>Minimal aesthetic + calm energy.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Terraced+Garden+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Green 🌳</div>
+        <h3>Terraced Garden</h3>
+        <p>Wide lawns + slow walks.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Leisure+Valley+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Walk 🚶</div>
+        <h3>Leisure Valley</h3>
+        <p>Long green stretch + peaceful vibe.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Fragrance+Garden+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Floral 🌸</div>
+        <h3>Fragrance Garden</h3>
+        <p>Soft scent + quiet surroundings.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Butterfly+Park+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Nature 🦋</div>
+        <h3>Butterfly Park</h3>
+        <p>Colorful + peaceful nature zone.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Shanti+Kunj+Park+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Hidden 🌿</div>
+        <h3>Shanti Kunj</h3>
+        <p>Underrated calm green spot.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Siswan+Dam" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Sunset 🌄</div>
+        <h3>Siswan Dam</h3>
+        <p>Golden hour + quiet views.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Morni+Hills" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Escape 🌲</div>
+        <h3>Morni Hills</h3>
+        <p>Peaceful hill getaway.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Pinjore+Gardens" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Royal 🌿</div>
+        <h3>Pinjore Gardens</h3>
+        <p>Historic + calm aesthetic vibe.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Nada+Sahib+Panchkula" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Peace 🙏</div>
+        <h3>Nada Sahib</h3>
+        <p>River + spiritual calm energy.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Kaimbwala+Forest+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Forest 🌲</div>
+        <h3>Kaimbwala Trails</h3>
+        <p>Raw forest + peaceful trekking.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Sector+10+Chandigarh+parks" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Calm 📚</div>
+        <h3>Sector 10 Parks</h3>
+        <p>Study + quiet chill vibe.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Sukhna+Forest+Trail" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Trail 🌿</div>
+        <h3>Sukhna Trails</h3>
+        <p>Nature walk + no crowd vibe.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Open+Hand+Monument+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1505692794403-34d4982b78f5?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Art 🏛️</div>
+        <h3>Open Hand Area</h3>
+        <p>Wide open + peaceful architecture.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Chandigarh+Golf+Course+view" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Luxury 🌿</div>
+        <h3>Golf Course View</h3>
+        <p>Green luxury + calm scenery.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Sector+8+inner+market+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Soft ☕</div>
+        <h3>Sector 8 Inner</h3>
+        <p>Quiet café streets + chill vibe.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- PARTY -->
+  <div class="vibe-content" id="vibe-party">
+    <div class="highlight-box">
+      <h3>🎉 Party Mode Activated</h3>
+      <p>Nightlife, mall crawls, food streets — Chandigarh knows how to have a good time no cap.</p>
+    </div>
+    <div class="gz-grid gz-grid-3">
+      <a href="https://maps.google.com/?q=Elante+Mall+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1524636935-f6b3d1f4be0b?w=600&q=80" alt="Elante Mall" class="gz-card-img"/>
+        <div class="gz-badge">Shopping 🛍️</div>
+        <h3>Elante Mall</h3>
+        <p>North India's biggest mall. Brands, food court, movies, arcade — full day sorted, bestie.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Sector+26+Food+Street+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80" alt="Sector 26" class="gz-card-img"/>
+        <div class="gz-badge">Nightlife 🌙</div>
+        <h3>Sector 26 Food Street</h3>
+        <p>City comes alive after dark. Street food, music, energy — this is THE spot.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Sector+17+Plaza+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Iconic 🔥</div>
+        <h3>Sector 17 Plaza</h3>
+        <p>Evening hangouts + street food + crowd vibes.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Sector+26+Chandigarh+clubs" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Nightlife 🌙</div>
+        <h3>Sector 26 Clubs</h3>
+        <p>Party zone of Chandigarh — bars & clubs.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Hibachi+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1521337706264-a414f153a5b0?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Luxury 🍸</div>
+        <h3>Hibachi</h3>
+        <p>Premium cocktails + clubbing vibe.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Toy+Room+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Club 🎧</div>
+        <h3>Toy Room</h3>
+        <p>High energy DJ nights + dance floor.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Kitty+Su+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">EDM ⚡</div>
+        <h3>Kitty Su</h3>
+        <p>EDM + big DJs + wild nights.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Paara+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Elite 💎</div>
+        <h3>Paara</h3>
+        <p>Premium crowd + luxury nightlife.</p>
+      </a>
+      <a href="https://maps.google.com/?q=The+Backroom+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Underground 🔥</div>
+        <h3>The Backroom</h3>
+        <p>Hidden club + crazy DJ vibe.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Prankster+Chandigarh+club" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Fun 🎉</div>
+        <h3>Prankster</h3>
+        <p>Loud music + fun crowd energy.</p>
+      </a>
+      <a href="https://maps.google.com/?q=The+Vault+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">VIP 🥂</div>
+        <h3>The Vault</h3>
+        <p>VIP lounge + premium nights.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Underdoggs+Chandigarh+club" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1525268771113-32d9e9021a97?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Sports 🍻</div>
+        <h3>Underdoggs</h3>
+        <p>Sports bar + party crowd.</p>
+      </a>
+      <a href="https://maps.google.com/?q=The+Great+Bear+Chandigarh+night" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Brew 🍺</div>
+        <h3>Great Bear</h3>
+        <p>Craft beer + party vibe.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Peddlers+Chandigarh+club" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Live 🎸</div>
+        <h3>Peddlers</h3>
+        <p>Live music + dance nights.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Score+Chandigarh+club" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Dance 💃</div>
+        <h3>Score Club</h3>
+        <p>Full dance floor + DJ vibe.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Culture+Brew+Exchange+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Chill 🍻</div>
+        <h3>Culture Brew</h3>
+        <p>Music + drinks + late night vibe.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Lord+of+the+Drinks+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Luxury 🍷</div>
+        <h3>Lord of the Drinks</h3>
+        <p>Big club + premium nightlife.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Hops+n+Grains+Chandigarh+night" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1525268771113-32d9e9021a97?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Brew 🔥</div>
+        <h3>Hops n Grains</h3>
+        <p>Beer + DJ nights combo.</p>
+      </a>
+      <a href="https://maps.google.com/?q=JW+Marriott+Chandigarh+bar" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Luxury 🥂</div>
+        <h3>JW Marriott Bar</h3>
+        <p>Premium cocktails + classy nights.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Social+Sector+7+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Trendy 🔥</div>
+        <h3>Social Sector 7</h3>
+        <p>GenZ party + aesthetic crowd.</p>
+      </a>
+      <a href="https://maps.google.com/?q=House+of+Garden+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Chill 🌿</div>
+        <h3>House of Garden</h3>
+        <p>Outdoor party + chill seating.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Virsa+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Desi 🎶</div>
+        <h3>Virsa</h3>
+        <p>Punjabi music + dance floor energy.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOD -->
+  <div class="vibe-content" id="vibe-food">
+    <div class="highlight-box">
+      <h3>🍕 Foodie Mode Activated</h3>
+      <p>Chandigarh's food scene is SO underrated. From legendary dhabas to rooftop vibes — it's all here bestie.</p>
+    </div>
+    <div class="gz-grid gz-grid-3">
+      <a href="https://maps.google.com/?q=Pal+Dhaba+Sector+28+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Legendary 🧡</div>
+        <h3>Pal Dhaba</h3>
+        <p>Butter chicken + dal makhni legend spot.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Indian+Coffee+House+Chandigarh+food" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1555992336-03a23c0d6a3f?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Classic ☕</div>
+        <h3>Indian Coffee House</h3>
+        <p>Old-school budget food + nostalgia.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Sector+26+Chandigarh+street+food" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Street 🔥</div>
+        <h3>Sector 26 Street Food</h3>
+        <p>Night food trucks + GenZ crowd.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Amritsari+Kulcha+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Spicy 🌶️</div>
+        <h3>Amritsari Kulcha Hub</h3>
+        <p>Crispy kulchas + butter overload.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Cafe+JC+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Luxury 🍽️</div>
+        <h3>Café JC</h3>
+        <p>Fine dining + aesthetic plating.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Virgin+Courtyard+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Aesthetic 💫</div>
+        <h3>Virgin Courtyard</h3>
+        <p>Italian food + white aesthetic vibes.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Brooklyn+Central+Chandigarh+food" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">NYC vibe 🗽</div>
+        <h3>Brooklyn Central</h3>
+        <p>Burgers + American comfort food.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Sector+7+Social+Chandigarh+food" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Trendy 🔥</div>
+        <h3>Social Sector 7</h3>
+        <p>GenZ food + cocktails + vibes.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Whistling+Duck+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Premium 🍷</div>
+        <h3>Whistling Duck</h3>
+        <p>Modern fusion + nightlife food spot.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Oven+Fresh+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Bakery 🍰</div>
+        <h3>Oven Fresh</h3>
+        <p>Cakes + snacks + café combo.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Gopal+Sweets+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Sweet 🍬</div>
+        <h3>Gopal Sweets</h3>
+        <p>Chandigarh sweets + snacks king.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Virgin+Courtyard+Sector+7+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600&q=80" alt="Virgin Courtyard" class="gz-card-img"/>
+        <div class="gz-badge">Rooftop ✨</div>
+        <h3>Virgin Courtyard</h3>
+        <p>Rooftop dining with fairy lights and gorgeous views. Perfect date spot, not gonna lie.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Sector+22+Market+Chandigarh+street+food" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80" alt="Sector 22" class="gz-card-img"/>
+        <div class="gz-badge">Street Food 🥘</div>
+        <h3>Sector 22 Market</h3>
+        <p>Aloo tikki, chole bhature, golgappe — street food heaven. Budget friendly too 💯</p>
+      </a>
+      <a href="https://maps.google.com/?q=Katani+Dhaba+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Dhaba 🔥</div>
+        <h3>Katani Dhaba</h3>
+        <p>Heavy Punjabi food + late night vibes.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Chawla+Chicken+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Spicy 🌶️</div>
+        <h3>Chawla Chicken</h3>
+        <p>Butter chicken OG taste.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Sector+15+Chandigarh+food+market" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Street 🍜</div>
+        <h3>Sector 15 Market</h3>
+        <p>Student crowd + cheap tasty food.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Hot+Millions+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Fast Food 🍔</div>
+        <h3>Hot Millions</h3>
+        <p>Burgers + shakes + OG vibe.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Midpoint+Cafe+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Chill ☕</div>
+        <h3>Midpoint Café</h3>
+        <p>Affordable café + hangout food.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Roll+Xpress+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Quick 🌯</div>
+        <h3>Roll Xpress</h3>
+        <p>Loaded rolls + quick bites.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Sector+34+Chandigarh+food+street" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Street 🔥</div>
+        <h3>Sector 34 Food Street</h3>
+        <p>Night street food hotspot.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- NATURE -->
+  <div class="vibe-content" id="vibe-nature">
+    <div class="highlight-box">
+      <h3>🌿 Nature Mode Activated</h3>
+      <p>Chandigarh has 30% green cover. Step outside and actually breathe — it genuinely slaps.</p>
+    </div>
+    <div class="gz-grid gz-grid-3">
+      <a href="https://maps.google.com/?q=Shivalik+Hills+Chandigarh+trekking" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1626784381830-ec0648873094?w=600&q=80" alt="Shivalik Hills" class="gz-card-img"/>
+        <div class="gz-badge">Trek 🏔️</div>
+        <h3>Shivalik Hills</h3>
+        <p>Trails, fresh air, views that make your camera roll go crazy. Right from the city.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Butterfly+Park+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&q=80" alt="Butterfly Park" class="gz-card-img"/>
+        <div class="gz-badge">Hidden 💎</div>
+        <h3>Butterfly Park</h3>
+        <p>A real butterfly conservatory INSIDE the city. Pure magic. Nobody talks about it enough.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Morni+Hills+Haryana" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=600&q=80" alt="Morni Hills" class="gz-card-img"/>
+        <div class="gz-badge">Day Trip 🚗</div>
+        <h3>Morni Hills</h3>
+        <p>45 min from Chandigarh. Lakes, trekking, Haryana's only hill station — so underrated.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Sukhna+Wildlife+Sanctuary" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Wild 🌿</div>
+        <h3>Sukhna Wildlife Sanctuary</h3>
+        <p>Forest trails + raw natural beauty.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Pinjore+Gardens" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Royal 🌺</div>
+        <h3>Pinjore Gardens</h3>
+        <p>Historic Mughal-style green gardens.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Rose+Garden+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Bloom 🌸</div>
+        <h3>Rose Garden</h3>
+        <p>Flowers + calm walking paths.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Japanese+Garden+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1522383225653-ed111181a951?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Zen 🧘</div>
+        <h3>Japanese Garden</h3>
+        <p>Minimal greenery + peaceful vibes.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Terraced+Garden+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Walk 🌿</div>
+        <h3>Terraced Garden</h3>
+        <p>Green lawns + sunset walks.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Leisure+Valley+Panchkula" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Calm 🌳</div>
+        <h3>Leisure Valley</h3>
+        <p>Long green park stretch for walks.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Timber+Trail+Parwanoo" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Cable 🚡</div>
+        <h3>Timber Trail</h3>
+        <p>Mountains + cable car scenic views.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Kasauli+Hills" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Hill 🌲</div>
+        <h3>Kasauli Hills</h3>
+        <p>Foggy roads + pine forest vibes.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Chhatbir+Zoo+Punjab" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Wild 🐅</div>
+        <h3>Chhatbir Zoo</h3>
+        <p>Nature + wildlife experience close to city.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Siswan+Dam+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Hidden 🌄</div>
+        <h3>Siswan Dam</h3>
+        <p>Quiet lake + sunset + mountain backdrop.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Garden+of+Silence+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Calm 🧘</div>
+        <h3>Garden of Silence</h3>
+        <p>Meditation spot + Sukhna side views.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Tikkar+Tal+Morni+Hills" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Lake 🌊</div>
+        <h3>Tikkar Tal</h3>
+        <p>Twin lakes + peaceful hills.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Kaimbwala+Forest+Area+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Wild 🌲</div>
+        <h3>Kaimbwala Trails</h3>
+        <p>Offbeat forest + raw trekking feel.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Yadavindra+Gardens+Pinjore" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Royal 🌿</div>
+        <h3>Yadavindra Gardens</h3>
+        <p>Historic Mughal garden aesthetic.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Kalka+Shimla+Railway+Route" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Train 🚂</div>
+        <h3>Kalka-Shimla Route</h3>
+        <p>World heritage scenic train ride.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Fragrance+Garden+Chandigarh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Floral 🌸</div>
+        <h3>Fragrance Garden</h3>
+        <p>Flower scents + peaceful vibe.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Nada+Sahib+Panchkula+river" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">Serene 🌅</div>
+        <h3>Nada Sahib Riverside</h3>
+        <p>River + calm spiritual vibes.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TRENDING — FIX: each card gets its own .gz-slide wrapper
+============================================================ -->
+<div style="border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);">
+<section class="gz-section" id="trending">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem;">
+    <div>
+      <span class="gz-section-label">🔥 What's Popping</span>
+      <h2 class="gz-title" style="margin:0;">Trending <span>Right Now</span></h2>
+    </div>
+    <p class="gz-subtitle" style="margin:0;max-width:300px;text-align:right;">Updated based on real activity in Chandigarh</p>
+  </div>
+  <div class="gz-slider" id="slider-trending">
+    <div class="gz-track" id="track-trending">
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Rock+Garden+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1582719478185-2c0b2f1a2a8b?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Viral 📸</div>
+          <h3>Rock Garden</h3>
+          <p>Top aesthetic + surreal art vibes.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Sukhna+Lake+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Sunset 🌅</div>
+          <h3>Sukhna Lake</h3>
+          <p>Golden hour + reflection shots.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Sector+17+Plaza+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Reels 🔥</div>
+          <h3>Sector 17 Plaza</h3>
+          <p>Night lights + fountain aesthetic.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Japanese+Garden+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1522383225653-ed111181a951?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Zen 🧘</div>
+          <h3>Japanese Garden</h3>
+          <p>Clean minimal aesthetic shots.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Elante+Mall+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1521337706264-a414f153a5b0?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Luxury 🛍️</div>
+          <h3>Elante Mall</h3>
+          <p>Glass reflections + café aesthetic.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Sector+26+Chandigarh+cafes" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Nightlife 🌙</div>
+          <h3>Sector 26 Cafés</h3>
+          <p>Neon lights + party reels.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Rose+Garden+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Floral 🌸</div>
+          <h3>Rose Garden</h3>
+          <p>Soft aesthetic flower shots.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Capitol+Complex+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1505692794403-34d4982b78f5?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Architecture 🏛️</div>
+          <h3>Capitol Complex</h3>
+          <p>UNESCO brutalist aesthetic.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=VR+Punjab+Mall+Mohali" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Aesthetic 💎</div>
+          <h3>VR Punjab</h3>
+          <p>Luxury mall + indoor shoots.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Timber+Trail+Parwanoo" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Views 🚡</div>
+          <h3>Timber Trail</h3>
+          <p>Cable car mountain aesthetic.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Morni+Hills" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Nature 🌄</div>
+          <h3>Morni Hills</h3>
+          <p>Fog + forest cinematic shots.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Pinjore+Gardens" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Royal 🌿</div>
+          <h3>Pinjore Gardens</h3>
+          <p>Vintage palace garden vibes.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Virgin+Courtyard+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Aesthetic ☕</div>
+          <h3>Virgin Courtyard</h3>
+          <p>Boho vibes + white aesthetic walls.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=The+Coffee+Bean+and+Tea+Leaf+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Chill ☕</div>
+          <h3>Coffee Bean</h3>
+          <p>Minimal aesthetic café corners.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Sector+7+Social+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Trendy 🔥</div>
+          <h3>Sector 7 Social</h3>
+          <p>GenZ crowd + aesthetic interiors.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Third+Wave+Coffee+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Modern ☕</div>
+          <h3>Third Wave Coffee</h3>
+          <p>Clean aesthetic + study café.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Indian+Coffee+House+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Vintage 🪑</div>
+          <h3>Indian Coffee House</h3>
+          <p>Old-school nostalgic café vibes.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Oven+Fresh+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Bakery 🍰</div>
+          <h3>Oven Fresh</h3>
+          <p>Cake + café aesthetic combo.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Starbucks+Elante+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Aesthetic ☕</div>
+          <h3>Starbucks Elante</h3>
+          <p>Glass window + luxury café vibe.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Brooklyn+Central+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">NYC vibe 🗽</div>
+          <h3>Brooklyn Central</h3>
+          <p>New York style café interiors.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Cafe+JC+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Luxury ☕</div>
+          <h3>Café JC</h3>
+          <p>Premium fine-dine café vibe.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=The+Finch+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Premium 🍷</div>
+          <h3>The Finch</h3>
+          <p>Luxury café + nightlife aesthetic.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=The+Mill+Chandigarh+cafe" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Boho 🌿</div>
+          <h3>The Mill</h3>
+          <p>Rustic + warm aesthetic café.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Backpackers+Cafe+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1525610553991-2bede1a236e2?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Travel 🌍</div>
+          <h3>Backpackers Café</h3>
+          <p>Travel aesthetic + indie vibe.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Chandigarh+University+Punjab" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Campus 🎓</div>
+          <h3>University Aesthetic</h3>
+          <p>Modern campus reels + portraits.</p>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- SURPRISE ME + THIS OR THAT -->
+<section class="gz-section" id="surprise">
+  <div style="margin-bottom:2.5rem;">
+    <span class="gz-section-label">🎲 Indecisive?</span>
+    <h2 class="gz-title">We'll Decide <span>For You</span></h2>
+  </div>
+  <div class="surprise-banner">
+    <h3 class="surprise-title">Can't decide? Let us choose 😎</h3>
+    <p class="surprise-subtitle">Hit the button — we'll pick a random Chandigarh spot for you to explore today.</p>
+    <button class="neon-btn" onclick="surpriseMe()">🎲 Surprise Me!</button>
+    <div id="surprise-result" style="display:none;margin-top:2rem;padding:2rem;border-radius:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);">
+      <div style="font-size:3rem;margin-bottom:0.8rem;" id="surprise-icon">🌊</div>
+      <h4 id="surprise-name" style="font-size:1.5rem;margin-bottom:0.5rem;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:#f0f0f5;">Sukhna Lake</h4>
+      <p id="surprise-desc" style="color:rgba(240,240,245,0.45);font-family:'Space Grotesk',sans-serif;font-size:1rem;margin-bottom:1.2rem;">A serene reservoir. Perfect for sunrise walks and boating.</p>
+      <a id="surprise-map-link" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;background:#c6ff00;color:#000;padding:10px 22px;border-radius:8px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.9rem;text-decoration:none;transition:all .3s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><i class="fa fa-map-location-dot"></i> Open in Maps</a>
+    </div>
+    <div style="margin-top:4rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,0.06);">
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:0.4rem;color:#f0f0f5;">This or That? 🤔</h3>
+      <p style="color:rgba(240,240,245,0.45);font-family:'Space Grotesk',sans-serif;margin-bottom:0.5rem;">Pick your vibe — we'll tell you exactly where to go in Chandigarh.</p>
+      <div id="tot-container">
+        <div class="tot-container">
+          <button class="tot-option" onclick="pickTOT('morning')">🌅 Morning person</button>
+          <button class="tot-option" onclick="pickTOT('night')">🌙 Night owl</button>
+        </div>
+      </div>
+      <div class="tot-result" id="tot-result"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HIDDEN GEMS — FIX: each card gets its own .gz-slide wrapper
+============================================================ -->
+<div style="border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);">
+<section class="gz-section" id="hidden">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem;">
+    <div>
+      <span class="gz-section-label">💎 Undiscovered</span>
+      <h2 class="gz-title" style="margin:0;">Hidden <span>Gems</span></h2>
+    </div>
+  </div>
+  <div class="gz-slider" id="slider-hidden">
+    <div class="gz-track" id="track-hidden">
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Butterfly+Park+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Secret 🤫</div>
+          <h3>Butterfly Park</h3>
+          <p>Hidden gem inside city.</p>
+        </a>
+      </div>
+      <div class="gz-slide">
+  <a href="https://maps.google.com/?q=Garden+of+Silence+Chandigarh" target="_blank" class="gz-card">
+    <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+    <div class="gz-badge">Secret 🤫</div>
+    <h3>Garden of Silence</h3>
+    <p>Peaceful spot near Sukhna.</p>
+  </a>
+</div>
+
+<div class="gz-slide">
+  <a href="https://maps.google.com/?q=Shanti+Kunj+Park+Chandigarh" target="_blank" class="gz-card">
+    <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=600&q=80" class="gz-card-img"/>
+    <div class="gz-badge">Hidden 🌿</div>
+    <h3>Shanti Kunj</h3>
+    <p>Underrated green escape.</p>
+  </a>
+</div>
+
+<div class="gz-slide">
+  <a href="https://maps.google.com/?q=Siswan+Dam" target="_blank" class="gz-card">
+    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" class="gz-card-img"/>
+    <div class="gz-badge">Sunset 🌄</div>
+    <h3>Siswan Dam</h3>
+    <p>Calm lake + golden hour views.</p>
+  </a>
+</div>
+
+<div class="gz-slide">
+  <a href="https://maps.google.com/?q=Fragrance+Garden+Chandigarh" target="_blank" class="gz-card">
+    <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=600&q=80" class="gz-card-img"/>
+    <div class="gz-badge">Floral 🌸</div>
+    <h3>Fragrance Garden</h3>
+    <p>Soft vibes + flower aesthetics.</p>
+  </a>
+</div>
+
+<div class="gz-slide">
+  <a href="https://maps.google.com/?q=Terraced+Garden+Chandigarh" target="_blank" class="gz-card">
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" class="gz-card-img"/>
+    <div class="gz-badge">Calm 🌳</div>
+    <h3>Terraced Garden</h3>
+    <p>Quiet walks + open lawns.</p>
+  </a>
+</div>
+
+<div class="gz-slide">
+  <a href="https://maps.google.com/?q=Leisure+Valley+Chandigarh" target="_blank" class="gz-card">
+    <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+    <div class="gz-badge">Walk 🚶</div>
+    <h3>Leisure Valley</h3>
+    <p>Long peaceful green stretch.</p>
+  </a>
+</div>
+
+<div class="gz-slide">
+  <a href="https://maps.google.com/?q=Kaimbwala+Forest+Chandigarh" target="_blank" class="gz-card">
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" class="gz-card-img"/>
+    <div class="gz-badge">Wild 🌲</div>
+    <h3>Kaimbwala Trails</h3>
+    <p>Hidden forest trekking vibe.</p>
+  </a>
+</div>
+
+<div class="gz-slide">
+  <a href="https://maps.google.com/?q=Yadavindra+Gardens+Pinjore" target="_blank" class="gz-card">
+    <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+    <div class="gz-badge">Royal 🌿</div>
+    <h3>Pinjore Gardens</h3>
+    <p>Historic + aesthetic green space.</p>
+  </a>
+</div>
+
+<div class="gz-slide">
+  <a href="https://maps.google.com/?q=Nada+Sahib+Panchkula" target="_blank" class="gz-card">
+    <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+    <div class="gz-badge">Peace 🙏</div>
+    <h3>Nada Sahib</h3>
+    <p>River + calm spiritual vibes.</p>
+  </a>
+</div>
+
+<div class="gz-slide">
+  <a href="https://maps.google.com/?q=Tikkar+Tal+Morni+Hills" target="_blank" class="gz-card">
+    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" class="gz-card-img"/>
+    <div class="gz-badge">Hidden 🌊</div>
+    <h3>Tikkar Tal</h3>
+    <p>Underrated lakes in hills.</p>
+  </a>
+</div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=IISER+Mohali+campus" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Niche 🔭</div>
+          <h3>IISER Stargazing</h3>
+          <p>Public telescope sessions.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Sector+8+Chandigarh+bakery" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Hidden Gem 👀</div>
+          <h3>Bake Studio</h3>
+          <p>Lowkey aesthetic bakery in Sector 8.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Rock+Garden+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1582719478185-2c0b2f1a2a8b?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Art Gem 🌿</div>
+          <h3>Rock Garden</h3>
+          <p>Surreal recycled art wonderland.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Japanese+Garden+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1522383225653-ed111181a951?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Zen 🏯</div>
+          <h3>Japanese Garden</h3>
+          <p>Calm aesthetic garden escape.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Timber+Trail+Parwanoo" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Views 🚡</div>
+          <h3>Timber Trail</h3>
+          <p>Cable car + mountain vibes.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Elante+Mall+Chandigarh+cafes" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Aesthetic ☕</div>
+          <h3>Elante Hidden Cafés</h3>
+          <p>Quiet café corners inside chaos.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Rose+Garden+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Bloom 🌸</div>
+          <h3>Rose Garden Corners</h3>
+          <p>Hidden floral escape zones.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Sector+17+Plaza+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Night Glow ✨</div>
+          <h3>Sector 17 Plaza Nights</h3>
+          <p>Lights, fountains & street vibe.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Pal+Dhaba+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Legend 🍽️</div>
+          <h3>Pal Dhaba</h3>
+          <p>Iconic North Indian food stop.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Morni+Hills+Haryana" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Hidden Nature 🌄</div>
+          <h3>Morni Hills</h3>
+          <p>Tricity's underrated hill escape.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Sector+10+Chandigarh" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Study 📚</div>
+          <h3>Sector 10 Quiet Spots</h3>
+          <p>Peaceful study + walk area.</p>
+        </a>
+      </div>
+
+      <div class="gz-slide">
+        <a href="https://maps.google.com/?q=Sector+26+Chandigarh+cafes" target="_blank" class="gz-card">
+          <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&q=80" class="gz-card-img"/>
+          <div class="gz-badge">Nightlife 🔥</div>
+          <h3>Sector 26 Cafés</h3>
+          <p>Chill bars & late-night spots.</p>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- NEARBY PLACES -->
+<section class="gz-section" id="nearby">
+  <div style="margin-bottom:2.5rem;">
+    <span class="gz-section-label">🗺️ Day Trips</span>
+    <h2 class="gz-title">Bunk <span>Trips Spots</span></h2>
+    <p class="gz-subtitle">Quick escapes from Chandigarh — pack light, hit the road.</p>
+  </div>
+  <div class="gz-slider" id="slider-nearby">
+    <div class="gz-track" id="track-nearby">
+      <a href="https://maps.google.com/?q=Shimla+Himachal+Pradesh" target="_blank" class="gz-card">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/b9/04/93/caption.jpg?w=500&h=400&s=1" class="gz-card-img"/>
+        <h3>Shimla</h3>
+        <p>Queen of Hills — perfect weekend escape.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Morni+Hills+Haryana" target="_blank" class="gz-card">
+        <img src="https://www.royalorchidhotels.com/Images/ThingsToDO/18_25_2024_11_25_49Tikkar%20Taal.jpg" alt="Morni Hills" class="gz-card-img"/>
+        <div class="gz-badge">45 km 🌿</div>
+        <h3>Morni Hills</h3>
+        <p>Haryana's only hill station — lakes, trekking, peace. SO underrated, lowkey a gem.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Kasauli+Himachal+Pradesh" target="_blank" class="gz-card">
+        <img src="https://www.brooknpines.com/wp-content/uploads/2025/01/Where-is-Kasauli-Place.webp" alt="Kasauli" class="gz-card-img"/>
+        <div class="gz-badge">65 km 🌲</div>
+        <h3>Kasauli</h3>
+        <p>Pine trees, colonial charm, slow travel energy. Perfect for the aesthetic crowd fr.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Anandpur+Sahib+Punjab" target="_blank" class="gz-card">
+        <img src="https://www.tribuneindia.com/sortd-service/imaginary/v22-01/jpg/large/high?url=dGhldHJpYnVuZS1zb3J0ZC1wcm8tcHJvZC1zb3J0ZC9tZWRpYWYwMzk1NGQwLTY0OTEtMTFmMC1hZjMyLTExNDFlMGVhOGQyOS5qcGc=" alt="Anandpur Sahib" class="gz-card-img"/>
+        <div class="gz-badge">50 km 🙏</div>
+        <h3>Anandpur Sahib</h3>
+        <p>Spiritual, historic, and genuinely moving. The Virasat-e-Khalsa alone is worth the trip.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Parwanoo+Himachal+Pradesh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">30 km 🚡</div>
+        <h3>Parwanoo</h3>
+        <p>Quick getaway famous for Timber Trail cable car ride.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Shoghi+Himachal+Pradesh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">100 km 🌲</div>
+        <h3>Shoghi</h3>
+        <p>Quiet alternative to Shimla with peaceful nature vibes.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Paonta+Sahib+Himachal+Pradesh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">110 km 🙏</div>
+        <h3>Paonta Sahib</h3>
+        <p>Historic Sikh pilgrimage site on the Yamuna River.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Kufri+Himachal+Pradesh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">125 km ⛷️</div>
+        <h3>Kufri</h3>
+        <p>Snow views, adventure and Himalayan Nature Park.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Narkanda+Himachal+Pradesh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">175 km 🍎</div>
+        <h3>Narkanda</h3>
+        <p>Apple orchards and trekking to Hatu Peak.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Bir+Billing+Himachal+Pradesh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">190 km 🪂</div>
+        <h3>Bir Billing</h3>
+        <p>Paragliding capital of India with stunning views.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Mashobra+Himachal+Pradesh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">125 km 🌳</div>
+        <h3>Mashobra</h3>
+        <p>Calm green escape perfect for camping and nature stays.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Renuka+Lake+Himachal+Pradesh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">100 km 🏞️</div>
+        <h3>Renuka Lake</h3>
+        <p>Serene lake destination surrounded by hills.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Tikkar+Taal+Haryana" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">70 km 🌿</div>
+        <h3>Tikkar Taal</h3>
+        <p>Hidden lakes near Morni Hills, perfect for a peaceful escape.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Chhatbir+Zoo+Punjab" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1503919005314-30d93d07d823?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">20 km 🐾</div>
+        <h3>Chhatbir Zoo</h3>
+        <p>Great spot for wildlife lovers and quick outings.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Siswan+Dam+Punjab" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">15 km 🌅</div>
+        <h3>Siswan Dam</h3>
+        <p>Popular sunset point with calm vibes and scenic views.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Karoran+Village+Punjab" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">10 km 🌾</div>
+        <h3>Karoran</h3>
+        <p>Peaceful countryside vibes, ideal for quick chill trips.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Nada+Sahib+Panchkula" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">12 km 🙏</div>
+        <h3>Nada Sahib</h3>
+        <p>Spiritual place near Panchkula with peaceful surroundings.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Timber+Trail+Parwanoo" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">30 km 🚡</div>
+        <h3>Timber Trail</h3>
+        <p>Cable car ride with breathtaking mountain views.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Dagshai+Himachal+Pradesh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">65 km 🌲</div>
+        <h3>Dagshai</h3>
+        <p>Quiet colonial hill town away from crowds.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Solan+Himachal+Pradesh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">70 km 🍃</div>
+        <h3>Solan</h3>
+        <p>City of red gold, known for pleasant weather and greenery.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Barog+Himachal+Pradesh" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">60 km 🚂</div>
+        <h3>Barog</h3>
+        <p>Famous for its railway tunnel and scenic surroundings.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Mansa+Devi+Temple+Panchkula" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">10 km 🙏</div>
+        <h3>Mansa Devi</h3>
+        <p>Famous temple attracting devotees all year round.</p>
+      </a>
+      <a href="https://maps.google.com/?q=Chintpurni+Temple+Himachal" target="_blank" class="gz-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" class="gz-card-img"/>
+        <div class="gz-badge">140 km 🛕</div>
+        <h3>Chintpurni</h3>
+        <p>Important pilgrimage site in Himachal Pradesh.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN YOUR TRIP -->
+<div style="border-top:1px solid rgba(255,255,255,0.06);">
+<section class="gz-section">
+  <div style="margin-bottom:2.5rem;">
+    <span class="gz-section-label">✈️ Get Moving</span>
+    <h2 class="gz-title">Plan Your <span>Trip</span></h2>
+    <p class="gz-subtitle">Everything you need to get to and around Chandigarh.</p>
+  </div>
+  <div class="gz-grid gz-grid-4 gz-plan-grid">
+    <a href="https://www.irctc.co.in" target="_blank" class="gz-card">
+      <img src="https://etimg.etb2bimg.com/photo/125901532.cms" alt="Train" class="gz-card-img"/>
+      <div class="gz-badge">Book 🚂</div>
+      <h3>IRCTC Trains</h3>
+      <p>Book train tickets to Chandigarh. Delhi–Chandigarh Shatabdi = 3.5 hrs, affordable AF.</p>
+    </a>
+    <a href="https://www.makemytrip.com" target="_blank" class="gz-card">
+      <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=80" alt="Flights" class="gz-card-img"/>
+      <div class="gz-badge">Flights ✈️</div>
+      <h3>MakeMyTrip</h3>
+      <p>Flights to Chandigarh airport (Mohali). Connects Delhi, Mumbai, Bangalore, Dubai.</p>
+    </a>
+    <a href="https://www.booking.com/searchresults/in/chandigarh.html" target="_blank" class="gz-card">
+      <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/11/fa/41/70.jpg" alt="Hotels" class="gz-card-img"/>
+      <div class="gz-badge">Tour 🏨</div>
+      <h3>Tripadvisor</h3>
+      <p>Plan one day tour and weekend gateways from Chandigarh's top attractions.</p>
+    </a>
+    <a href="https://maps.google.com/?q=Chandigarh" target="_blank" class="gz-card">
+      <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&q=80" alt="Maps" class="gz-card-img"/>
+      <div class="gz-badge">Navigate 🗺️</div>
+      <h3>Google Maps</h3>
+      <p>Navigate Chandigarh's sectors like a pro. The grid system actually makes sense once you get it.</p>
+    </a>
+  </div>
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-inner container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand-name"><i class="fa fa-city"></i> Aurevia</div>
+        <p>Your one-stop digital gateway to explore cafes, hotels, tourist spots, restaurants, transport, and emergency services across India's top cities.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#explore">Cafés &amp; Hotels</a></li>
+          <li><a href="#cities">Tourist Places</a></li>
+          <li><a href="#how-it-works">Services</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Cities</h4>
+        <ul>
+          <li><a href="#">Chandigarh</a></li>
+          <li><a href="#">Delhi</a></li>
+          <li><a href="#">Udaipur</a></li>
+          <li><a href="#">Rishikesh</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#complaint">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 <span style="color:var(--cyan)">Aurevia - City Explorer and Travel Web Portal</span>. All rights reserved.</p>
+      <p>Made with <span style="color:#e74c3c">♥</span> for India</p>
+    </div>
+  </div>
+</footer>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa fa-arrow-up"></i></button>
+
+<script>
+function toggleTheme() { showToastGZ('Gen Z stays in dark mode only 😎'); }
+
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  const btn = document.getElementById('back-top');
+  if (window.scrollY > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+}, { passive: true });
+
+function showToastGZ(msg) {
+  const t = document.getElementById('gz-toast');
+  t.textContent = msg;
+  t.style.opacity = '1';
+  t.style.transform = 'translateX(-50%) translateY(0)';
+  setTimeout(() => {
+    t.style.opacity = '0';
+    t.style.transform = 'translateX(-50%) translateY(20px)';
+  }, 2800);
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (!href || href === '#') return;
+    const el = document.querySelector(href);
+    if (!el) return;
+    e.preventDefault();
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
+  });
+});
+
+function setVibe(vibe, btn) {
+  document.querySelectorAll('.vibe-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.vibe-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('vibe-' + vibe).classList.add('active');
+  const labels = { chill:'❄️ Chill mode ON!', party:'🎉 Party mode activated!', food:'🍕 Foodie mode fr!', nature:'🌿 Nature girl/boy?' };
+  showToastGZ(labels[vibe]);
+}
+
+const surprises = [
+  { icon:'🌊', name:'Sukhna Lake',     desc:'Head there for an evening walk and watch the sun dip behind the Shivaliks. Pure therapy.',  map:'Sukhna Lake Chandigarh' },
+  { icon:'🎨', name:'Rock Garden',      desc:'Lose yourself in Nek Chand\'s wild, beautiful world of sculptures. Seriously unique place.',  map:'Rock Garden Chandigarh' },
+  { icon:'🌹', name:'Rose Garden',      desc:'Walk through 1,600 varieties of blooming roses. Asia\'s largest rose garden = pure peace.',    map:'Zakir Hussain Rose Garden Chandigarh' },
+  { icon:'🦋', name:'Butterfly Park',  desc:'A hidden gem you won\'t regret visiting. Bring your camera — it\'s lowkey magical.',           map:'Butterfly Park Chandigarh' },
+  { icon:'☕', name:'Elma\'s Bakery',   desc:'Great coffee, artisan bread, garden seating in Sector 11. Slow morning energy unlocked.',       map:'Elmas Bakery Sector 11 Chandigarh' },
+  { icon:'🏔️', name:'Morni Hills',     desc:'45 min away — pack a bag and go. Haryana\'s only hill station is SO underrated.',              map:'Morni Hills Haryana day trip' },
+  { icon:'🎪', name:'Sector 17 Night', desc:'Grab street food, walk around, and soak the city vibe. Perfect evening activity fr.',           map:'Sector 17 Plaza Chandigarh night' },
+  { icon:'🌿', name:'Leisure Valley',  desc:'Walk through Chandigarh\'s green spine — parks connected across sectors. Free entry.',           map:'Leisure Valley Chandigarh' },
+  { icon:'🍗', name:'Pal Dhaba',        desc:'Late night butter chicken and dal makhni that hit different. Legendary since 1962.',             map:'Pal Dhaba Sector 28 Chandigarh' },
+  { icon:'🎭', name:'Tagore Theatre',  desc:'Check if there\'s a show tonight — classical music, theatre, or cultural performance.',           map:'Tagore Theatre Sector 18 Chandigarh' },
+];
+
+let lastSurprise = -1;
+function surpriseMe() {
+  let idx;
+  do { idx = Math.floor(Math.random() * surprises.length); } while (idx === lastSurprise);
+  lastSurprise = idx;
+  const s = surprises[idx];
+  document.getElementById('surprise-icon').textContent = s.icon;
+  document.getElementById('surprise-name').textContent = s.name;
+  document.getElementById('surprise-desc').textContent = s.desc;
+  document.getElementById('surprise-map-link').href = `https://maps.google.com/?q=${encodeURIComponent(s.map)}`;
+  const res = document.getElementById('surprise-result');
+  res.style.display = 'block';
+  res.style.animation = 'none';
+  res.offsetHeight;
+  res.style.animation = 'fadeSlideUp 0.4s ease both';
+  showToastGZ(`📍 Picked: ${s.name}`);
+}
+
+const tot2 = {
+  morning: [{ label:'🥾 Outdoorsy', val:'outdoor-morning' }, { label:'☕ Café crawler', val:'cafe-morning' }],
+  night:   [{ label:'🍔 Street food', val:'street-night' },  { label:'🛍️ Mall rat', val:'mall-night' }]
+};
+const totAnswers = {
+  'outdoor-morning': '🌄 Shivalik Hills trail — grab your shoes and GO. 7 AM energy only.',
+  'cafe-morning':    '☕ Brew & Banter, Sector 8-C, 9 AM, oat milk latte. You\'re welcome bestie.',
+  'street-night':    '🥘 Sector 22 food street, 7 PM. Aloo tikki and golgappe await. No-brainer fr.',
+  'mall-night':      '🎬 Elante Mall — dinner + late night movie. Classic move, never fails.'
+};
+
+let totPhase = 1;
+function pickTOT(val) {
+  if (totPhase !== 1) return;
+  totPhase = 2;
+  const round2 = tot2[val];
+  document.getElementById('tot-container').innerHTML = `
+    <p style="color:rgba(240,240,245,0.45);font-family:'Space Grotesk',sans-serif;margin:1rem 0 0.5rem;">Ok ok… be honest now:</p>
+    <div class="tot-container">
+      ${round2.map(o => `<button class="tot-option" onclick="pickTOT2('${o.val}')">${o.label}</button>`).join('')}
+    </div>`;
+}
+window.pickTOT2 = function(val) {
+  const result = document.getElementById('tot-result');
+  result.textContent = totAnswers[val];
+  showToastGZ('📍 Your spot has been chosen!');
+  document.getElementById('tot-container').innerHTML += `
+    <div style="margin-top:1.5rem;">
+      <button onclick="resetTOT()" class="btn-outline">Try again →</button>
+    </div>`;
+};
+window.resetTOT = function() {
+  totPhase = 1;
+  document.getElementById('tot-result').textContent = '';
+  document.getElementById('tot-container').innerHTML = `
+    <div class="tot-container">
+      <button class="tot-option" onclick="pickTOT('morning')">🌅 Morning person</button>
+      <button class="tot-option" onclick="pickTOT('night')">🌙 Night owl</button>
+    </div>`;
+};
+
+document.querySelectorAll('.gz-card').forEach(card => {
+  card.addEventListener('mouseenter', () => { card.style.borderColor = 'rgba(255,255,255,0.12)'; });
+  card.addEventListener('mouseleave', () => { card.style.borderColor = ''; });
+});
+
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }, i * 60);
+      fadeObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.gz-card, .highlight-box, .vibe-btn, .stat-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  fadeObs.observe(el);
+});
+
+const hamburger = document.querySelector('.hamburger-label');
+if (window.innerWidth <= 992) {
+  hamburger.style.display = 'flex';
+  document.querySelector('.mobile-nav').style.display = 'flex';
+}
+window.addEventListener('resize', () => {
+  if (window.innerWidth <= 992) {
+    hamburger.style.display = 'flex';
+    document.querySelector('.mobile-nav').style.display = 'flex';
+  } else {
+    hamburger.style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>

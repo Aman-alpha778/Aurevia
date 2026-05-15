@@ -1,0 +1,121 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.aurevia:city-explorer >----------------------
+[INFO] Building city-explorer 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.4.5:run (default-cli) > test-compile @ city-explorer >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ city-explorer ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 11 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ city-explorer ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ city-explorer ---
+[INFO] skip non existing resourceDirectory C:\Users\91854\Pictures\posts\majorprojectai\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ city-explorer ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.4.5:run (default-cli) < test-compile @ city-explorer <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.4.5:run (default-cli) @ city-explorer ---
+Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-buildpack-platform/3.4.5/spring-boot-buildpack-platform-3.4.5.pom
+Progress (1): 971 BProgress (1): 2.7 kBProgress (1): 3.2 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-buildpack-platform/3.4.5/spring-boot-buildpack-platform-3.4.5.pom (3.2 kB at 2.8 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/client5/httpclient5/5.4.3/httpclient5-5.4.3.pom
+Progress (1): 869 BProgress (1): 2.0 kBProgress (1): 4.8 kBProgress (1): 6.1 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/client5/httpclient5/5.4.3/httpclient5-5.4.3.pom (6.1 kB at 115 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/client5/httpclient5-parent/5.4.3/httpclient5-parent-5.4.3.pom
+Progress (1): 840 BProgress (1): 1.9 kBProgress (1): 3.5 kBProgress (1): 7.8 kBProgress (1): 9.3 kBProgress (1): 13 kB Progress (1): 16 kB                   Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/client5/httpclient5-parent/5.4.3/httpclient5-parent-5.4.3.pom (16 kB at 347 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-loader-tools/3.4.5/spring-boot-loader-tools-3.4.5.pom
+Progress (1): 1.0 kBProgress (1): 2.2 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-loader-tools/3.4.5/spring-boot-loader-tools-3.4.5.pom (2.2 kB at 49 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.pom
+Progress (1): 1.1 kBProgress (1): 3.0 kBProgress (1): 3.8 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.pom (3.8 kB at 72 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.pom
+Progress (1): 1.1 kBProgress (1): 2.6 kBProgress (1): 3.4 kB                    Downloaded from central: https://repo.maven.apache.org/maven2/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.pom (3.4 kB at 57 kB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-buildpack-platform/3.4.5/spring-boot-buildpack-platform-3.4.5.jar
+Progress (1): 0.9/300 kBProgress (1): 2.3/300 kBProgress (1): 3.6/300 kBProgress (1): 5.0/300 kBProgress (1): 6.4/300 kBProgress (1): 7.7/300 kBProgress (1): 9.1/300 kBProgress (1): 10/300 kB Progress (1): 12/300 kBProgress (1): 13/300 kBProgress (1): 15/300 kBProgress (1): 16/300 kBProgress (1): 17/300 kBProgress (1): 19/300 kBProgress (1): 20/300 kBProgress (1): 21/300 kBProgress (1): 23/300 kBProgress (1): 24/300 kBProgress (1): 25/300 kBProgress (1): 27/300 kBProgress (1): 28/300 kBProgress (1): 30/300 kBProgress (1): 31/300 kBProgress (1): 35/300 kBProgress (1): 39/300 kBProgress (1): 44/300 kBProgress (1): 48/300 kBProgress (1): 52/300 kBProgress (1): 56/300 kBProgress (1): 61/300 kBProgress (1): 65/300 kBProgress (1): 69/300 kBProgress (1): 73/300 kBProgress (1): 77/300 kBProgress (1): 82/300 kBProgress (1): 86/300 kBProgress (1): 90/300 kBProgress (1): 94/300 kBProgress (1): 99/300 kBProgress (1): 103/300 kBProgress (1): 107/300 kBProgress (1): 111/300 kBProgress (1): 116/300 kBProgress (1): 120/300 kBProgress (1): 124/300 kBProgress (1): 128/300 kBProgress (1): 132/300 kBProgress (1): 137/300 kBProgress (1): 141/300 kBProgress (1): 145/300 kBProgress (1): 149/300 kBProgress (1): 154/300 kBProgress (1): 155/300 kBProgress (1): 159/300 kBProgress (1): 164/300 kBProgress (1): 168/300 kBProgress (1): 172/300 kBProgress (1): 176/300 kBProgress (1): 181/300 kBProgress (1): 185/300 kBProgress (1): 189/300 kBProgress (1): 193/300 kBProgress (1): 197/300 kBProgress (1): 214/300 kBProgress (1): 230/300 kBProgress (1): 247/300 kBProgress (1): 263/300 kBProgress (1): 279/300 kBProgress (1): 286/300 kBProgress (1): 300 kB                        Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-buildpack-platform/3.4.5/spring-boot-buildpack-platform-3.4.5.jar (300 kB at 2.1 MB/s)
+Downloading from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/client5/httpclient5/5.4.3/httpclient5-5.4.3.jar
+Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-loader-tools/3.4.5/spring-boot-loader-tools-3.4.5.jar
+Downloading from central: https://repo.maven.apache.org/maven2/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar
+Downloading from central: https://repo.maven.apache.org/maven2/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar
+Progress (1): 4.1/465 kBProgress (1): 20/465 kB Progress (1): 37/465 kBProgress (1): 53/465 kBProgress (1): 70/465 kBProgress (1): 86/465 kBProgress (1): 102/465 kBProgress (1): 119/465 kBProgress (1): 127/465 kBProgress (1): 143/465 kBProgress (1): 160/465 kBProgress (1): 176/465 kBProgress (1): 193/465 kBProgress (1): 209/465 kBProgress (1): 225/465 kBProgress (1): 242/465 kBProgress (1): 258/465 kBProgress (1): 274/465 kBProgress (1): 291/465 kBProgress (1): 307/465 kBProgress (1): 324/465 kBProgress (1): 340/465 kBProgress (1): 356/465 kBProgress (1): 373/465 kBProgress (1): 389/465 kBProgress (1): 406/465 kBProgress (1): 422/465 kBProgress (1): 438/465 kBProgress (2): 438/465 kB | 0.9/75 kBProgress (2): 455/465 kB | 0.9/75 kBProgress (2): 465 kB | 0.9/75 kB    Progress (2): 465 kB | 2.3/75 kBProgress (2): 465 kB | 3.2/75 kBProgress (2): 465 kB | 4.6/75 kBProgress (2): 465 kB | 5.9/75 kBProgress (2): 465 kB | 7.3/75 kBProgress (2): 465 kB | 8.7/75 kBProgress (2): 465 kB | 10/75 kB Progress (2): 465 kB | 11/75 kBProgress (2): 465 kB | 13/75 kBProgress (2): 465 kB | 14/75 kBProgress (2): 465 kB | 16/75 kBProgress (2): 465 kB | 17/75 kBProgress (2): 465 kB | 18/75 kBProgress (2): 465 kB | 20/75 kBProgress (2): 465 kB | 21/75 kBProgress (2): 465 kB | 22/75 kBProgress (2): 465 kB | 24/75 kBProgress (2): 465 kB | 25/75 kBProgress (2): 465 kB | 26/75 kBProgress (2): 465 kB | 28/75 kBProgress (2): 465 kB | 29/75 kBProgress (2): 465 kB | 31/75 kBProgress (3): 465 kB | 31/75 kB | 0.9/48 kBProgress (3): 465 kB | 31/75 kB | 2.3/48 kBProgress (3): 465 kB | 31/75 kB | 3.6/48 kBProgress (3): 465 kB | 31/75 kB | 5.0/48 kBProgress (3): 465 kB | 31/75 kB | 6.4/48 kBProgress (3): 465 kB | 31/75 kB | 7.7/48 kBProgress (3): 465 kB | 31/75 kB | 9.1/48 kBProgress (3): 465 kB | 31/75 kB | 10/48 kB Progress (3): 465 kB | 31/75 kB | 12/48 kBProgress (3): 465 kB | 31/75 kB | 12/48 kBProgress (3): 465 kB | 31/75 kB | 14/48 kBProgress (3): 465 kB | 31/75 kB | 15/48 kBProgress (3): 465 kB | 32/75 kB | 15/48 kBProgress (4): 465 kB | 32/75 kB | 15/48 kB | 0.9/910 kBProgress (4): 465 kB | 32/75 kB | 15/48 kB | 2.3/910 kBProgress (4): 465 kB | 32/75 kB | 15/48 kB | 3.6/910 kBProgress (4): 465 kB | 32/75 kB | 15/48 kB | 5.0/910 kBProgress (4): 465 kB | 32/75 kB | 15/48 kB | 6.4/910 kBProgress (4): 465 kB | 33/75 kB | 15/48 kB | 6.4/910 kBProgress (4): 465 kB | 35/75 kB | 15/48 kB | 6.4/910 kBProgress (4): 465 kB | 36/75 kB | 15/48 kB | 6.4/910 kBProgress (4): 465 kB | 37/75 kB | 15/48 kB | 6.4/910 kBProgress (4): 465 kB | 37/75 kB | 16/48 kB | 6.4/910 kBProgress (4): 465 kB | 37/75 kB | 18/48 kB | 6.4/910 kBProgress (4): 465 kB | 37/75 kB | 19/48 kB | 6.4/910 kBProgress (4): 465 kB | 37/75 kB | 21/48 kB | 6.4/910 kBProgress (4): 465 kB | 37/75 kB | 21/48 kB | 7.7/910 kBProgress (4): 465 kB | 39/75 kB | 21/48 kB | 7.7/910 kBProgress (4): 465 kB | 40/75 kB | 21/48 kB | 7.7/910 kBProgress (4): 465 kB | 41/75 kB | 21/48 kB | 7.7/910 kBProgress (4): 465 kB | 43/75 kB | 21/48 kB | 7.7/910 kBProgress (4): 465 kB | 44/75 kB | 21/48 kB | 7.7/910 kBProgress (4): 465 kB | 46/75 kB | 21/48 kB | 7.7/910 kBProgress (4): 465 kB | 46/75 kB | 21/48 kB | 9.1/910 kBProgress (4): 465 kB | 46/75 kB | 21/48 kB | 10/910 kB Progress (4): 465 kB | 46/75 kB | 21/48 kB | 12/910 kBProgress (4): 465 kB | 46/75 kB | 21/48 kB | 13/910 kBProgress (4): 465 kB | 46/75 kB | 22/48 kB | 13/910 kBProgress (4): 465 kB | 46/75 kB | 23/48 kB | 13/910 kBProgress (4): 465 kB | 46/75 kB | 25/48 kB | 13/910 kBProgress (4): 465 kB | 47/75 kB | 25/48 kB | 13/910 kBProgress (4): 465 kB | 48/75 kB | 25/48 kB | 13/910 kBProgress (4): 465 kB | 50/75 kB | 25/48 kB | 13/910 kBProgress (4): 465 kB | 51/75 kB | 25/48 kB | 13/910 kBProgress (4): 465 kB | 52/75 kB | 25/48 kB | 13/910 kBProgress (4): 465 kB | 54/75 kB | 25/48 kB | 13/910 kBProgress (4): 465 kB | 55/75 kB | 25/48 kB | 13/910 kBProgress (4): 465 kB | 59/75 kB | 25/48 kB | 13/910 kBProgress (4): 465 kB | 59/75 kB | 25/48 kB | 15/910 kBProgress (4): 465 kB | 59/75 kB | 25/48 kB | 16/910 kBProgress (4): 465 kB | 59/75 kB | 25/48 kB | 17/910 kBProgress (4): 465 kB | 59/75 kB | 25/48 kB | 19/910 kBProgress (4): 465 kB | 59/75 kB | 26/48 kB | 19/910 kBProgress (4): 465 kB | 59/75 kB | 27/48 kB | 19/910 kBProgress (4): 465 kB | 59/75 kB | 27/48 kB | 20/910 kBProgress (4): 465 kB | 59/75 kB | 27/48 kB | 21/910 kBProgress (4): 465 kB | 59/75 kB | 27/48 kB | 23/910 kBProgress (4): 465 kB | 59/75 kB | 27/48 kB | 24/910 kBProgress (4): 465 kB | 59/75 kB | 27/48 kB | 25/910 kBProgress (4): 465 kB | 59/75 kB | 27/48 kB | 26/910 kBProgress (4): 465 kB | 59/75 kB | 27/48 kB | 27/910 kBProgress (4): 465 kB | 59/75 kB | 27/48 kB | 29/910 kBProgress (4): 465 kB | 59/75 kB | 27/48 kB | 30/910 kBProgress (4): 465 kB | 59/75 kB | 29/48 kB | 30/910 kBProgress (4): 465 kB | 59/75 kB | 30/48 kB | 30/910 kBProgress (4): 465 kB | 59/75 kB | 31/48 kB | 30/910 kBProgress (4): 465 kB | 59/75 kB | 33/48 kB | 30/910 kBProgress (4): 465 kB | 59/75 kB | 34/48 kB | 30/910 kBProgress (4): 465 kB | 59/75 kB | 36/48 kB | 30/910 kBProgress (4): 465 kB | 59/75 kB | 37/48 kB | 30/910 kBProgress (4): 465 kB | 59/75 kB | 38/48 kB | 30/910 kBProgress (4): 465 kB | 59/75 kB | 40/48 kB | 30/910 kBProgress (4): 465 kB | 59/75 kB | 41/48 kB | 30/910 kBProgress (4): 465 kB | 59/75 kB | 42/48 kB | 30/910 kBProgress (4): 465 kB | 64/75 kB | 42/48 kB | 30/910 kBProgress (4): 465 kB | 68/75 kB | 42/48 kB | 30/910 kBProgress (4): 465 kB | 72/75 kB | 42/48 kB | 30/910 kBProgress (4): 465 kB | 72/75 kB | 42/48 kB | 31/910 kBProgress (4): 465 kB | 72/75 kB | 42/48 kB | 33/910 kBProgress (4): 465 kB | 72/75 kB | 42/48 kB | 34/910 kBProgress (4): 465 kB | 72/75 kB | 42/48 kB | 36/910 kBProgress (4): 465 kB | 72/75 kB | 44/48 kB | 36/910 kBProgress (4): 465 kB | 72/75 kB | 45/48 kB | 36/910 kBProgress (4): 465 kB | 72/75 kB | 47/48 kB | 36/910 kBProgress (4): 465 kB | 72/75 kB | 48/48 kB | 36/910 kBProgress (4): 465 kB | 72/75 kB | 48 kB | 36/910 kB                                                      Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-loader-tools/3.4.5/spring-boot-loader-tools-3.4.5.jar (465 kB at 1.5 MB/s)
+Progress (3): 72/75 kB | 48 kB | 37/910 kBProgress (3): 75 kB | 48 kB | 37/910 kB   Progress (3): 75 kB | 48 kB | 38/910 kBProgress (3): 75 kB | 48 kB | 40/910 kBProgress (3): 75 kB | 48 kB | 41/910 kBProgress (3): 75 kB | 48 kB | 42/910 kBProgress (3): 75 kB | 48 kB | 44/910 kBProgress (3): 75 kB | 48 kB | 45/910 kBProgress (3): 75 kB | 48 kB | 46/910 kBProgress (3): 75 kB | 48 kB | 48/910 kBProgress (3): 75 kB | 48 kB | 49/910 kBProgress (3): 75 kB | 48 kB | 51/910 kBProgress (3): 75 kB | 48 kB | 52/910 kB                                       Downloaded from central: https://repo.maven.apache.org/maven2/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar (48 kB at 150 kB/s)
+Progress (2): 75 kB | 53/910 kBProgress (2): 75 kB | 55/910 kBProgress (2): 75 kB | 59/910 kBProgress (2): 75 kB | 63/910 kB                               Downloaded from central: https://repo.maven.apache.org/maven2/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar (75 kB at 229 kB/s)
+Progress (1): 67/910 kBProgress (1): 72/910 kBProgress (1): 76/910 kBProgress (1): 80/910 kBProgress (1): 84/910 kBProgress (1): 89/910 kBProgress (1): 93/910 kBProgress (1): 97/910 kBProgress (1): 101/910 kBProgress (1): 105/910 kBProgress (1): 110/910 kBProgress (1): 114/910 kBProgress (1): 118/910 kBProgress (1): 122/910 kBProgress (1): 127/910 kBProgress (1): 131/910 kBProgress (1): 135/910 kBProgress (1): 139/910 kBProgress (1): 144/910 kBProgress (1): 148/910 kBProgress (1): 152/910 kBProgress (1): 156/910 kBProgress (1): 160/910 kBProgress (1): 164/910 kBProgress (1): 168/910 kBProgress (1): 173/910 kBProgress (1): 177/910 kBProgress (1): 181/910 kBProgress (1): 185/910 kBProgress (1): 189/910 kBProgress (1): 194/910 kBProgress (1): 198/910 kBProgress (1): 202/910 kBProgress (1): 206/910 kBProgress (1): 211/910 kBProgress (1): 215/910 kBProgress (1): 219/910 kBProgress (1): 223/910 kBProgress (1): 240/910 kBProgress (1): 256/910 kBProgress (1): 272/910 kBProgress (1): 287/910 kBProgress (1): 303/910 kBProgress (1): 319/910 kBProgress (1): 336/910 kBProgress (1): 352/910 kBProgress (1): 369/910 kBProgress (1): 385/910 kBProgress (1): 401/910 kBProgress (1): 418/910 kBProgress (1): 434/910 kBProgress (1): 451/910 kBProgress (1): 467/910 kBProgress (1): 483/910 kBProgress (1): 500/910 kBProgress (1): 516/910 kBProgress (1): 532/910 kBProgress (1): 549/910 kBProgress (1): 565/910 kBProgress (1): 582/910 kBProgress (1): 598/910 kBProgress (1): 614/910 kBProgress (1): 631/910 kBProgress (1): 647/910 kBProgress (1): 664/910 kBProgress (1): 680/910 kBProgress (1): 696/910 kBProgress (1): 713/910 kBProgress (1): 729/910 kBProgress (1): 745/910 kBProgress (1): 762/910 kBProgress (1): 778/910 kBProgress (1): 795/910 kBProgress (1): 811/910 kBProgress (1): 827/910 kBProgress (1): 844/910 kBProgress (1): 860/910 kBProgress (1): 877/910 kBProgress (1): 893/910 kBProgress (1): 909/910 kBProgress (1): 910 kB                        Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/client5/httpclient5/5.4.3/httpclient5-5.4.3.jar (910 kB at 959 kB/s)
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.5)
+
+2026-04-30T17:16:58.845+05:30  INFO 17136 --- [city-explorer] [           main] c.a.c.CityExplorerApplication            : Starting CityExplorerApplication using Java 25.0.2 with PID 17136 (C:\Users\91854\Pictures\posts\majorprojectai\target\classes started by 91854 in C:\Users\91854\Pictures\posts\majorprojectai)
+2026-04-30T17:16:58.850+05:30  INFO 17136 --- [city-explorer] [           main] c.a.c.CityExplorerApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-04-30T17:17:00.204+05:30  INFO 17136 --- [city-explorer] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-30T17:17:00.354+05:30  INFO 17136 --- [city-explorer] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 136 ms. Found 2 JPA repository interfaces.
+2026-04-30T17:17:01.258+05:30  INFO 17136 --- [city-explorer] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-04-30T17:17:01.292+05:30  INFO 17136 --- [city-explorer] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-30T17:17:01.293+05:30  INFO 17136 --- [city-explorer] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
+2026-04-30T17:17:01.388+05:30  INFO 17136 --- [city-explorer] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-30T17:17:01.390+05:30  INFO 17136 --- [city-explorer] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2443 ms
+2026-04-30T17:17:01.618+05:30  INFO 17136 --- [city-explorer] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-30T17:17:01.696+05:30  INFO 17136 --- [city-explorer] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2026-04-30T17:17:01.743+05:30  INFO 17136 --- [city-explorer] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-04-30T17:17:02.155+05:30  INFO 17136 --- [city-explorer] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-30T17:17:02.214+05:30  INFO 17136 --- [city-explorer] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-30T17:17:02.524+05:30  INFO 17136 --- [city-explorer] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/aurevia-db user=SA
+2026-04-30T17:17:02.527+05:30  INFO 17136 --- [city-explorer] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-30T17:17:02.611+05:30  INFO 17136 --- [city-explorer] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-30T17:17:03.970+05:30  INFO 17136 --- [city-explorer] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-30T17:17:04.070+05:30  INFO 17136 --- [city-explorer] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-30T17:17:04.754+05:30  INFO 17136 --- [city-explorer] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userService
+2026-04-30T17:17:05.590+05:30  INFO 17136 --- [city-explorer] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/aurevia-db'
+2026-04-30T17:17:05.722+05:30  WARN 17136 --- [city-explorer] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-04-30T17:17:05.725+05:30  INFO 17136 --- [city-explorer] [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-30T17:17:05.727+05:30  INFO 17136 --- [city-explorer] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-30T17:17:05.735+05:30  INFO 17136 --- [city-explorer] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-04-30T17:17:05.751+05:30  INFO 17136 --- [city-explorer] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-30T17:17:05.770+05:30 ERROR 17136 --- [city-explorer] [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  28.534 s
+[INFO] Finished at: 2026-04-30T17:17:05+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.4.5:run (default-cli) on project city-explorer: Process terminated with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

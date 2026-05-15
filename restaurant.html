@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aurevia | Best Restaurants in Chandigarh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --navy:#1F256B;--cyan:#29B6C8;--cyan-lt:#5fd6e6;--cyan-dk:#1d8fa0;
+      --sky:#87CEEB;--sky-light:#E0F4FF;--sky-mid:#C8E9F8;
+      --white:#ffffff;--card-bg:#ffffff;--surface:#ffffff;--body-bg:#f0f8ff;
+      --input-bg:#ffffff;--off:#e8f4fb;--text:#1a2040;--text-2:#4a5568;--text-muted:#4a5568;
+      --border:rgba(31,37,107,.12);--nav-bg:rgba(255,255,255,.92);
+      --shadow:0 8px 40px rgba(31,37,107,.15);--shadow-sm:0 2px 12px rgba(31,37,107,0.08);
+      --shadow-md:0 8px 32px rgba(31,37,107,0.14);--shadow-lg:0 24px 64px rgba(31,37,107,0.22);
+      --tr:0.32s cubic-bezier(.4,0,.2,1);--ease:cubic-bezier(0.16,1,0.3,1);
+      --glass:rgba(255,255,255,0.55);--glass-bg:rgba(255,255,255,0.72);--glass-border:rgba(255,255,255,0.75);
+      --radius:20px;--radius-sm:12px;--radius-pill:50px;--nav-h:68px;
+      --font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
+      /* Restaurant accent */
+      --accent:#e8572a;--accent-lt:#ff7a50;--accent-dk:#c03d18;
+    }
+    [data-theme="dark"]{
+      --body-bg:#0b1220;--card-bg:#121826;--surface:#121826;--text:#e6f1ff;--text-2:#7f8ea3;--text-muted:#7f8ea3;
+      --nav-bg:rgba(10,14,25,0.92);--input-bg:#0f1724;--border:#1f2a3a;--off:#0f1724;
+      --shadow:0 8px 40px rgba(0,0,0,.35);--shadow-sm:0 2px 12px rgba(0,0,0,0.2);
+      --shadow-md:0 8px 32px rgba(0,0,0,0.3);--glass:rgba(18,24,38,0.65);
+      --glass-bg:rgba(18,24,38,0.75);--glass-border:rgba(232,87,42,0.2);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{font-size:16px;scroll-behavior:smooth;}
+    body{font-family:var(--font-body);background:var(--body-bg);color:var(--text);overflow-x:hidden;transition:background .3s,color .3s;line-height:1.65;}
+    h1,h2,h3,h4{font-family:var(--font-display);}
+    a{text-decoration:none;color:inherit;}
+    img{max-width:100%;display:block;object-fit:cover;}
+    ul{list-style:none;}
+    button{cursor:pointer;font-family:inherit;}
+
+    .container{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem);}
+    .section-pad{padding:clamp(3.5rem,7vw,6rem) 0;}
+    .section-label{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-dk);background:rgba(232,87,42,0.1);border:1px solid rgba(232,87,42,0.25);padding:.35em .9em;border-radius:100px;margin-bottom:1rem;}
+    [data-theme="dark"] .section-label{color:var(--accent-lt);background:rgba(232,87,42,.12);border-color:rgba(232,87,42,.3);}
+    .section-title{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;line-height:1.15;color:var(--text);}
+    .section-title span,.section-title em{color:var(--accent);font-style:normal;}
+    [data-theme="dark"] .section-title{color:#e6f1ff;}
+    .section-header{margin-bottom:3rem;text-align:center;}
+    .section-header .section-label{margin:0 auto 1rem;display:table;}
+
+    #toast-container{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);z-index:7000;display:flex;flex-direction:column;gap:.6rem;align-items:center;pointer-events:none;}
+    .toast{padding:.7rem 1.4rem;border-radius:50px;font-family:var(--font-display);font-size:.85rem;color:#fff;display:flex;align-items:center;gap:.6rem;box-shadow:0 4px 20px rgba(0,0,0,.25);white-space:nowrap;pointer-events:all;opacity:0;transform:translateY(16px);transition:opacity .35s ease,transform .35s ease;}
+    .toast.show{opacity:1;transform:translateY(0);}
+    .toast.success{background:linear-gradient(135deg,#c03d18,var(--accent));}
+    .toast.info{background:linear-gradient(135deg,var(--navy),#3546b0);}
+
+    /* NAVBAR */
+    #navbar{position:sticky;top:0;z-index:900;background:var(--nav-bg);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);box-shadow:var(--shadow-sm);transition:background .35s,box-shadow .35s;}
+    #navbar.scrolled{box-shadow:var(--shadow);}
+    .mob-toggle{display:none;}
+    .nav-inner{max-width:1300px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:.85rem 2rem;gap:1.2rem;height:var(--nav-h);}
+    .nav-logo{font-family:var(--font-display);font-weight:800;font-size:1.25rem;color:var(--navy);white-space:nowrap;flex-shrink:0;}
+    .nav-logo a{display:flex;align-items:center;gap:.55rem;color:inherit;}
+    .nav-logo i{color:var(--cyan);font-size:1.4rem;}
+    [data-theme="dark"] .nav-logo{color:var(--cyan-lt);}
+    .nav-city-wrap{position:relative;display:flex;align-items:center;flex-shrink:0;}
+    .nav-city-icon{position:absolute;left:.75rem;color:var(--cyan);font-size:.9rem;pointer-events:none;z-index:1;}
+    .nav-city-select{appearance:none;background:var(--input-bg);border:1.5px solid var(--border);border-radius:10px;padding:.5rem 2.2rem .5rem 2.1rem;font-family:var(--font-display);font-weight:700;font-size:.85rem;color:var(--navy);cursor:pointer;min-width:140px;transition:border-color var(--tr);}
+    .nav-city-select:focus{outline:none;border-color:var(--cyan);}
+    .nav-city-caret{position:absolute;right:.6rem;color:var(--text-2);font-size:.75rem;pointer-events:none;}
+    [data-theme="dark"] .nav-city-select{background:#121826;border-color:#2a3446;color:var(--cyan-lt);}
+    .nav-search-wrap{position:relative;flex:1;max-width:280px;}
+    .nav-search-icon{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:var(--text-2);font-size:.9rem;pointer-events:none;}
+    #nav-search{width:100%;background:var(--input-bg);border:1.5px solid var(--border);border-radius:10px;padding:.5rem .9rem .5rem 2.2rem;font-family:var(--font-body);font-size:.88rem;color:var(--text);transition:border-color var(--tr),box-shadow var(--tr);outline:none;}
+    #nav-search::placeholder{color:var(--text-2);opacity:.7;}
+    #nav-search:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,87,42,.15);}
+    [data-theme="dark"] #nav-search{background:#121826;border-color:#2a3446;color:#e6f1ff;}
+    .nav-links{display:flex;align-items:center;gap:1.6rem;flex-shrink:0;}
+    .nav-links a{font-weight:500;font-size:.9rem;color:var(--text-2);position:relative;padding-bottom:2px;transition:color var(--tr);white-space:nowrap;}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;border-radius:2px;background:var(--accent);transition:width var(--tr);}
+    .nav-links a:hover,.nav-links a.active{color:var(--accent);}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+    [data-theme="dark"] .nav-links a{color:#9fb3c8;}
+    #theme-toggle{font-size:1.15rem;cursor:pointer;color:var(--text-2);transition:color var(--tr),transform var(--tr);flex-shrink:0;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--border);background:transparent;}
+    #theme-toggle:hover{color:var(--accent);transform:scale(1.1);border-color:var(--accent);}
+    [data-theme="dark"] #theme-toggle{color:var(--accent-lt);border-color:rgba(232,87,42,.3);}
+    .hamburger-label{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;flex-shrink:0;}
+    .hamburger-label span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all var(--tr);display:block;}
+    [data-theme="dark"] .hamburger-label span{background:#e6f1ff;}
+    .mob-toggle:checked~.nav-inner .hamburger-label span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .mob-toggle:checked~.nav-inner .hamburger-label span:nth-child(2){opacity:0;}
+    .mob-toggle:checked~.nav-inner .hamburger-label span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .mobile-nav{display:none;flex-direction:column;background:var(--nav-bg);border-top:1px solid var(--border);max-height:0;overflow:hidden;transition:max-height .4s ease;}
+    .mob-toggle:checked~.mobile-nav{max-height:500px;}
+    .mobile-nav a{padding:.85rem 2rem;font-weight:500;font-size:.95rem;color:var(--text-2);border-bottom:1px solid var(--border);transition:color var(--tr),background var(--tr);}
+    .mobile-nav a:hover{color:var(--accent);background:rgba(232,87,42,.06);}
+    [data-theme="dark"] .mobile-nav{background:#0f1724;}
+    [data-theme="dark"] .mobile-nav a{color:#9fb3c8;border-color:#1f2a3a;}
+    @media(max-width:992px){.nav-links,.nav-search-wrap{display:none;}.hamburger-label{display:flex;}.mobile-nav{display:flex;}}
+
+    /* HERO */
+    .cat-hero{position:relative;min-height:72vh;display:flex;align-items:flex-end;overflow:hidden;}
+    .cat-hero-bg{position:absolute;inset:0;}
+    .cat-hero-img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);animation:heroZoom 14s ease-in-out infinite alternate;}
+    @keyframes heroZoom{from{transform:scale(1.05);}to{transform:scale(1.12);}}
+    .cat-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(20,8,2,0.96) 0%,rgba(20,8,2,0.55) 50%,rgba(20,8,2,0.15) 100%);}
+    .cat-hero-content{position:relative;z-index:2;width:100%;padding:4rem clamp(1rem,5vw,2.5rem);max-width:1200px;margin:0 auto;}
+    .cat-hero-breadcrumb{display:flex;align-items:center;gap:.5rem;margin-bottom:1.2rem;font-size:.78rem;color:rgba(255,255,255,.5);font-weight:500;}
+    .cat-hero-breadcrumb a{color:var(--accent-lt);transition:color var(--tr);}
+    .cat-hero-breadcrumb a:hover{color:#fff;}
+    .cat-hero-breadcrumb i{font-size:.55rem;}
+    .cat-hero-badge{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-lt);border:1px solid rgba(255,122,80,.4);padding:.4em 1.1em;border-radius:100px;margin-bottom:1.2rem;backdrop-filter:blur(8px);background:rgba(232,87,42,.15);}
+    .cat-hero-title{font-family:var(--font-display);font-size:clamp(2.8rem,7vw,6rem);font-weight:800;color:#fff;line-height:.95;letter-spacing:-.02em;margin-bottom:1rem;}
+    .cat-hero-title em{font-style:italic;background:linear-gradient(135deg,var(--accent-lt),#ffd0b5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .cat-hero-sub{max-width:520px;font-size:clamp(1rem,2vw,1.1rem);color:rgba(255,255,255,.75);margin-bottom:2.2rem;line-height:1.7;}
+    .cat-hero-meta{display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
+    .cat-hero-stat{display:flex;flex-direction:column;gap:.1rem;}
+    .cat-hero-stat strong{font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--accent-lt);line-height:1;}
+    .cat-hero-stat span{font-size:.75rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;}
+    .cat-hero-stat-divider{width:1px;height:40px;background:rgba(255,255,255,.15);}
+
+    /* VIBE STRIP */
+    .vibe-strip{background:linear-gradient(135deg,#1a0805,#2d1005);padding:2.5rem 0;}
+    .vibe-inner{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,5vw,2.5rem);}
+    .vibe-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
+    .vibe-item{text-align:center;color:rgba(255,255,255,.8);}
+    .vibe-icon{width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto .8rem;color:var(--accent-lt);transition:all .35s var(--ease);}
+    .vibe-item:hover .vibe-icon{background:rgba(232,87,42,.25);transform:translateY(-4px);}
+    .vibe-label{font-family:var(--font-display);font-weight:700;font-size:.92rem;color:#fff;margin-bottom:.2rem;}
+    .vibe-sub{font-size:.78rem;color:rgba(255,255,255,.45);}
+    @media(max-width:768px){.vibe-grid{grid-template-columns:repeat(2,1fr);}}
+
+    /* FILTER BAR */
+    .filter-bar-section{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:var(--nav-h);z-index:100;box-shadow:var(--shadow-sm);transition:background .3s;}
+    [data-theme="dark"] .filter-bar-section{background:#0f1724;}
+    .filter-bar-inner{max-width:1200px;margin:0 auto;padding:1rem clamp(1rem,5vw,2.5rem);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+    .filter-pills{display:flex;gap:.5rem;flex-wrap:wrap;}
+    .filter-pill{padding:.45em 1.1em;border-radius:50px;border:1.5px solid var(--border);background:var(--input-bg);font-size:.82rem;font-weight:600;color:var(--text-2);font-family:var(--font-display);cursor:pointer;transition:all var(--tr);}
+    .filter-pill:hover{border-color:var(--accent);color:var(--accent);}
+    .filter-pill.active{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 4px 12px rgba(232,87,42,.35);}
+    [data-theme="dark"] .filter-pill{background:#121826;}
+    .sort-wrap{display:flex;align-items:center;gap:.6rem;}
+    .sort-wrap label{font-size:.8rem;color:var(--text-muted);white-space:nowrap;}
+    .sort-select{appearance:none;background:var(--input-bg);border:1.5px solid var(--border);border-radius:10px;padding:.42rem 2rem .42rem .8rem;font-family:var(--font-display);font-size:.82rem;font-weight:600;color:var(--text);cursor:pointer;transition:border-color var(--tr);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a5568' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .6rem center;background-size:10px;}
+    .sort-select:focus{outline:none;border-color:var(--accent);}
+    [data-theme="dark"] .sort-select{background-color:#121826;border-color:#2a3446;color:#e6f1ff;}
+
+    /* RESTAURANT GRID */
+    .rest-section{background:var(--body-bg);}
+    .rest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;}
+    .rest-card{background:var(--surface);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--border);transition:transform .4s var(--ease),box-shadow .4s;display:flex;flex-direction:column;}
+    .rest-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg);}
+    [data-theme="dark"] .rest-card{background:var(--card-bg);}
+    .rest-img-wrap{position:relative;height:220px;overflow:hidden;flex-shrink:0;}
+    .rest-img-wrap img{height:100%;width:100%;object-fit:cover;transition:transform .55s var(--ease);}
+    .rest-card:hover .rest-img-wrap img{transform:scale(1.07);}
+    .rest-tag{position:absolute;top:1rem;right:1rem;background:var(--glass-bg);backdrop-filter:blur(10px);border:1px solid var(--glass-border);padding:.3em .8em;border-radius:100px;font-size:.7rem;font-weight:700;color:var(--navy);font-family:var(--font-display);}
+    [data-theme="dark"] .rest-tag{color:var(--accent-lt);background:rgba(18,24,38,.8);border-color:rgba(232,87,42,.3);}
+    .rest-rating{position:absolute;bottom:1rem;left:1rem;background:rgba(20,8,2,.85);backdrop-filter:blur(10px);padding:.3em .75em;border-radius:100px;display:flex;align-items:center;gap:.35rem;font-size:.78rem;font-weight:700;color:#fff;font-family:var(--font-display);}
+    .rest-rating i{color:#f1c40f;font-size:.7rem;}
+    .rest-body{padding:1.5rem;display:flex;flex-direction:column;flex:1;}
+    .rest-name{font-family:var(--font-display);font-size:1.2rem;font-weight:800;margin-bottom:.3rem;color:var(--text);}
+    .rest-location{display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--text-muted);margin-bottom:.8rem;}
+    .rest-location i{color:var(--accent);font-size:.7rem;}
+    .rest-desc{font-size:.9rem;color:var(--text-muted);line-height:1.65;margin-bottom:1.2rem;flex:1;}
+    .rest-chips{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:1.3rem;}
+    .rest-chip{font-size:.7rem;font-weight:600;padding:.25em .7em;border-radius:50px;background:rgba(232,87,42,.1);color:var(--accent-dk);border:1px solid rgba(232,87,42,.2);font-family:var(--font-display);}
+    [data-theme="dark"] .rest-chip{color:var(--accent-lt);background:rgba(232,87,42,.12);border-color:rgba(232,87,42,.25);}
+    .rest-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--border);}
+    .rest-price{font-family:var(--font-display);font-size:.85rem;font-weight:700;color:var(--text-muted);}
+    .rest-price span{color:var(--accent-dk);font-size:1rem;}
+    [data-theme="dark"] .rest-price span{color:var(--accent-lt);}
+    .rest-link{font-size:.82rem;font-weight:700;color:var(--accent-dk);display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-display);transition:gap .2s,color .2s;}
+    .rest-link:hover{color:var(--navy);gap:.7rem;}
+    [data-theme="dark"] .rest-link{color:var(--accent-lt);}
+    [data-theme="dark"] .rest-link:hover{color:#fff;}
+
+    /* FEATURED */
+    .rest-card.featured{grid-column:1/-1;flex-direction:row;}
+    .rest-card.featured .rest-img-wrap{height:auto;min-height:280px;width:45%;flex-shrink:0;}
+    .rest-card.featured .rest-body{padding:2.5rem;justify-content:center;}
+    .rest-card.featured .rest-name{font-size:1.7rem;margin-bottom:.4rem;}
+    .rest-card.featured .rest-desc{font-size:1rem;}
+    .featured-label{display:inline-flex;align-items:center;gap:.4rem;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:#fff;background:linear-gradient(135deg,var(--accent-dk),var(--accent));padding:.3em .85em;border-radius:50px;margin-bottom:.9rem;}
+    @media(max-width:992px){.rest-grid{grid-template-columns:repeat(2,1fr);}.rest-card.featured{flex-direction:column;grid-column:auto;}.rest-card.featured .rest-img-wrap{width:100%;height:220px;}}
+    @media(max-width:640px){.rest-grid{grid-template-columns:1fr;}}
+
+    #no-results{display:none;grid-column:1/-1;text-align:center;padding:4rem;color:var(--text-muted);font-size:1.1rem;}
+    #no-results i{font-size:2.5rem;margin-bottom:1rem;color:var(--accent);display:block;}
+
+    /* FADE IN */
+    .fade-in{opacity:0;transform:translateY(32px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+    .fade-in.visible{opacity:1;transform:translateY(0);}
+
+    /* REVIEW */
+    #complaint{background:linear-gradient(135deg,#f5ede8,#efded8);padding:5rem 0;}
+    [data-theme="dark"] #complaint{background:#0b1220;}
+    .complaint-inner{max-width:1300px;margin:auto;padding:0 clamp(1rem,5vw,2.5rem);}
+    .complaint-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+    .complaint-info h2{font-size:clamp(2rem,3vw,3rem);font-weight:800;color:var(--text);margin-bottom:.8rem;}
+    .complaint-info h2 span{color:var(--accent);}
+    .complaint-info p{color:var(--text-2);line-height:1.7;margin-bottom:1.2rem;}
+    .complaint-steps{display:flex;flex-direction:column;gap:1rem;}
+    .cstep{display:flex;align-items:flex-start;gap:.8rem;}
+    .cstep-num{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:var(--accent);color:#fff;font-family:var(--font-display);font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+    .cstep-text{font-size:1rem;color:var(--text-2);line-height:1.5;padding-top:2px;}
+    .hero-badge-inline{display:inline-flex;align-items:center;gap:.5rem;background:rgba(232,87,42,.12);border:1px solid rgba(232,87,42,.3);padding:.35rem .9rem;border-radius:50px;font-size:.8rem;font-family:var(--font-display);font-weight:700;color:var(--accent-dk);margin-bottom:.8rem;}
+    [data-theme="dark"] .hero-badge-inline{color:var(--accent-lt);}
+    .complaint-form{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow);}
+    [data-theme="dark"] .complaint-form{background:linear-gradient(180deg,#121826 0%,#0f1724 100%);border-color:rgba(255,255,255,.08);}
+    .form-group{margin-bottom:1.1rem;}
+    .form-group label{display:block;font-size:.78rem;font-weight:700;color:var(--text);margin-bottom:.35rem;font-family:var(--font-display);}
+    .form-control{width:100%;padding:.65rem .9rem;background:var(--input-bg);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font-body);font-size:.85rem;outline:none;transition:border-color var(--tr),box-shadow var(--tr);}
+    .form-control:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,87,42,.15);}
+    .form-control::placeholder{color:var(--text-2);opacity:.6;}
+    textarea.form-control{resize:vertical;min-height:90px;}
+    .upload-zone{border:2px dashed var(--border);border-radius:10px;padding:1.1rem;text-align:center;cursor:pointer;transition:all var(--tr);position:relative;}
+    .upload-zone:hover{border-color:var(--accent);background:rgba(232,87,42,.04);}
+    .upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+    .upload-zone i{font-size:1.5rem;color:var(--accent);margin-bottom:.3rem;display:block;}
+    .upload-zone p{font-size:.75rem;color:var(--text-2);}
+    .btn-submit{width:100%;padding:.8rem;border-radius:50px;background:linear-gradient(135deg,#1f256b 13%,var(--accent) 78%,#f28bb8 100%);color:#fff;border:none;font-family:var(--font-display);font-weight:700;font-size:.92rem;cursor:pointer;transition:all var(--tr);display:flex;align-items:center;justify-content:center;gap:.5rem;}
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(232,87,42,.4);}
+    @media(max-width:768px){.complaint-wrap{grid-template-columns:1fr;}}
+
+    /* FOOTER */
+    footer{background-color:#1F256B;color:rgba(255,255,255,.65);padding:3rem 2rem 1.5rem;}
+    .footer-inner{max-width:1300px;margin:auto;}
+    .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;}
+    .footer-brand .brand-name{font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:#fff;display:flex;align-items:center;gap:.5rem;margin-bottom:.8rem;}
+    .footer-brand .brand-name i{color:var(--cyan);}
+    .footer-brand p{font-size:.88rem;line-height:1.7;max-width:280px;}
+    .footer-socials{display:flex;gap:.6rem;margin-top:1.2rem;}
+    .social-btn{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:.88rem;transition:all var(--tr);}
+    .social-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+    .footer-col h4{font-family:var(--font-display);font-weight:700;font-size:.92rem;color:#fff;margin-bottom:1rem;}
+    .footer-col ul li{margin-bottom:.55rem;}
+    .footer-col ul li a{font-size:.86rem;transition:color var(--tr);}
+    .footer-col ul li a:hover{color:var(--cyan);}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:1.2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;}
+    .footer-bottom p{font-size:.82rem;}
+    @media(max-width:992px){.footer-top{grid-template-columns:1fr 1fr;}}
+    @media(max-width:540px){.footer-top{grid-template-columns:1fr;}}
+
+    #back-top{position:fixed;bottom:2rem;left:2rem;z-index:700;width:44px;height:44px;border-radius:50%;background:var(--accent-dk);color:#fff;border:none;font-size:.95rem;cursor:pointer;opacity:0;pointer-events:none;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:all var(--tr);}
+    #back-top.visible{opacity:1;pointer-events:all;}
+    #back-top:hover{background:var(--accent);transform:translateY(-3px);}
+  </style>
+</head>
+<body>
+
+<div id="toast-container"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <input type="checkbox" class="mob-toggle" id="mob-chk"/>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <a href="home.html"><i class="fa fa-city"></i> Aurevia</a>
+    </div>
+    <div class="nav-city-wrap">
+      <i class="fa fa-location-dot nav-city-icon"></i>
+      <select class="nav-city-select" aria-label="Select City">
+        <option value="chandigarh" selected>Chandigarh</option>
+        <option value="delhi">Delhi</option>
+        <option value="udaipur">Udaipur</option>
+        <option value="rishikesh">Rishikesh</option>
+      </select>
+      <i class="fa fa-chevron-down nav-city-caret"></i>
+    </div>
+    <div class="nav-search-wrap">
+      <i class="fa fa-magnifying-glass nav-search-icon"></i>
+      <input type="text" id="nav-search" placeholder="Search restaurants…" oninput="filterCards(this.value)"/>
+    </div>
+    <nav class="nav-links">
+      <a href="homepage.html">Home</a>
+      <a href="cafes.html">Cafés</a>
+      <a href="restaurant.html" class="active">Restaurants</a>
+      <a href="mall.html">Malls</a>
+      <a href="#complaint">Review</a>
+    </nav>
+    <button id="theme-toggle" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
+    <label class="hamburger-label" for="mob-chk" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </label>
+  </div>
+  <div class="mobile-nav">
+    <a href="homepage.html">Home</a>
+    <a href="cafes.html">Cafés</a>
+    <a href="restaurant.html">Restaurants</a>
+    <a href="#complaint">Review</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="cat-hero" id="hero">
+  <div class="cat-hero-bg">
+    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1800&q=80" alt="Restaurants in Chandigarh" class="cat-hero-img" onerror="this.src='https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1800&q=80'"/>
+    <div class="cat-hero-overlay"></div>
+  </div>
+  <div class="cat-hero-content">
+    <div class="cat-hero-breadcrumb">
+      <a href="homepage.html">Home</a>
+      <i class="fa fa-chevron-right"></i>
+      <a href="homepage.html#categories">Explore</a>
+      <i class="fa fa-chevron-right"></i>
+      <span>Restaurants</span>
+    </div>
+    <div class="cat-hero-badge"><i class="fa fa-utensils"></i> Culinary Delights</div>
+    <h1 class="cat-hero-title">Taste of<br/><em>Chandigarh</em></h1>
+    <p class="cat-hero-sub">From fine dining to authentic North Indian flavours — explore the city's most beloved culinary destinations, one plate at a time.</p>
+    <div class="cat-hero-meta">
+      <div class="cat-hero-stat"><strong>6+</strong><span>Restaurants</span></div>
+      <div class="cat-hero-stat-divider"></div>
+      <div class="cat-hero-stat"><strong>4.6★</strong><span>Avg Rating</span></div>
+      <div class="cat-hero-stat-divider"></div>
+      <div class="cat-hero-stat"><strong>₹400–2000</strong><span>Avg Budget</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIBE STRIP -->
+<div class="vibe-strip">
+  <div class="vibe-inner">
+    <div class="vibe-grid">
+      <div class="vibe-item fade-in">
+        <div class="vibe-icon"><i class="fa fa-fire-burner"></i></div>
+        <div class="vibe-label">Live Tandoor</div>
+        <div class="vibe-sub">Fresh from the oven</div>
+      </div>
+      <div class="vibe-item fade-in">
+        <div class="vibe-icon"><i class="fa fa-champagne-glasses"></i></div>
+        <div class="vibe-label">Fine Dining</div>
+        <div class="vibe-sub">Elevated experiences</div>
+      </div>
+      <div class="vibe-item fade-in">
+        <div class="vibe-icon"><i class="fa fa-seedling"></i></div>
+        <div class="vibe-label">Veg & Vegan</div>
+        <div class="vibe-sub">Pure veg options</div>
+      </div>
+      <div class="vibe-item fade-in">
+        <div class="vibe-icon"><i class="fa fa-moon"></i></div>
+        <div class="vibe-label">Late Night</div>
+        <div class="vibe-sub">Open past midnight</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar-section">
+  <div class="filter-bar-inner">
+    <div class="filter-pills" id="filter-pills">
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="north-indian">North Indian</button>
+      <button class="filter-pill" data-filter="italian">Italian</button>
+      <button class="filter-pill" data-filter="asian">Asian / Pan-Asian</button>
+      <button class="filter-pill" data-filter="fine-dining">Fine Dining</button>
+      <button class="filter-pill" data-filter="street">Street Food</button>
+    </div>
+    <div class="sort-wrap">
+      <label for="sort-select">Sort:</label>
+      <select class="sort-select" id="sort-select">
+        <option value="rating">Top Rated</option>
+        <option value="popular">Most Popular</option>
+        <option value="price-low">Price: Low</option>
+        <option value="price-high">Price: High</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- GRID -->
+<section class="rest-section section-pad" id="restaurants">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="section-label">Gastronomy</span>
+      <h2 class="section-title">Where to <span>Dine</span></h2>
+    </div>
+    <div class="rest-grid fade-in" id="card-grid">
+
+      <!-- FEATURED -->
+      <div class="rest-card featured" data-tags="italian,fine-dining">
+        <div class="rest-img-wrap">
+          <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=900&q=80" alt="Virgin Courtyard" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=80'"/>
+          <span class="rest-rating"><i class="fa fa-star"></i> 4.9</span>
+          <span class="rest-tag">Italian / European</span>
+        </div>
+        <div class="rest-body">
+          <div class="featured-label"><i class="fa fa-award"></i> Chef's Recommendation</div>
+          <h3 class="rest-name">Virgin Courtyard</h3>
+          <div class="rest-location"><i class="fa fa-location-dot"></i> Sector 8-C, Chandigarh</div>
+          <p class="rest-desc">An exquisite Italian dining experience with an open-air courtyard that feels like a slice of Tuscany in Chandigarh. Fresh pasta, wood-fired pizzas, and an award-winning wine cellar make this the city's most romantic fine-dining destination. Best reserved for special evenings and celebrations.</p>
+          <div class="rest-chips">
+            <span class="rest-chip">Open Air Courtyard</span>
+            <span class="rest-chip">Wood-Fired Pizza</span>
+            <span class="rest-chip">Wine Cellar</span>
+            <span class="rest-chip">Reservations Required</span>
+          </div>
+          <div class="rest-footer">
+            <div class="rest-price">Avg Cost <span>₹1,800</span> for two</div>
+            <a href="#" class="rest-link">Explore →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="rest-card" data-tags="north-indian,fine-dining">
+        <div class="rest-img-wrap">
+          <img src="https://images.unsplash.com/photo-1562967639-654e951473d0?w=600&q=80" alt="Swagath" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80'"/>
+          <span class="rest-rating"><i class="fa fa-star"></i> 4.7</span>
+          <span class="rest-tag">Coastal / North Indian</span>
+        </div>
+        <div class="rest-body">
+          <h3 class="rest-name">Swagath</h3>
+          <div class="rest-location"><i class="fa fa-location-dot"></i> Sector 17, Chandigarh</div>
+          <p class="rest-desc">Famous for their coastal delicacies and rich North Indian curries. A family favourite for decades, known for generous portions and authentic flavours.</p>
+          <div class="rest-chips">
+            <span class="rest-chip">Seafood Speciality</span>
+            <span class="rest-chip">Family Dining</span>
+            <span class="rest-chip">North Indian</span>
+          </div>
+          <div class="rest-footer">
+            <div class="rest-price">Avg Cost <span>₹900</span> for two</div>
+            <a href="#" class="rest-link">Explore →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="rest-card" data-tags="italian,fine-dining">
+        <div class="rest-img-wrap">
+          <img src="https://images.unsplash.com/photo-1550966871-3ed39b5ed03e?w=600&q=80" alt="Piccante" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80'"/>
+          <span class="rest-rating"><i class="fa fa-star"></i> 4.8</span>
+          <span class="rest-tag">Fine Dining</span>
+        </div>
+        <div class="rest-body">
+          <h3 class="rest-name">Piccante</h3>
+          <div class="rest-location"><i class="fa fa-location-dot"></i> Hyatt Regency, Chandigarh</div>
+          <p class="rest-desc">Located inside Hyatt Regency, this restaurant offers authentic Italian cuisine with a modern, sophisticated twist. Impeccable service in a grand setting.</p>
+          <div class="rest-chips">
+            <span class="rest-chip">5-Star Hotel</span>
+            <span class="rest-chip">Buffet Available</span>
+            <span class="rest-chip">Italian</span>
+          </div>
+          <div class="rest-footer">
+            <div class="rest-price">Avg Cost <span>₹2,000</span> for two</div>
+            <a href="#" class="rest-link">Explore →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="rest-card" data-tags="street,north-indian">
+        <div class="rest-img-wrap">
+          <img src="https://images.unsplash.com/photo-1585238342024-78d388f4a179?w=600&q=80" alt="Sindhi Sweets" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80'"/>
+          <span class="rest-rating"><i class="fa fa-star"></i> 4.6</span>
+          <span class="rest-tag">Iconic Local</span>
+        </div>
+        <div class="rest-body">
+          <h3 class="rest-name">Sindhi Sweets</h3>
+          <div class="rest-location"><i class="fa fa-location-dot"></i> Sector 17, Chandigarh</div>
+          <p class="rest-desc">More than just sweets — an iconic local eatery serving the best Chole Bhature and quick snacks in the city since generations. A true Chandigarh institution.</p>
+          <div class="rest-chips">
+            <span class="rest-chip">Chole Bhature</span>
+            <span class="rest-chip">Sweets</span>
+            <span class="rest-chip">Budget Friendly</span>
+          </div>
+          <div class="rest-footer">
+            <div class="rest-price">Avg Cost <span>₹300</span> for two</div>
+            <a href="#" class="rest-link">Explore →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 5 -->
+      <div class="rest-card" data-tags="north-indian,fine-dining">
+        <div class="rest-img-wrap">
+          <img src="https://images.unsplash.com/photo-1587899897383-057d34b41b71?w=600&q=80" alt="Ghazal" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80'"/>
+          <span class="rest-rating"><i class="fa fa-star"></i> 4.5</span>
+          <span class="rest-tag">Mughlai / Classic</span>
+        </div>
+        <div class="rest-body">
+          <h3 class="rest-name">Ghazal</h3>
+          <div class="rest-location"><i class="fa fa-location-dot"></i> Sector 17, Chandigarh</div>
+          <p class="rest-desc">Step back into the classic era of fine dining with impeccable service and traditional Mughlai preparations. Slow-cooked dum biryanis and rich kormas are legendary here.</p>
+          <div class="rest-chips">
+            <span class="rest-chip">Dum Biryani</span>
+            <span class="rest-chip">Mughlai</span>
+            <span class="rest-chip">Classic Ambiance</span>
+          </div>
+          <div class="rest-footer">
+            <div class="rest-price">Avg Cost <span>₹1,200</span> for two</div>
+            <a href="#" class="rest-link">Explore →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 6 -->
+      <div class="rest-card" data-tags="asian">
+        <div class="rest-img-wrap">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Kylin" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80'"/>
+          <span class="rest-rating"><i class="fa fa-star"></i> 4.7</span>
+          <span class="rest-tag">Pan-Asian</span>
+        </div>
+        <div class="rest-body">
+          <h3 class="rest-name">Kylin Experience</h3>
+          <div class="rest-location"><i class="fa fa-location-dot"></i> Elante Mall, Chandigarh</div>
+          <p class="rest-desc">The best spot for Pan-Asian fusion. Incredible sushi, dim sums, wok-tossed noodles, and a vibrant rooftop ambiance that comes alive after sunset.</p>
+          <div class="rest-chips">
+            <span class="rest-chip">Sushi Bar</span>
+            <span class="rest-chip">Dim Sum</span>
+            <span class="rest-chip">Rooftop</span>
+          </div>
+          <div class="rest-footer">
+            <div class="rest-price">Avg Cost <span>₹1,500</span> for two</div>
+            <a href="#" class="rest-link">Explore →</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="no-results"><i class="fa fa-magnifying-glass"></i>No restaurants found. Try a different filter or search.</div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEW -->
+<section id="complaint">
+  <div class="complaint-inner">
+    <div class="complaint-wrap">
+      <div class="complaint-info">
+        <div class="hero-badge-inline"><i class="fa fa-bullhorn"></i> Send us your Reviews</div>
+        <h2>Your Voice <span>Matters</span></h2>
+        <p>Loved a meal? Disappointed by a dish? Tell us everything — your feedback helps the community discover the best of Chandigarh. 🍽️</p>
+        <div class="complaint-steps">
+          <div class="cstep"><div class="cstep-num">1</div><div class="cstep-text">Say hi 👋 who's giving this feedback?</div></div>
+          <div class="cstep"><div class="cstep-num">2</div><div class="cstep-text">📍 Pick your city.</div></div>
+          <div class="cstep"><div class="cstep-num">3</div><div class="cstep-text">💭 Drop your thoughts (no filter)</div></div>
+          <div class="cstep"><div class="cstep-num">4</div><div class="cstep-text">🚀 Hit submit = done.</div></div>
+        </div>
+      </div>
+      <div class="complaint-form">
+        <form id="review-form">
+          <div class="form-group"><label for="c-name">Full Name *</label><input type="text" class="form-control" id="c-name" placeholder="Your full name" required/></div>
+          <div class="form-group"><label for="c-city">City *</label><select class="form-control" id="c-city" required><option value="">— Select City —</option><option>Chandigarh</option><option>Delhi</option><option>Udaipur</option><option>Rishikesh</option></select></div>
+          <div class="form-group"><label for="c-desc">Review *</label><textarea class="form-control" id="c-desc" placeholder="Tell us about your dining experience…" required></textarea></div>
+          <div class="form-group"><label>Upload Photo (optional)</label><div class="upload-zone"><input type="file" accept="image/*"/><i class="fa fa-cloud-arrow-up"></i><p>Click or drag &amp; drop an image here</p></div></div>
+          <button type="submit" class="btn-submit"><i class="fa fa-paper-plane"></i> Submit Review</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-inner container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand-name"><i class="fa fa-city"></i> Aurevia</div>
+        <p>Your one-stop digital gateway to explore cafes, hotels, tourist spots, restaurants, transport, and emergency services across India's top cities.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Explore</h4><ul><li><a href="cafes.html">Cafés</a></li><li><a href="restaurant.html">Restaurants</a></li><li><a href="hotel.html">Hotels</a></li><li><a href="mall.html">Malls</a></li></ul></div>
+      <div class="footer-col"><h4>Cities</h4><ul><li><a href="#">Chandigarh</a></li><li><a href="#">Delhi</a></li><li><a href="#">Udaipur</a></li><li><a href="#">Rishikesh</a></li></ul></div>
+      <div class="footer-col"><h4>Help</h4><ul><li><a href="#">About Us</a></li><li><a href="#complaint">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 <span style="color:var(--cyan)">Aurevia - City Explorer and Travel Web Portal</span>. All rights reserved.</p>
+      <p>Made with <span style="color:#e74c3c">♥</span> for India</p>
+    </div>
+  </div>
+</footer>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top"><i class="fa fa-arrow-up"></i></button>
+
+<script>
+function showToast(msg,type='success'){const c=document.getElementById('toast-container');const t=document.createElement('div');t.className=`toast ${type}`;t.innerHTML=`<i class="fa fa-circle-check"></i> ${msg}`;c.appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),400);},3200);}
+let currentFilter='all';
+function filterCards(q=''){applyFilter(q,currentFilter);}
+function applyFilter(q='',filter='all'){q=q.toLowerCase().trim();const cards=document.querySelectorAll('#card-grid .rest-card');const nr=document.getElementById('no-results');let count=0;cards.forEach(c=>{const name=c.querySelector('.rest-name')?.textContent.toLowerCase()||'';const desc=c.querySelector('.rest-desc')?.textContent.toLowerCase()||'';const tags=c.dataset.tags||'';const mq=!q||name.includes(q)||desc.includes(q);const mf=filter==='all'||tags.includes(filter);const v=mq&&mf;c.style.display=v?'':'none';if(v)count++;});nr.style.display=count===0?'block':'none';}
+document.addEventListener('DOMContentLoaded',()=>{
+  const nb=document.getElementById('navbar');window.addEventListener('scroll',()=>nb.classList.toggle('scrolled',window.scrollY>50),{passive:true});
+  document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>{const c=document.getElementById('mob-chk');if(c)c.checked=false;}));
+  const bt=document.getElementById('back-top');window.addEventListener('scroll',()=>bt.classList.toggle('visible',window.scrollY>400),{passive:true});
+  const tt=document.getElementById('theme-toggle');const ic=tt.querySelector('i');if(localStorage.getItem('aurevia-theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');ic?.classList.replace('fa-moon','fa-sun');}
+  tt.addEventListener('click',()=>{const d=document.documentElement.getAttribute('data-theme')==='dark';if(d){document.documentElement.removeAttribute('data-theme');localStorage.setItem('aurevia-theme','light');ic?.classList.replace('fa-sun','fa-moon');}else{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem('aurevia-theme','dark');ic?.classList.replace('fa-moon','fa-sun');}});
+  const fi=new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');fi.unobserve(e.target);}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.fade-in').forEach((el,i)=>{el.style.transitionDelay=`${(i%3)*100}ms`;fi.observe(el);});
+  document.querySelectorAll('.filter-pill').forEach(p=>p.addEventListener('click',()=>{document.querySelectorAll('.filter-pill').forEach(x=>x.classList.remove('active'));p.classList.add('active');currentFilter=p.dataset.filter;applyFilter(document.getElementById('nav-search')?.value||'',currentFilter);}));
+  const rf=document.getElementById('review-form');if(rf){rf.addEventListener('submit',function(e){e.preventDefault();const n=document.getElementById('c-name')?.value.trim();const ci=document.getElementById('c-city')?.value;const b=this.querySelector('.btn-submit');b.disabled=true;b.innerHTML='<i class="fa fa-spinner fa-spin"></i> Submitting…';setTimeout(()=>{this.reset();showToast(`✅ Thanks ${n}! Your review for ${ci} has been submitted 🚀`,'success');b.disabled=false;b.innerHTML='<i class="fa fa-paper-plane"></i> Submit Review';},1200);});}
+});
+</script>
+</body>
+</html>

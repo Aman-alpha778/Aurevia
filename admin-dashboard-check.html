@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurevia | Admin Panel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <style>
+        .admin-main {
+            padding: 24px;
+            display: grid;
+            gap: 24px;
+        }
+
+        .admin-hero-shell {
+            position: relative;
+            overflow: hidden;
+            border-radius: 32px;
+            padding: 32px;
+            color: #f8fbff;
+            background:
+                radial-gradient(circle at top right, rgba(61, 214, 228, 0.34), transparent 30%),
+                radial-gradient(circle at bottom left, rgba(113, 86, 255, 0.2), transparent 28%),
+                linear-gradient(135deg, #0d1f48 0%, #16346d 52%, #1e7684 100%);
+            box-shadow: 0 28px 60px rgba(10, 23, 59, 0.28);
+        }
+
+        .admin-hero-shell::after {
+            content: "";
+            position: absolute;
+            inset: auto -60px -60px auto;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.12), rgba(255,255,255,0));
+        }
+
+        .admin-hero-copy {
+            position: relative;
+            z-index: 1;
+            max-width: 760px;
+        }
+
+        .admin-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.16);
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .admin-hero-shell h1 {
+            margin: 16px 0 12px;
+            font-family: "Syne", sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.02;
+        }
+
+        .admin-hero-shell p {
+            margin: 0;
+            max-width: 660px;
+            color: rgba(248, 251, 255, 0.86);
+            line-height: 1.75;
+        }
+
+        .admin-seed {
+            margin-top: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.14);
+            font-size: 0.94rem;
+        }
+
+        .admin-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .admin-metric {
+            padding: 18px;
+            border-radius: 22px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(14px);
+        }
+
+        .admin-metric strong {
+            display: block;
+            font-family: "Syne", sans-serif;
+            font-size: 2rem;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .admin-shell {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .admin-sidebar-card,
+        .admin-panel {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 28px;
+            box-shadow: 0 26px 60px rgba(15, 23, 42, 0.1);
+            backdrop-filter: blur(12px);
+        }
+
+        .admin-sidebar-card {
+            position: sticky;
+            top: 92px;
+            padding: 24px;
+            display: grid;
+            gap: 20px;
+        }
+
+        .admin-panel {
+            padding: 26px;
+        }
+
+        .admin-panel + .admin-panel {
+            margin-top: 24px;
+        }
+
+        .admin-panel-head {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .admin-panel-head h2,
+        .admin-sidebar-card h2,
+        .admin-subsection h3 {
+            margin: 0 0 8px;
+            font-family: "Syne", sans-serif;
+            line-height: 1.05;
+        }
+
+        .admin-panel-head p,
+        .admin-sidebar-card p,
+        .admin-subsection p,
+        .admin-table td {
+            color: #5f6d81;
+        }
+
+        .admin-nav {
+            display: grid;
+            gap: 10px;
+        }
+
+        .admin-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: #f7fbff;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            font-weight: 700;
+            transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .admin-nav a:hover {
+            transform: translateY(-1px);
+            border-color: rgba(15, 98, 254, 0.28);
+            background: #eef6ff;
+        }
+
+        .admin-sidebar-note {
+            padding: 16px 18px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(15, 98, 254, 0.08), rgba(25, 194, 176, 0.12));
+            border: 1px solid rgba(15, 98, 254, 0.12);
+        }
+
+        .admin-stack {
+            display: grid;
+        }
+
+        .admin-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .admin-form-grid .full-span {
+            grid-column: 1 / -1;
+        }
+
+        .admin-field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .admin-field label {
+            font-weight: 800;
+            color: #162033;
+        }
+
+        .admin-field-hint {
+            color: #6f7d90;
+            font-size: 0.84rem;
+            line-height: 1.6;
+        }
+
+        .admin-form-grid input,
+        .admin-form-grid textarea,
+        .admin-form-grid select,
+        .admin-inline-form input,
+        .admin-inline-form textarea,
+        .admin-inline-form select {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            background: rgba(255,255,255,0.92);
+            color: #162033;
+        }
+
+        .admin-form-grid textarea,
+        .admin-inline-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .admin-form-grid input:focus,
+        .admin-form-grid textarea:focus,
+        .admin-form-grid select:focus,
+        .admin-inline-form input:focus,
+        .admin-inline-form textarea:focus,
+        .admin-inline-form select:focus {
+            outline: none;
+            border-color: rgba(15, 98, 254, 0.38);
+            box-shadow: 0 0 0 4px rgba(15, 98, 254, 0.08);
+        }
+
+        .admin-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #0f62fe, #19c2b0);
+            color: #fff;
+            font-weight: 800;
+            box-shadow: 0 18px 34px rgba(15, 98, 254, 0.22);
+        }
+
+        .admin-ghost {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            background: #fff;
+            color: #162033;
+            font-weight: 700;
+        }
+
+        .admin-table-wrap {
+            overflow: auto;
+            border-radius: 20px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+        }
+
+        .admin-table th {
+            background: #f7fbff;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #476079;
+        }
+
+        .admin-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(15, 98, 254, 0.08);
+            color: #0f62fe;
+            font-weight: 800;
+            font-size: 0.83rem;
+        }
+
+        .admin-badge.alt {
+            background: rgba(25, 194, 176, 0.12);
+            color: #0d8e7f;
+        }
+
+        .admin-type-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .insight-type-card {
+            text-align: left;
+            border: 1px solid rgba(15, 23, 42, 0.1);
+            border-radius: 22px;
+            background: linear-gradient(180deg, #ffffff, #f6fbff);
+            padding: 18px;
+            display: grid;
+            gap: 10px;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .insight-type-card:hover,
+        .insight-type-card.active {
+            transform: translateY(-2px);
+            border-color: rgba(15, 98, 254, 0.24);
+            box-shadow: 0 18px 30px rgba(15, 98, 254, 0.12);
+        }
+
+        .insight-type-card i {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 98, 254, 0.1);
+            color: #0f62fe;
+        }
+
+        .admin-composer-head {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+            padding: 18px 20px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(15, 98, 254, 0.06), rgba(25, 194, 176, 0.08));
+            border: 1px solid rgba(15, 98, 254, 0.1);
+        }
+
+        .admin-composer-head h3 {
+            margin: 0 0 6px;
+            font-family: "Syne", sans-serif;
+        }
+
+        .admin-subsection {
+            padding: 18px;
+            border-radius: 22px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            background: #fbfdff;
+        }
+
+        .admin-subsection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .admin-manage-grid,
+        .admin-library-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .admin-city-card,
+        .admin-library-card {
+            overflow: hidden;
+            border-radius: 24px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            background: #fff;
+            box-shadow: 0 22px 48px rgba(15, 23, 42, 0.08);
+        }
+
+        .admin-city-card img,
+        .admin-library-visual img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .admin-city-card-body,
+        .admin-library-card-body {
+            padding: 20px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .admin-library-top {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .admin-library-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .admin-disclosure {
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 18px;
+            background: #fcfdff;
+            overflow: hidden;
+        }
+
+        .admin-disclosure summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 14px 16px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .admin-disclosure summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .admin-disclosure-content {
+            padding: 0 16px 16px;
+        }
+
+        .admin-inline-form {
+            display: grid;
+            gap: 14px;
+        }
+
+        .admin-inline-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .admin-danger {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 14px;
+            background: #b42318;
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .admin-empty {
+            padding: 22px;
+            border-radius: 22px;
+            border: 1px dashed rgba(15, 98, 254, 0.26);
+            background: rgba(15, 98, 254, 0.04);
+            color: #476079;
+        }
+
+        @media (max-width: 1180px) {
+            .admin-shell,
+            .admin-manage-grid,
+            .admin-library-grid,
+            .admin-type-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-sidebar-card {
+                position: static;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .admin-main {
+                padding: 14px;
+            }
+
+            .admin-form-grid,
+            .admin-inline-grid,
+            .admin-subsection-grid,
+            .admin-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-panel,
+            .admin-sidebar-card,
+            .admin-hero-shell {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="page-body admin-body">
+<header class="topbar">
+    <a class="brand" href="/portal"><i class="fa-solid fa-shield-halved"></i> Aurevia Admin</a>
+    <nav>
+        <a href="/portal">Portal</a>
+        <a href="/planner/hotels">Hotel Planner</a>
+    </nav>
+    <div class="topbar-right">
+        <span>Admin: Aurevia Admin</span>
+        <form action="/logout" method="post"><input type="hidden" name="_csrf" value="fThL2NRUh8B4wcgO8RmpbRhiOqLbRIKRWondivXNLJFpjot_SA1z6-Rtt6JVoqxtxDSdWCpUF8Dodrq8O-rsupCrSKlf7e1L"/>
+            <input type="hidden" name="_csrf" value="fThL2NRUh8B4wcgO8RmpbRhiOqLbRIKRWondivXNLJFpjot_SA1z6-Rtt6JVoqxtxDSdWCpUF8Dodrq8O-rsupCrSKlf7e1L">
+            <button class="ghost-btn" type="submit">Logout</button>
+        </form>
+    </div>
+</header>
+
+<main class="admin-main">
+    <section class="admin-hero-shell">
+        <div class="admin-hero-copy">
+            <span class="admin-kicker"><i class="fa-solid fa-sparkles"></i> Destination Control Center</span>
+            <h1>Build a professional city management panel for admins, cities, users, and deep destination content.</h1>
+            <p>Everything here is connected to the main app. When you add a city, it becomes searchable on the portal and appears in the city card area. When you add hotels, popular places, cafes, tourist spots, or educational places, those entries flow into the city, category, and place pages.</p>
+            <div class="admin-seed">
+                <i class="fa-solid fa-key"></i>
+                <span>Seed admin username: <strong>admin@aurevia.com</strong></span>
+            </div>
+        </div>
+        <div class="admin-metrics">
+            <article class="admin-metric">
+                <strong>3</strong>
+                <span>Admins</span>
+            </article>
+            <article class="admin-metric">
+                <strong>7</strong>
+                <span>Total Users</span>
+            </article>
+            <article class="admin-metric">
+                <strong>18</strong>
+                <span>Searchable Cities</span>
+            </article>
+            <article class="admin-metric">
+                <strong>0</strong>
+                <span>Managed Insights</span>
+            </article>
+        </div>
+    </section>
+
+    
+
+    <section class="admin-shell">
+        <aside class="admin-sidebar-card">
+            <div>
+                <h2>Panel Map</h2>
+                <p>Jump straight to the area you want to manage.</p>
+            </div>
+            <nav class="admin-nav">
+                <a href="#add-admin"><i class="fa-solid fa-user-shield"></i> Add Admin</a>
+                <a href="#view-admins"><i class="fa-solid fa-address-card"></i> View Admins</a>
+                <a href="#view-users"><i class="fa-solid fa-users"></i> View Users</a>
+                <a href="#add-city"><i class="fa-solid fa-city"></i> Add City</a>
+                <a href="#add-content"><i class="fa-solid fa-layer-group"></i> Add City Insights</a>
+                <a href="#manage-cities"><i class="fa-solid fa-pen-to-square"></i> Manage Cities</a>
+                <a href="#content-library"><i class="fa-solid fa-folder-tree"></i> Content Library</a>
+            </nav>
+            <div class="admin-sidebar-note">
+                <strong>Workflow tip</strong>
+                <p>Start with a city, then choose a content type card below and compose a full destination profile with gallery images, insight cards, and visitor notes.</p>
+            </div>
+        </aside>
+
+        <div class="admin-stack">
+            <section class="admin-panel" id="add-admin">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-badge"><i class="fa-solid fa-user-plus"></i> Add Admin</span>
+                        <h2>Create another admin</h2>
+                        <p>Add a new administrator who can manage cities, users, and live destination content.</p>
+                    </div>
+                </div>
+                <form class="admin-form-grid" action="/admin/admins" method="post"><input type="hidden" name="_csrf" value="fThL2NRUh8B4wcgO8RmpbRhiOqLbRIKRWondivXNLJFpjot_SA1z6-Rtt6JVoqxtxDSdWCpUF8Dodrq8O-rsupCrSKlf7e1L"/>
+                    <input type="hidden" name="_csrf" value="fThL2NRUh8B4wcgO8RmpbRhiOqLbRIKRWondivXNLJFpjot_SA1z6-Rtt6JVoqxtxDSdWCpUF8Dodrq8O-rsupCrSKlf7e1L">
+                    <div class="admin-field">
+                        <label>Full name</label>
+                        <input type="text" placeholder="Example: City Content Manager" id="fullName" name="fullName" value="">
+                        
+                    </div>
+                    <div class="admin-field">
+                        <label>Email / username</label>
+                        <input type="email" placeholder="admin@example.com" id="email" name="email" value="">
+                        
+                    </div>
+                    <div class="admin-field full-span">
+                        <label>Password</label>
+                        <input type="password" placeholder="At least 6 characters" id="password" name="password" value="">
+                        
+                    </div>
+                    <div class="full-span">
+                        <button class="admin-submit" type="submit"><i class="fa-solid fa-user-check"></i> Add admin</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="admin-panel" id="view-admins">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-badge alt"><i class="fa-solid fa-shield"></i> View Admins</span>
+                        <h2>Admin directory</h2>
+                        <p>See every current admin account in one place.</p>
+                    </div>
+                </div>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Aurevia Admin</td>
+                            <td>admin@aurevia.com</td>
+                            <td><span class="admin-badge">ADMIN</span></td>
+                        </tr>
+                        <tr>
+                            <td>Amans Sharma</td>
+                            <td>amam@gmail.com</td>
+                            <td><span class="admin-badge">ADMIN</span></td>
+                        </tr>
+                        <tr>
+                            <td>Aman Sharma</td>
+                            <td>amansharma21276@gmail.com</td>
+                            <td><span class="admin-badge">ADMIN</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="admin-panel" id="view-users">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-badge"><i class="fa-solid fa-users"></i> View Users</span>
+                        <h2>User directory</h2>
+                        <p>Track both normal users and admins from one dashboard table.</p>
+                    </div>
+                </div>
+                <div class="admin-table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Aman Sharma</td>
+                            <td>amansharma21276@gmail.com</td>
+                            <td>
+                                <span class="admin-badge">ADMIN</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Amans Sharma</td>
+                            <td>amam@gmail.com</td>
+                            <td>
+                                <span class="admin-badge">ADMIN</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Aurevia Admin</td>
+                            <td>admin@aurevia.com</td>
+                            <td>
+                                <span class="admin-badge">ADMIN</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Aman</td>
+                            <td>ajsharma89096@gmail.com</td>
+                            <td>
+                                <span class="admin-badge  alt">USER</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Carousel Test</td>
+                            <td>carouseltest1777705091220@example.com</td>
+                            <td>
+                                <span class="admin-badge  alt">USER</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Carousel Verify</td>
+                            <td>carouselverify1777705216257@example.com</td>
+                            <td>
+                                <span class="admin-badge  alt">USER</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>karan</td>
+                            <td>karan@gmail</td>
+                            <td>
+                                <span class="admin-badge  alt">USER</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="admin-panel" id="add-city">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-badge"><i class="fa-solid fa-map-location-dot"></i> Add City</span>
+                        <h2>Create a searchable city</h2>
+                        <p>The city will appear on the homepage city cards and become available in portal search once saved.</p>
+                    </div>
+                </div>
+                <form class="admin-form-grid" action="/admin/cities" method="post"><input type="hidden" name="_csrf" value="fThL2NRUh8B4wcgO8RmpbRhiOqLbRIKRWondivXNLJFpjot_SA1z6-Rtt6JVoqxtxDSdWCpUF8Dodrq8O-rsupCrSKlf7e1L"/>
+                    <input type="hidden" name="_csrf" value="fThL2NRUh8B4wcgO8RmpbRhiOqLbRIKRWondivXNLJFpjot_SA1z6-Rtt6JVoqxtxDSdWCpUF8Dodrq8O-rsupCrSKlf7e1L">
+                    <div class="admin-field">
+                        <label>City name</label>
+                        <input type="text" placeholder="Example: Pune" id="name" name="name" value="">
+                        
+                    </div>
+                    <div class="admin-field">
+                        <label>Region / state</label>
+                        <input type="text" placeholder="Example: Maharashtra" id="region" name="region" value="">
+                        
+                    </div>
+                    <div class="admin-field full-span">
+                        <label>Portal overview</label>
+                        <textarea placeholder="Write the main city summary that appears on the city landing page." id="tagline" name="tagline"></textarea>
+                        
+                    </div>
+                    <div class="admin-field full-span">
+                        <label>Hero image URL</label>
+                        <input type="text" placeholder="https://..." id="heroImage" name="heroImage" value="">
+                        
+                    </div>
+                    <div class="admin-field">
+                        <label>Search keywords</label>
+                        <textarea placeholder="One alias per line, for example&#10;Bangalore&#10;Bengaluru" id="searchKeywords" name="searchKeywords"></textarea>
+                    </div>
+                    <div class="admin-subsection-grid">
+                        <div class="admin-field">
+                            <label>Best season</label>
+                            <input type="text" placeholder="Oct to Feb" id="bestSeason" name="bestSeason" value="">
+                        </div>
+                        <div class="admin-field">
+                            <label>Ideal duration</label>
+                            <input type="text" placeholder="3 to 4 days" id="idealDuration" name="idealDuration" value="">
+                        </div>
+                    </div>
+                    <div class="admin-field full-span">
+                        <label>City highlights</label>
+                        <textarea placeholder="One highlight per line" id="cityHighlights" name="cityHighlights"></textarea>
+                    </div>
+                    <div class="full-span">
+                        <button class="admin-submit" type="submit"><i class="fa-solid fa-circle-plus"></i> Add city to portal</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="admin-panel" id="add-content">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-badge alt"><i class="fa-solid fa-layer-group"></i> Add City Insights</span>
+                        <h2>Compose detailed destination content</h2>
+                        <p>Pick a content type card, then fill in a full venue profile with cover image, gallery, story copy, structured detail cards, and visitor notes.</p>
+                    </div>
+                </div>
+
+                <div class="admin-type-grid">
+                    <button class="insight-type-card active" type="button" data-category="hotels">
+                        <i class="fa-solid fa-hotel"></i>
+                        <strong>Hotels</strong>
+                        <span>Rooms, venue, dining, amenities, stay notes</span>
+                    </button>
+                    <button class="insight-type-card" type="button" data-category="popular-places">
+                        <i class="fa-solid fa-landmark"></i>
+                        <strong>Popular Places</strong>
+                        <span>Landmarks, must-see spots, identity of the city</span>
+                    </button>
+                    <button class="insight-type-card" type="button" data-category="tourist-places">
+                        <i class="fa-solid fa-camera-retro"></i>
+                        <strong>Tourist Places</strong>
+                        <span>Visitor flow, best time, entry tips, photo moments</span>
+                    </button>
+                    <button class="insight-type-card" type="button" data-category="cafes">
+                        <i class="fa-solid fa-mug-hot"></i>
+                        <strong>Cafes</strong>
+                        <span>Menu focus, vibe, signature dishes, hangout cues</span>
+                    </button>
+                    <button class="insight-type-card" type="button" data-category="educational-places">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <strong>Educational Places</strong>
+                        <span>Campus, learning focus, what visitors should explore</span>
+                    </button>
+                </div>
+
+                <form class="admin-inline-form" action="/admin/places" method="post" id="insight-composer-form"><input type="hidden" name="_csrf" value="fThL2NRUh8B4wcgO8RmpbRhiOqLbRIKRWondivXNLJFpjot_SA1z6-Rtt6JVoqxtxDSdWCpUF8Dodrq8O-rsupCrSKlf7e1L"/>
+                    <input type="hidden" name="_csrf" value="fThL2NRUh8B4wcgO8RmpbRhiOqLbRIKRWondivXNLJFpjot_SA1z6-Rtt6JVoqxtxDSdWCpUF8Dodrq8O-rsupCrSKlf7e1L">
+                    <div class="admin-composer-head">
+                        <div>
+                            <span class="admin-badge" id="composer-category-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Hotels Composer</span>
+                            <h3 id="composer-title">Build a hotel profile</h3>
+                            <p id="composer-copy">Use this form to add a hotel that instantly shows up under the city, category, and place routes.</p>
+                        </div>
+                        <div class="admin-badge alt" id="composer-route-preview">Reflects on homepage, category page, and place page</div>
+                    </div>
+
+                    <div class="admin-subsection">
+                        <div class="admin-panel-head">
+                            <div>
+                                <h3>Basic identity</h3>
+                                <p>Choose the city, lock the content type, and set the main headline copy.</p>
+                            </div>
+                        </div>
+                        <div class="admin-form-grid">
+                            <div class="admin-field">
+                                <label>Select city</label>
+                                <select id="citySlug" name="citySlug">
+                                    <option value="">Choose city</option>
+                                    <option value="jaipur">Jaipur</option>
+                                    <option value="agra">Agra</option>
+                                    <option value="varanasi">Varanasi</option>
+                                    <option value="delhi">Delhi</option>
+                                    <option value="chandigarh">Chandigarh</option>
+                                    <option value="udaipur">Udaipur</option>
+                                    <option value="jaisalmer">Jaisalmer</option>
+                                    <option value="goa">Goa</option>
+                                    <option value="mumbai">Mumbai</option>
+                                    <option value="maharashtra">Maharashtra</option>
+                                    <option value="kochi">Kochi</option>
+                                    <option value="darjeeling">Darjeeling</option>
+                                    <option value="leh">Leh</option>
+                                    <option value="srinagar">Srinagar</option>
+                                    <option value="manali">Manali</option>
+                                    <option value="shimla">Shimla</option>
+                                    <option value="rishikesh">Rishikesh</option>
+                                    <option value="chamba">Chamba</option>
+                                </select>
+                                
+                            </div>
+                            <div class="admin-field">
+                                <label>Content type</label>
+                                <select id="categorySlug" name="categorySlug">
+                                    <option value="hotels">Hotels</option>
+                                    <option value="popular-places">Popular Places</option>
+                                    <option value="tourist-places">Tourist Places</option>
+                                    <option value="cafes">Cafes</option>
+                                    <option value="educational-places">Educational Places</option>
+                                </select>
+                                
+                            </div>
+                            <div class="admin-field">
+                                <label>Name</label>
+                                <input type="text" placeholder="Example: The Oberoi Grand" id="name" name="name" value="">
+                                
+                            </div>
+                            <div class="admin-field">
+                                <label>Cover image URL</label>
+                                <input type="text" placeholder="https://..." id="imageUrl" name="imageUrl" value="">
+                                
+                            </div>
+                            <div class="admin-field full-span">
+                                <label>Short overview</label>
+                                <textarea placeholder="This becomes the card description on the city and category pages." id="description" name="description"></textarea>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-subsection">
+                        <div class="admin-panel-head">
+                            <div>
+                                <h3>Gallery and story</h3>
+                                <p>Hotels can include at least five images here, while other categories can use the gallery for multiple angles and nearby context.</p>
+                            </div>
+                        </div>
+                        <div class="admin-form-grid">
+                            <div class="admin-field full-span">
+                                <label>Gallery image URLs</label>
+                                <textarea placeholder="One image URL per line. For hotels, add at least 5." id="galleryImages" name="galleryImages"></textarea>
+                            </div>
+                            <div class="admin-field full-span">
+                                <label>Insight section copy</label>
+                                <textarea placeholder="What makes this place stand out?" id="insight" name="insight"></textarea>
+                            </div>
+                            <div class="admin-field full-span">
+                                <label>History or context</label>
+                                <textarea placeholder="Add story, background, reputation, or why it matters in this city." id="history" name="history"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-subsection">
+                        <div class="admin-panel-head">
+                            <div>
+                                <h3>Practical information</h3>
+                                <p>These values are folded into the detail cards on the place page.</p>
+                            </div>
+                        </div>
+                        <div class="admin-subsection-grid">
+                            <div class="admin-field">
+                                <label>Address / venue</label>
+                                <input type="text" placeholder="Venue, locality, landmark" id="address" name="address" value="">
+                            </div>
+                            <div class="admin-field">
+                                <label>Timings / availability</label>
+                                <input type="text" placeholder="24x7, 9 AM to 8 PM, seasonal timings" id="timings" name="timings" value="">
+                            </div>
+                            <div class="admin-field full-span">
+                                <label>Price range / entry / room range</label>
+                                <input type="text" placeholder="INR 5,000 to 8,000 per night or entry info" id="priceRange" name="priceRange" value="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-subsection">
+                        <div class="admin-panel-head">
+                            <div>
+                                <h3>Detail cards</h3>
+                                <p id="detail-helper-copy">Suggested hotel cards: Venue, Rooms, Dining, Amenities.</p>
+                            </div>
+                        </div>
+                        <div class="admin-form-grid">
+                            <div class="admin-field">
+                                <label id="detail-one-label">Detail card 1 title</label>
+                                <input type="text" id="detailTitleOne" placeholder="Venue" name="detailTitleOne" value="">
+                            </div>
+                            <div class="admin-field">
+                                <label>Detail card 1 body</label>
+                                <textarea placeholder="Describe the venue experience." id="detailBodyOne" name="detailBodyOne"></textarea>
+                            </div>
+                            <div class="admin-field">
+                                <label id="detail-two-label">Detail card 2 title</label>
+                                <input type="text" id="detailTitleTwo" placeholder="Rooms" name="detailTitleTwo" value="">
+                            </div>
+                            <div class="admin-field">
+                                <label>Detail card 2 body</label>
+                                <textarea placeholder="Describe rooms, suites, layouts, or collections." id="detailBodyTwo" name="detailBodyTwo"></textarea>
+                            </div>
+                            <div class="admin-field">
+                                <label id="detail-three-label">Detail card 3 title</label>
+                                <input type="text" id="detailTitleThree" placeholder="Dining" name="detailTitleThree" value="">
+                            </div>
+                            <div class="admin-field">
+                                <label>Detail card 3 body</label>
+                                <textarea placeholder="Describe dining, menu style, cafes, or food format." id="detailBodyThree" name="detailBodyThree"></textarea>
+                            </div>
+                            <div class="admin-field">
+                                <label id="detail-four-label">Detail card 4 title</label>
+                                <input type="text" id="detailTitleFour" placeholder="Amenities" name="detailTitleFour" value="">
+                            </div>
+                            <div class="admin-field">
+                                <label>Detail card 4 body</label>
+                                <textarea placeholder="Describe amenities, what to expect, or visitor fit." id="detailBodyFour" name="detailBodyFour"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-subsection">
+                        <div class="admin-panel-head">
+                            <div>
+                                <h3>Visitor notes</h3>
+                                <p>These appear as short action-oriented bullets on the place page.</p>
+                            </div>
+                        </div>
+                        <div class="admin-field">
+                            <label>Visitor notes</label>
+                            <textarea placeholder="One note per line" id="visitorNotes" name="visitorNotes"></textarea>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button class="admin-submit" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save city insight</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="admin-panel" id="manage-cities">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-badge"><i class="fa-solid fa-earth-asia"></i> Manage Cities</span>
+                        <h2>Edit city cards and search metadata</h2>
+                        <p>These are the cities created through the admin panel. Updates flow back to the homepage card area and city routes.</p>
+                    </div>
+                </div>
+
+                
+
+                <div class="admin-empty">
+                    No admin-added cities yet. Built-in cities are still available, and every new city you add here becomes searchable from the portal homepage.
+                </div>
+            </section>
+
+            <section class="admin-panel" id="content-library">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-badge alt"><i class="fa-solid fa-folder-open"></i> Content Library</span>
+                        <h2>Manage hotel, place, cafe, and city insight entries</h2>
+                        <p>Edit the live content cards that feed city pages, category pages, and detailed place routes.</p>
+                    </div>
+                </div>
+
+                
+
+                <div class="admin-empty">
+                    No admin-managed hotels, popular places, cafes, tourist places, or educational places yet.
+                </div>
+            </section>
+        </div>
+    </section>
+</main>
+
+<script>
+    (function () {
+        const presets = {
+            hotels: {
+                badge: "Hotels Composer",
+                title: "Build a hotel profile",
+                copy: "Add a hotel with venue details, room mix, dining coverage, amenities, and a strong gallery so it feels like a proper hospitality listing.",
+                helper: "Suggested hotel cards: Venue, Rooms, Dining, Amenities.",
+                placeholders: ["Venue", "Rooms", "Dining", "Amenities"]
+            },
+            "popular-places": {
+                badge: "Popular Places Composer",
+                title: "Build a landmark profile",
+                copy: "Use this for iconic city spots that should show up as signature landmarks on the main city journey.",
+                helper: "Suggested popular place cards: Identity, Experience, Best Time, Nearby Scene.",
+                placeholders: ["Identity", "Experience", "Best Time", "Nearby Scene"]
+            },
+            "tourist-places": {
+                badge: "Tourist Places Composer",
+                title: "Build a tourist place profile",
+                copy: "Ideal for viewpoints, gardens, forts, and sightseeing entries that need visitor tips and timing guidance.",
+                helper: "Suggested tourist place cards: What To See, Best Time, Entry Tips, Trip Fit.",
+                placeholders: ["What To See", "Best Time", "Entry Tips", "Trip Fit"]
+            },
+            cafes: {
+                badge: "Cafes Composer",
+                title: "Build a cafe profile",
+                copy: "Set the vibe, menu focus, signature orders, and what kind of audience the cafe naturally suits.",
+                helper: "Suggested cafe cards: Vibe, Menu, Signature Picks, Best For.",
+                placeholders: ["Vibe", "Menu", "Signature Picks", "Best For"]
+            },
+            "educational-places": {
+                badge: "Educational Places Composer",
+                title: "Build an educational place profile",
+                copy: "Use this for museums, universities, campuses, galleries, and knowledge-focused spaces.",
+                helper: "Suggested educational cards: Focus, Venue Type, What To Explore, Best For.",
+                placeholders: ["Focus", "Venue Type", "What To Explore", "Best For"]
+            }
+        };
+
+        const cards = Array.from(document.querySelectorAll(".insight-type-card"));
+        const select = document.getElementById("categorySlug");
+        const badge = document.getElementById("composer-category-badge");
+        const title = document.getElementById("composer-title");
+        const copy = document.getElementById("composer-copy");
+        const helper = document.getElementById("detail-helper-copy");
+        const titleInputs = [
+            document.getElementById("detailTitleOne"),
+            document.getElementById("detailTitleTwo"),
+            document.getElementById("detailTitleThree"),
+            document.getElementById("detailTitleFour")
+        ];
+
+        function applyPreset(category, shouldFillEmpty) {
+            const preset = presets[category] || presets.hotels;
+            if (select) {
+                select.value = category;
+            }
+            if (badge) {
+                badge.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> ' + preset.badge;
+            }
+            if (title) {
+                title.textContent = preset.title;
+            }
+            if (copy) {
+                copy.textContent = preset.copy;
+            }
+            if (helper) {
+                helper.textContent = preset.helper;
+            }
+            cards.forEach(card => card.classList.toggle("active", card.dataset.category === category));
+            titleInputs.forEach((input, index) => {
+                if (!input) return;
+                input.placeholder = preset.placeholders[index];
+                if (shouldFillEmpty && !input.value.trim()) {
+                    input.value = preset.placeholders[index];
+                }
+            });
+        }
+
+        cards.forEach(card => {
+            card.addEventListener("click", () => applyPreset(card.dataset.category, true));
+        });
+
+        select?.addEventListener("change", event => applyPreset(event.target.value, false));
+        applyPreset(select?.value || "hotels", false);
+    })();
+</script>
+</body>
+</html>
