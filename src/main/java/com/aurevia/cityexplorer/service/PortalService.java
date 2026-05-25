@@ -1268,7 +1268,7 @@ List.of(
     place("Nada Sahib Gurudwara", "Popular spiritual and riverside destination.", "https://haryanatourism.gov.in/wp-content/uploads/2024/07/nada_pic1-1.jpg"),
     place("Pinjore Gardens", "Historic Mughal-style garden near Chandigarh.", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/d4/a2/2a/pinjore-yadavindra-gardens.jpg?w=900&h=500&s=1"),
     place("Thunder Zone", "Fun amusement and water park.", "https://hblimg.mmtcdn.com/content/hubble/img/ttd_images/mmt/activities/m_Mohali_Thunder_zone_amusement_park_1_l_425_601.jpg"),
-    place("Funcity", "Family-friendly rides and water attractions.", "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&q=80"),
+    place("Funcity", "Family-friendly rides and water attractions.", "https://www.joonsquare.com/usermanage/image/business/funcity-water-park-chandigarh-1935/funcity-water-and-amusement-park-chandigarh-funcity-aug-01.jpg"),
     place("VR Punjab Mall", "Large nearby mall with shopping and cinema.", "https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?w=900&q=80"),
     place("Cactus Garden", "Unique garden filled with rare cactus species.", "https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=900&q=80"),
     place("ChhatBir Zoo", "Popular wildlife and safari attraction.", "https://images.unsplash.com/photo-1501706362039-c6e13b4b2b5d?w=900&q=80")
